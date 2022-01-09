@@ -47,7 +47,7 @@ namespace Kuldorendszer
             }
             else
             {
-                MessageBox.Show("END");
+                MessageBox.Show("Az adatok elejét elérte!");
             }
         }
 
@@ -60,7 +60,7 @@ namespace Kuldorendszer
             }
             else
             {
-                MessageBox.Show("END");
+                MessageBox.Show("Az adatok végét elérte!");
                 pos = table.Rows.Count - 1;
             }
         }
