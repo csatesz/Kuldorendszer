@@ -545,6 +545,7 @@ namespace Kuldorendszer
             // 
             // btnElozo
             // 
+            this.btnElozo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnElozo.Location = new System.Drawing.Point(15, 44);
             this.btnElozo.Name = "btnElozo";
             this.btnElozo.Size = new System.Drawing.Size(75, 23);
@@ -555,6 +556,7 @@ namespace Kuldorendszer
             // 
             // btnKovetkezo
             // 
+            this.btnKovetkezo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnKovetkezo.Location = new System.Drawing.Point(585, 47);
             this.btnKovetkezo.Name = "btnKovetkezo";
             this.btnKovetkezo.Size = new System.Drawing.Size(75, 23);

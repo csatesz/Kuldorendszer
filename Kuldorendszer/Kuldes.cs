@@ -24,18 +24,18 @@ namespace Kuldorendszer
 
         private void Kuldes_Load(object sender, EventArgs e)
         {
-            adapter = new MySqlDataAdapter("SELECT * FROM ami.users", connection);
+            adapter = new MySqlDataAdapter("SELECT * FROM kuldes.merkozes", connection);
             adapter.Fill(table);
             showData(pos);
 
         }
         public void showData(int index)
         {
-            txtBVerseny.Text = table.Rows[index][2].ToString();
+            txtBVerseny.Text = table.Rows[index][5].ToString();
             txtBKod.Text = table.Rows[index][0].ToString();
             txtBHazai.Text = table.Rows[index][1].ToString();
-            txtBVendeg.Text = table.Rows[index][1].ToString();
-            txtBDatum.Text = table.Rows[index][3].ToString();
+            txtBVendeg.Text = table.Rows[index][2].ToString();
+            txtBDatum.Text = table.Rows[index][4].ToString();
         }
 
         private void btnElozo_Click(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace Kuldorendszer
             }
             else
             {
-                MessageBox.Show("Az adatok elejét elérte!");
+                MessageBox.Show("Elérte az adatok elejét!");
             }
         }
 
@@ -60,7 +60,7 @@ namespace Kuldorendszer
             }
             else
             {
-                MessageBox.Show("Az adatok végét elérte!");
+                MessageBox.Show("Elérte az adatok végét!");
                 pos = table.Rows.Count - 1;
             }
         }

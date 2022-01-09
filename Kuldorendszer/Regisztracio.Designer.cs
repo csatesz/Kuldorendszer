@@ -132,6 +132,7 @@ namespace Kuldorendszer
             // 
             // BtnReg
             // 
+            this.BtnReg.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnReg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.BtnReg.Location = new System.Drawing.Point(144, 287);
             this.BtnReg.Name = "BtnReg";

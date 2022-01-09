@@ -45,6 +45,7 @@ namespace Kuldorendszer
             // 
             // BtnUjFelh
             // 
+            this.BtnUjFelh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnUjFelh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.BtnUjFelh.Location = new System.Drawing.Point(361, 261);
             this.BtnUjFelh.Name = "BtnUjFelh";
@@ -56,6 +57,7 @@ namespace Kuldorendszer
             // 
             // BtnBelep
             // 
+            this.BtnBelep.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnBelep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.BtnBelep.Location = new System.Drawing.Point(140, 261);
             this.BtnBelep.Name = "BtnBelep";
