@@ -101,6 +101,14 @@
     <Compile Include="Kuldes.Designer.cs">
       <DependentUpon>Kuldes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Csapatok.cs" />
+    <Compile Include="Models\Elerhetoseg.cs" />
+    <Compile Include="Models\Jatekvezeto.cs" />
+    <Compile Include="Models\Kuldes.cs" />
+    <Compile Include="Models\ListBoxItems.cs" />
+    <Compile Include="Models\Merkozes.cs" />
+    <Compile Include="Models\Osztaly.cs" />
+    <Compile Include="Models\Telepules.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Regisztracio.cs">
@@ -141,5 +149,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

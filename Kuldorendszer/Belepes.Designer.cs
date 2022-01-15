@@ -45,6 +45,7 @@ namespace Kuldorendszer
             // 
             // BtnUjFelh
             // 
+            this.BtnUjFelh.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnUjFelh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnUjFelh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.BtnUjFelh.Location = new System.Drawing.Point(361, 261);
@@ -52,11 +53,12 @@ namespace Kuldorendszer
             this.BtnUjFelh.Size = new System.Drawing.Size(110, 25);
             this.BtnUjFelh.TabIndex = 0;
             this.BtnUjFelh.Text = "Új felhasználó";
-            this.BtnUjFelh.UseVisualStyleBackColor = true;
+            this.BtnUjFelh.UseVisualStyleBackColor = false;
             this.BtnUjFelh.Click += new System.EventHandler(this.BtnUjFelh_Click);
             // 
             // BtnBelep
             // 
+            this.BtnBelep.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnBelep.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnBelep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.BtnBelep.Location = new System.Drawing.Point(140, 261);
@@ -64,18 +66,19 @@ namespace Kuldorendszer
             this.BtnBelep.Size = new System.Drawing.Size(131, 25);
             this.BtnBelep.TabIndex = 1;
             this.BtnBelep.Text = "Belép";
-            this.BtnBelep.UseVisualStyleBackColor = true;
+            this.BtnBelep.UseVisualStyleBackColor = false;
             this.BtnBelep.Click += new System.EventHandler(this.BtnBelep_Click);
             // 
             // button3
             // 
+            this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button3.Location = new System.Drawing.Point(361, 128);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(122, 23);
             this.button3.TabIndex = 2;
             this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -168,6 +171,7 @@ namespace Kuldorendszer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(513, 334);
             this.Controls.Add(this.txtBEmail);
             this.Controls.Add(this.txtBJelszo);

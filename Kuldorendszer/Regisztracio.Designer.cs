@@ -132,6 +132,7 @@ namespace Kuldorendszer
             // 
             // BtnReg
             // 
+            this.BtnReg.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnReg.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnReg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.BtnReg.Location = new System.Drawing.Point(144, 287);
@@ -139,7 +140,7 @@ namespace Kuldorendszer
             this.BtnReg.Size = new System.Drawing.Size(131, 25);
             this.BtnReg.TabIndex = 12;
             this.BtnReg.Text = "Regisztráció";
-            this.BtnReg.UseVisualStyleBackColor = true;
+            this.BtnReg.UseVisualStyleBackColor = false;
             this.BtnReg.Click += new System.EventHandler(this.BtnReg_Click);
             // 
             // txtBJelszoUjra
@@ -164,6 +165,7 @@ namespace Kuldorendszer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(414, 334);
             this.Controls.Add(this.txtBJelszoUjra);
             this.Controls.Add(this.label5);
