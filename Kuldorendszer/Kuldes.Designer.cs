@@ -290,7 +290,8 @@ namespace Kuldorendszer
             // 
             // btnKuldes
             // 
-            this.btnKuldes.Location = new System.Drawing.Point(24, 315);
+            this.btnKuldes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnKuldes.Location = new System.Drawing.Point(33, 315);
             this.btnKuldes.Name = "btnKuldes";
             this.btnKuldes.Size = new System.Drawing.Size(100, 47);
             this.btnKuldes.TabIndex = 47;
@@ -300,7 +301,8 @@ namespace Kuldorendszer
             // 
             // btnModosit
             // 
-            this.btnModosit.Location = new System.Drawing.Point(226, 315);
+            this.btnModosit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnModosit.Location = new System.Drawing.Point(235, 315);
             this.btnModosit.Name = "btnModosit";
             this.btnModosit.Size = new System.Drawing.Size(100, 47);
             this.btnModosit.TabIndex = 48;
@@ -327,7 +329,7 @@ namespace Kuldorendszer
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1184, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1134, 24);
             this.menuStrip1.TabIndex = 50;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -592,10 +594,14 @@ namespace Kuldorendszer
             // 
             // lBMerkozesek
             // 
+            this.lBMerkozesek.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lBMerkozesek.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lBMerkozesek.FormattingEnabled = true;
-            this.lBMerkozesek.Location = new System.Drawing.Point(686, 32);
+            this.lBMerkozesek.ItemHeight = 16;
+            this.lBMerkozesek.Location = new System.Drawing.Point(686, 44);
             this.lBMerkozesek.Name = "lBMerkozesek";
-            this.lBMerkozesek.Size = new System.Drawing.Size(422, 433);
+            this.lBMerkozesek.Size = new System.Drawing.Size(422, 372);
             this.lBMerkozesek.TabIndex = 1;
             this.lBMerkozesek.SelectedIndexChanged += new System.EventHandler(this.lBMerkozesek_SelectedIndexChanged);
             // 
@@ -628,7 +634,8 @@ namespace Kuldorendszer
             // 
             // btnVegleg
             // 
-            this.btnVegleg.Location = new System.Drawing.Point(432, 315);
+            this.btnVegleg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnVegleg.Location = new System.Drawing.Point(441, 315);
             this.btnVegleg.Name = "btnVegleg";
             this.btnVegleg.Size = new System.Drawing.Size(100, 47);
             this.btnVegleg.TabIndex = 57;
@@ -642,7 +649,8 @@ namespace Kuldorendszer
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1184, 511);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1134, 461);
             this.Controls.Add(this.btnVegleg);
             this.Controls.Add(this.cBoxAssz2);
             this.Controls.Add(this.cBoxAssz1);
@@ -676,10 +684,13 @@ namespace Kuldorendszer
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(1150, 500);
             this.Name = "Kuldes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = " ";
+            this.Text = " Küldés";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Kuldes_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

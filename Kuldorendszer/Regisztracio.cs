@@ -1,9 +1,10 @@
 ﻿using Kuldorendszer.Models;
-
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
@@ -15,6 +16,9 @@ namespace Kuldorendszer
 {
     public partial class Regisztracio : Form
     {
+        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
+        MySqlDataAdapter adapter;
+        MySqlCommand cmd;
         public Regisztracio()
         {
             try
@@ -60,16 +64,34 @@ namespace Kuldorendszer
             }
             if (ervenyes)
             {
-                Felhasznalo felh = new Felhasznalo()
+                Felhasznalo felh = new Felhasznalo
                 {
                     felhNev = txtBRegFelh.Text,
                     email = txtBRegEmail.Text,
                     jelszo = txtBRegJelszo.Text // titkosítani! sha256_hash
-                };
-            this.Close();
-        }
 
-    }
+                };
+                cmd = new MySqlCommand("INSERT INTO kuldes.felhasznalo (felhNev,email,jelszo) VALUES (@felhNev,@email,@jelszo)", connection);
+                try
+                {
+                    connection.Open();
+                    cmd.Parameters.AddWithValue("@felhNev", txtBRegFelh.Text);
+                    cmd.Parameters.AddWithValue("@email", txtBRegEmail.Text);
+                    cmd.Parameters.AddWithValue("@jelszo", txtBRegJelszo.Text);
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                }
+                catch
+                {
+                    throw new Exception("Hiba");
+                }
+
+                connection.Close();
+                MessageBox.Show("Sikeres Regisztráció", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+
+        }
 
         private void radioBKuldo_CheckedChanged(object sender, EventArgs e)
         {

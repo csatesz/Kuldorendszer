@@ -41,16 +41,19 @@ namespace Kuldorendszer
             this.txtBFelh = new System.Windows.Forms.TextBox();
             this.txtBJelszo = new System.Windows.Forms.TextBox();
             this.txtBEmail = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnUjFelh
             // 
+            this.BtnUjFelh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnUjFelh.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnUjFelh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnUjFelh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.BtnUjFelh.Location = new System.Drawing.Point(361, 261);
+            this.BtnUjFelh.Location = new System.Drawing.Point(310, 251);
             this.BtnUjFelh.Name = "BtnUjFelh";
-            this.BtnUjFelh.Size = new System.Drawing.Size(110, 25);
+            this.BtnUjFelh.Size = new System.Drawing.Size(120, 25);
             this.BtnUjFelh.TabIndex = 0;
             this.BtnUjFelh.Text = "Új felhasználó";
             this.BtnUjFelh.UseVisualStyleBackColor = false;
@@ -58,12 +61,13 @@ namespace Kuldorendszer
             // 
             // BtnBelep
             // 
+            this.BtnBelep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.BtnBelep.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnBelep.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnBelep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.BtnBelep.Location = new System.Drawing.Point(140, 261);
+            this.BtnBelep.Location = new System.Drawing.Point(140, 251);
             this.BtnBelep.Name = "BtnBelep";
-            this.BtnBelep.Size = new System.Drawing.Size(131, 25);
+            this.BtnBelep.Size = new System.Drawing.Size(130, 25);
             this.BtnBelep.TabIndex = 1;
             this.BtnBelep.Text = "Belép";
             this.BtnBelep.UseVisualStyleBackColor = false;
@@ -71,11 +75,12 @@ namespace Kuldorendszer
             // 
             // button3
             // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button3.Location = new System.Drawing.Point(361, 128);
+            this.button3.Location = new System.Drawing.Point(310, 150);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(122, 23);
+            this.button3.Size = new System.Drawing.Size(120, 25);
             this.button3.TabIndex = 2;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = false;
@@ -113,9 +118,10 @@ namespace Kuldorendszer
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(83, 189);
+            this.label4.Location = new System.Drawing.Point(83, 179);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 17);
             this.label4.TabIndex = 6;
@@ -123,9 +129,10 @@ namespace Kuldorendszer
             // 
             // radioBKuldo
             // 
+            this.radioBKuldo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioBKuldo.AutoSize = true;
             this.radioBKuldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.radioBKuldo.Location = new System.Drawing.Point(143, 185);
+            this.radioBKuldo.Location = new System.Drawing.Point(143, 175);
             this.radioBKuldo.Name = "radioBKuldo";
             this.radioBKuldo.Size = new System.Drawing.Size(62, 21);
             this.radioBKuldo.TabIndex = 7;
@@ -135,9 +142,10 @@ namespace Kuldorendszer
             // 
             // radioBAdmin
             // 
+            this.radioBAdmin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioBAdmin.AutoSize = true;
             this.radioBAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.radioBAdmin.Location = new System.Drawing.Point(143, 208);
+            this.radioBAdmin.Location = new System.Drawing.Point(143, 198);
             this.radioBAdmin.Name = "radioBAdmin";
             this.radioBAdmin.Size = new System.Drawing.Size(65, 21);
             this.radioBAdmin.TabIndex = 8;
@@ -170,12 +178,25 @@ namespace Kuldorendszer
             this.txtBEmail.TabIndex = 11;
             this.txtBEmail.Visible = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.No;
+            this.pictureBox1.Image = global::Kuldorendszer.Properties.Resources.Labda;
+            this.pictureBox1.Location = new System.Drawing.Point(310, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            // 
             // Belepes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(513, 334);
+            this.ClientSize = new System.Drawing.Size(454, 321);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtBEmail);
             this.Controls.Add(this.txtBJelszo);
             this.Controls.Add(this.txtBFelh);
@@ -188,10 +209,13 @@ namespace Kuldorendszer
             this.Controls.Add(this.button3);
             this.Controls.Add(this.BtnBelep);
             this.Controls.Add(this.BtnUjFelh);
+            this.MaximumSize = new System.Drawing.Size(580, 440);
+            this.MinimumSize = new System.Drawing.Size(470, 360);
             this.Name = "Belepes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Belépés";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,6 +235,7 @@ namespace Kuldorendszer
         private System.Windows.Forms.TextBox txtBFelh;
         private System.Windows.Forms.TextBox txtBJelszo;
         private System.Windows.Forms.TextBox txtBEmail;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

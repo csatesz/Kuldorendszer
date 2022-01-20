@@ -186,8 +186,8 @@ namespace Kuldorendszer
             btnVegleg.Visible = true;
 
             cBoxJv.Items.Add("JV");
-            cBoxAssz1.Items.Add("xxx");
-            cBoxAssz2.Items.Add("yyyy");
+            cBoxAssz1.Items.Add("assz1");
+            cBoxAssz2.Items.Add("assz2");
 
         }
 

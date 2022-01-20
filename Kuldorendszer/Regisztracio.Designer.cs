@@ -29,6 +29,7 @@ namespace Kuldorendszer
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Regisztracio));
             this.txtBRegEmail = new System.Windows.Forms.TextBox();
             this.txtBRegJelszo = new System.Windows.Forms.TextBox();
             this.txtBRegFelh = new System.Windows.Forms.TextBox();
@@ -47,25 +48,25 @@ namespace Kuldorendszer
             // 
             // txtBRegEmail
             // 
-            this.txtBRegEmail.Location = new System.Drawing.Point(175, 165);
+            this.txtBRegEmail.Location = new System.Drawing.Point(141, 148);
             this.txtBRegEmail.Multiline = true;
             this.txtBRegEmail.Name = "txtBRegEmail";
-            this.txtBRegEmail.Size = new System.Drawing.Size(131, 20);
+            this.txtBRegEmail.Size = new System.Drawing.Size(130, 20);
             this.txtBRegEmail.TabIndex = 21;
             // 
             // txtBRegJelszo
             // 
-            this.txtBRegJelszo.Location = new System.Drawing.Point(175, 82);
+            this.txtBRegJelszo.Location = new System.Drawing.Point(141, 65);
             this.txtBRegJelszo.Name = "txtBRegJelszo";
             this.txtBRegJelszo.PasswordChar = '*';
-            this.txtBRegJelszo.Size = new System.Drawing.Size(131, 20);
+            this.txtBRegJelszo.Size = new System.Drawing.Size(130, 20);
             this.txtBRegJelszo.TabIndex = 20;
             // 
             // txtBRegFelh
             // 
-            this.txtBRegFelh.Location = new System.Drawing.Point(175, 40);
+            this.txtBRegFelh.Location = new System.Drawing.Point(141, 23);
             this.txtBRegFelh.Name = "txtBRegFelh";
-            this.txtBRegFelh.Size = new System.Drawing.Size(131, 20);
+            this.txtBRegFelh.Size = new System.Drawing.Size(130, 20);
             this.txtBRegFelh.TabIndex = 19;
             // 
             // radioBAdmin
@@ -98,7 +99,7 @@ namespace Kuldorendszer
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(118, 222);
+            this.label4.Location = new System.Drawing.Point(84, 205);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 17);
             this.label4.TabIndex = 16;
@@ -108,7 +109,7 @@ namespace Kuldorendszer
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(116, 165);
+            this.label3.Location = new System.Drawing.Point(82, 148);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 17);
             this.label3.TabIndex = 15;
@@ -118,7 +119,7 @@ namespace Kuldorendszer
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(115, 82);
+            this.label2.Location = new System.Drawing.Point(81, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 17);
             this.label2.TabIndex = 14;
@@ -128,7 +129,7 @@ namespace Kuldorendszer
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(56, 39);
+            this.label1.Location = new System.Drawing.Point(22, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 17);
             this.label1.TabIndex = 13;
@@ -139,9 +140,9 @@ namespace Kuldorendszer
             this.BtnReg.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnReg.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnReg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.BtnReg.Location = new System.Drawing.Point(175, 286);
+            this.BtnReg.Location = new System.Drawing.Point(141, 269);
             this.BtnReg.Name = "BtnReg";
-            this.BtnReg.Size = new System.Drawing.Size(131, 25);
+            this.BtnReg.Size = new System.Drawing.Size(130, 25);
             this.BtnReg.TabIndex = 12;
             this.BtnReg.Text = "Regisztráció";
             this.BtnReg.UseVisualStyleBackColor = false;
@@ -149,17 +150,17 @@ namespace Kuldorendszer
             // 
             // txtBJelszoUjra
             // 
-            this.txtBJelszoUjra.Location = new System.Drawing.Point(175, 125);
+            this.txtBJelszoUjra.Location = new System.Drawing.Point(141, 108);
             this.txtBJelszoUjra.Name = "txtBJelszoUjra";
             this.txtBJelszoUjra.PasswordChar = '*';
-            this.txtBJelszoUjra.Size = new System.Drawing.Size(131, 20);
+            this.txtBJelszoUjra.Size = new System.Drawing.Size(130, 20);
             this.txtBJelszoUjra.TabIndex = 23;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(65, 125);
+            this.label5.Location = new System.Drawing.Point(31, 108);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(96, 17);
             this.label5.TabIndex = 22;
@@ -169,7 +170,7 @@ namespace Kuldorendszer
             // 
             this.groupBox1.Controls.Add(this.radioBKuldo);
             this.groupBox1.Controls.Add(this.radioBAdmin);
-            this.groupBox1.Location = new System.Drawing.Point(189, 191);
+            this.groupBox1.Location = new System.Drawing.Point(155, 174);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(75, 75);
             this.groupBox1.TabIndex = 24;
@@ -180,7 +181,7 @@ namespace Kuldorendszer
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(414, 334);
+            this.ClientSize = new System.Drawing.Size(339, 311);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtBJelszoUjra);
             this.Controls.Add(this.label5);
@@ -192,6 +193,10 @@ namespace Kuldorendszer
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnReg);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Regisztracio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Regisztráció";
