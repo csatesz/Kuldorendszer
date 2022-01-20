@@ -13,6 +13,7 @@ namespace Kuldorendszer
 {
     public partial class Kuldes : Form
     {
+
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
         MySqlDataAdapter adapter;
         DataTable table = new DataTable();
@@ -64,12 +65,12 @@ namespace Kuldorendszer
 
         public void ShowData(int index)
         {
-            txtBHely.Text = table.Rows[index][5].ToString();
             txtBKod.Text = table.Rows[index][0].ToString();
             txtBHazai.Text = table.Rows[index][1].ToString();
             txtBVendeg.Text = table.Rows[index][2].ToString();
-            txtBDatum.Text = table.Rows[index][4].ToString();
             txtBJV.Text = table.Rows[index][3].ToString();
+            txtBDatum.Text = table.Rows[index][4].ToString();
+            txtBHely.Text = table.Rows[index][5].ToString();
             txtBVerseny.Text = table.Rows[index][6].ToString();
         }
 
@@ -175,6 +176,33 @@ namespace Kuldorendszer
         {
             //pos = lBMerkozesek.SelectedIndex;
             //ShowData(pos);
+        }
+
+        private void btnModosit_Click(object sender, EventArgs e)
+        {
+            cBoxJv.Visible= true;
+            cBoxAssz1.Visible = true;
+            cBoxAssz2.Visible = true;
+            btnVegleg.Visible = true;
+
+            cBoxJv.Items.Add("JV");
+            cBoxAssz1.Items.Add("xxx");
+            cBoxAssz2.Items.Add("yyyy");
+
+        }
+
+        private void btnVegleg_Click(object sender, EventArgs e)
+        {
+            cBoxJv.Visible = false;
+            txtBJV.Text = cBoxJv.Text;
+
+            cBoxAssz1.Visible =false;
+            txtBAssz1.Text = cBoxAssz1.Text;
+
+            cBoxAssz2.Visible =false;
+            txtBAssz2.Text = cBoxAssz2.Text;
+
+            btnVegleg.Visible =false;
         }
     }
 }

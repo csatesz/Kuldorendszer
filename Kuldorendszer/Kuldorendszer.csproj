@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="Models\Csapatok.cs" />
     <Compile Include="Models\Elerhetoseg.cs" />
+    <Compile Include="Models\Felhasznalo.cs" />
     <Compile Include="Models\Jatekvezeto.cs" />
     <Compile Include="Models\Kuldes.cs" />
     <Compile Include="Models\ListBoxItems.cs" />

@@ -88,6 +88,10 @@ namespace Kuldorendszer
             this.btnKovetkezo = new System.Windows.Forms.Button();
             this.btnLast = new System.Windows.Forms.Button();
             this.lBMerkozesek = new System.Windows.Forms.ListBox();
+            this.cBoxJv = new System.Windows.Forms.ComboBox();
+            this.cBoxAssz1 = new System.Windows.Forms.ComboBox();
+            this.cBoxAssz2 = new System.Windows.Forms.ComboBox();
+            this.btnVegleg = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -302,6 +306,7 @@ namespace Kuldorendszer
             this.btnModosit.TabIndex = 48;
             this.btnModosit.Text = "Küldés módosítás";
             this.btnModosit.UseVisualStyleBackColor = true;
+            this.btnModosit.Click += new System.EventHandler(this.btnModosit_Click);
             // 
             // cBoxVerseny
             // 
@@ -350,7 +355,7 @@ namespace Kuldorendszer
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.newToolStripMenuItem.Text = "&New";
             // 
             // openToolStripMenuItem
@@ -594,12 +599,54 @@ namespace Kuldorendszer
             this.lBMerkozesek.TabIndex = 1;
             this.lBMerkozesek.SelectedIndexChanged += new System.EventHandler(this.lBMerkozesek_SelectedIndexChanged);
             // 
+            // cBoxJv
+            // 
+            this.cBoxJv.FormattingEnabled = true;
+            this.cBoxJv.Location = new System.Drawing.Point(171, 180);
+            this.cBoxJv.Name = "cBoxJv";
+            this.cBoxJv.Size = new System.Drawing.Size(131, 21);
+            this.cBoxJv.TabIndex = 54;
+            this.cBoxJv.Visible = false;
+            // 
+            // cBoxAssz1
+            // 
+            this.cBoxAssz1.FormattingEnabled = true;
+            this.cBoxAssz1.Location = new System.Drawing.Point(329, 180);
+            this.cBoxAssz1.Name = "cBoxAssz1";
+            this.cBoxAssz1.Size = new System.Drawing.Size(131, 21);
+            this.cBoxAssz1.TabIndex = 55;
+            this.cBoxAssz1.Visible = false;
+            // 
+            // cBoxAssz2
+            // 
+            this.cBoxAssz2.FormattingEnabled = true;
+            this.cBoxAssz2.Location = new System.Drawing.Point(487, 180);
+            this.cBoxAssz2.Name = "cBoxAssz2";
+            this.cBoxAssz2.Size = new System.Drawing.Size(131, 21);
+            this.cBoxAssz2.TabIndex = 56;
+            this.cBoxAssz2.Visible = false;
+            // 
+            // btnVegleg
+            // 
+            this.btnVegleg.Location = new System.Drawing.Point(432, 315);
+            this.btnVegleg.Name = "btnVegleg";
+            this.btnVegleg.Size = new System.Drawing.Size(100, 47);
+            this.btnVegleg.TabIndex = 57;
+            this.btnVegleg.Text = "Küldés véglegesítése";
+            this.btnVegleg.UseVisualStyleBackColor = true;
+            this.btnVegleg.Visible = false;
+            this.btnVegleg.Click += new System.EventHandler(this.btnVegleg_Click);
+            // 
             // Kuldes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1184, 511);
+            this.Controls.Add(this.btnVegleg);
+            this.Controls.Add(this.cBoxAssz2);
+            this.Controls.Add(this.cBoxAssz1);
+            this.Controls.Add(this.cBoxJv);
             this.Controls.Add(this.lBMerkozesek);
             this.Controls.Add(this.btnLast);
             this.Controls.Add(this.btnKovetkezo);
@@ -701,5 +748,9 @@ namespace Kuldorendszer
         private System.Windows.Forms.Button btnKovetkezo;
         private System.Windows.Forms.Button btnLast;
         private System.Windows.Forms.ListBox lBMerkozesek;
+        private System.Windows.Forms.ComboBox cBoxJv;
+        private System.Windows.Forms.ComboBox cBoxAssz1;
+        private System.Windows.Forms.ComboBox cBoxAssz2;
+        private System.Windows.Forms.Button btnVegleg;
     }
 }

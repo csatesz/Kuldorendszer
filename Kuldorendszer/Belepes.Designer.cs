@@ -109,6 +109,7 @@ namespace Kuldorendszer
             this.label3.Size = new System.Drawing.Size(47, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "E-mail";
+            this.label3.Visible = false;
             // 
             // label4
             // 
@@ -143,6 +144,7 @@ namespace Kuldorendszer
             this.radioBAdmin.TabStop = true;
             this.radioBAdmin.Text = "Admin";
             this.radioBAdmin.UseVisualStyleBackColor = true;
+            this.radioBAdmin.CheckedChanged += new System.EventHandler(this.radioBAdmin_CheckedChanged);
             // 
             // txtBFelh
             // 
@@ -166,6 +168,7 @@ namespace Kuldorendszer
             this.txtBEmail.Name = "txtBEmail";
             this.txtBEmail.Size = new System.Drawing.Size(131, 20);
             this.txtBEmail.TabIndex = 11;
+            this.txtBEmail.Visible = false;
             // 
             // Belepes
             // 

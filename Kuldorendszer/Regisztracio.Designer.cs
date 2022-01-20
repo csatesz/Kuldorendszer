@@ -41,6 +41,8 @@ namespace Kuldorendszer
             this.BtnReg = new System.Windows.Forms.Button();
             this.txtBJelszoUjra = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtBRegEmail
@@ -70,7 +72,7 @@ namespace Kuldorendszer
             // 
             this.radioBAdmin.AutoSize = true;
             this.radioBAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.radioBAdmin.Location = new System.Drawing.Point(178, 241);
+            this.radioBAdmin.Location = new System.Drawing.Point(6, 46);
             this.radioBAdmin.Name = "radioBAdmin";
             this.radioBAdmin.Size = new System.Drawing.Size(65, 21);
             this.radioBAdmin.TabIndex = 18;
@@ -81,14 +83,16 @@ namespace Kuldorendszer
             // radioBKuldo
             // 
             this.radioBKuldo.AutoSize = true;
+            this.radioBKuldo.Checked = true;
             this.radioBKuldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.radioBKuldo.Location = new System.Drawing.Point(178, 218);
+            this.radioBKuldo.Location = new System.Drawing.Point(6, 19);
             this.radioBKuldo.Name = "radioBKuldo";
             this.radioBKuldo.Size = new System.Drawing.Size(62, 21);
             this.radioBKuldo.TabIndex = 17;
             this.radioBKuldo.TabStop = true;
             this.radioBKuldo.Text = "Küldő";
             this.radioBKuldo.UseVisualStyleBackColor = true;
+            this.radioBKuldo.CheckedChanged += new System.EventHandler(this.radioBKuldo_CheckedChanged);
             // 
             // label4
             // 
@@ -135,7 +139,7 @@ namespace Kuldorendszer
             this.BtnReg.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnReg.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnReg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.BtnReg.Location = new System.Drawing.Point(144, 287);
+            this.BtnReg.Location = new System.Drawing.Point(175, 286);
             this.BtnReg.Name = "BtnReg";
             this.BtnReg.Size = new System.Drawing.Size(131, 25);
             this.BtnReg.TabIndex = 12;
@@ -161,19 +165,28 @@ namespace Kuldorendszer
             this.label5.TabIndex = 22;
             this.label5.Text = "Ismételt jelszó";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioBKuldo);
+            this.groupBox1.Controls.Add(this.radioBAdmin);
+            this.groupBox1.Location = new System.Drawing.Point(189, 191);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(75, 75);
+            this.groupBox1.TabIndex = 24;
+            this.groupBox1.TabStop = false;
+            // 
             // Regisztracio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(414, 334);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtBJelszoUjra);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtBRegEmail);
             this.Controls.Add(this.txtBRegJelszo);
             this.Controls.Add(this.txtBRegFelh);
-            this.Controls.Add(this.radioBAdmin);
-            this.Controls.Add(this.radioBKuldo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -183,6 +196,8 @@ namespace Kuldorendszer
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Regisztráció";
             this.Load += new System.EventHandler(this.Regisztracio_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,5 +217,6 @@ namespace Kuldorendszer
         private System.Windows.Forms.Button BtnReg;
         private System.Windows.Forms.TextBox txtBJelszoUjra;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

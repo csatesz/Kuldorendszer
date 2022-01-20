@@ -14,7 +14,14 @@ namespace Kuldorendszer
     {
         public Belepes()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception)
+            {
+                throw new Exception("Hiba történt! Indítsa újra a programot.");
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -35,12 +42,21 @@ namespace Kuldorendszer
             {
                 MessageBox.Show("Egyik adat sem lehet üres!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            if (true)
+            {
 
+            }
             this.Visible = false;
             Kuldes kuld = new Kuldes();
             kuld.ShowDialog();
             this.Close();
 
+        }
+
+        private void radioBAdmin_CheckedChanged(object sender, EventArgs e)
+        {
+            label3.Visible = true;
+            txtBEmail.Visible = true;
         }
     }
 }
