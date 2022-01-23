@@ -13,7 +13,6 @@ namespace Kuldorendszer
 {
     public partial class Kuldes : Form
     {
-
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
         MySqlDataAdapter adapter;
         DataTable table = new DataTable();
@@ -41,7 +40,7 @@ namespace Kuldorendszer
             }
             catch
             {
-
+                throw new Exception();
             }
             ShowData(pos);
             FillCombo();
@@ -65,13 +64,34 @@ namespace Kuldorendszer
 
         public void ShowData(int index)
         {
-            txtBKod.Text = table.Rows[index][0].ToString();
-            txtBHazai.Text = table.Rows[index][1].ToString();
-            txtBVendeg.Text = table.Rows[index][2].ToString();
-            txtBJV.Text = table.Rows[index][3].ToString();
-            txtBDatum.Text = table.Rows[index][4].ToString();
-            txtBHely.Text = table.Rows[index][5].ToString();
-            txtBVerseny.Text = table.Rows[index][6].ToString();
+            //connection.Open();
+            adapter = new MySqlDataAdapter($"SELECT osztalyMegnevezes FROM kuldes.osztaly WHERE idOsztaly = {table.Rows[index][6]};", connection);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            txtBVerseny.Text = dt.Rows[0][0].ToString(); // Osztály? idOsztály
+
+            txtBKod.Text = table.Rows[index][0].ToString(); // mérkőzés kódja
+            txtBDatum.Text = table.Rows[index][4].ToString(); // Mérkőzés dátuma
+
+            adapter = new MySqlDataAdapter($"SELECT csapatNev FROM kuldes.csapatok WHERE idCsapat = {table.Rows[index][1]};", connection);
+            DataTable dt2 = new DataTable();
+            adapter.Fill(dt2);
+            txtBHazai.Text = dt2.Rows[0][0].ToString(); // hazai csapat ID
+            adapter = new MySqlDataAdapter($"SELECT csapatNev FROM kuldes.csapatok WHERE idCsapat = {table.Rows[index][2]};", connection);
+            DataTable dt3 = new DataTable();
+            adapter.Fill(dt3);
+            txtBVendeg.Text = dt3.Rows[0][0].ToString();// vendég csapat ID
+
+            adapter = new MySqlDataAdapter($"SELECT telepules FROM kuldes.telepules WHERE idTelepules = {table.Rows[index][5]};", connection);
+            DataTable dt4 = new DataTable();
+            adapter.Fill(dt4);
+            txtBHely.Text = dt4.Rows[0][0].ToString();// Hol? idTelepules -> 
+
+            txtBJV.Text = ""; // table.Rows[index][3].ToString(); ez a jv-k száma
+            txtBAssz1.Text = "";
+            txtBAssz1.Text = "";
+
+            //connection.Close();
         }
 
         private void btnElozo_Click(object sender, EventArgs e)
@@ -103,21 +123,7 @@ namespace Kuldorendszer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            List<ListBoxItems> merkozesek = new List<ListBoxItems>();
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                merkozesek.Add(new ListBoxItems
-                {
-                    Kod = (int)table.Rows[i][0],
-                    Text = table.Rows[i][1].ToString() + "\t-\t" + table.Rows[i][2].ToString()
-                });
-
-            }
-            lBMerkozesek.DisplayMember = "Text";
-            lBMerkozesek.ValueMember = "Kod";
-            lBMerkozesek.DataSource = merkozesek;
-            lBMerkozesek.Refresh();
-            lBMerkozesek.SelectedIndex = -1;
+            
         }
 
         private void cBoxVerseny_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,10 +139,22 @@ namespace Kuldorendszer
                 string query = $"SELECT * FROM kuldes.merkozes WHERE idOsztaly = " +
                     $"(SELECT idOsztaly FROM kuldes.osztaly WHERE osztalyMegnevezes = \"{cBoxVerseny.SelectedItem}\");";
                 adapter = new MySqlDataAdapter(query, connection);
-                adapter.Fill(table);
+                if (adapter != null)
+                {
+                    adapter.Fill(table);
+                    if (table.Rows.Count != 0)
+                    {
+                        pos = 0;
+                        ShowData(pos);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ebben az osztályban nincs mérkőzés!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }              
 
-                pos = 0;
-                ShowData(pos);
+                
             }
         }
 
@@ -203,6 +221,31 @@ namespace Kuldorendszer
             txtBAssz2.Text = cBoxAssz2.Text;
 
             btnVegleg.Visible =false;
+        }
+
+        private void txtBVerseny_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnKuldes_Click(object sender, EventArgs e)
+        {
+            List<ListBoxItems> merkozesek = new List<ListBoxItems>();
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                merkozesek.Add(new ListBoxItems
+                {
+                    Kod = (int)table.Rows[i][0],
+                    Text = table.Rows[i][1].ToString() + "\t-\t" + table.Rows[i][2].ToString() +
+                    "jv, " +" Assz1 " + " Assz2 "
+                });
+
+            }
+            lBMerkozesek.DisplayMember = "Text";
+            lBMerkozesek.ValueMember = "Kod";
+            lBMerkozesek.DataSource = merkozesek;
+            lBMerkozesek.Refresh();
+            lBMerkozesek.SelectedIndex = -1;
         }
     }
 }

@@ -29,6 +29,7 @@ namespace Kuldorendszer
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnFelhKarb = new System.Windows.Forms.Button();
             this.btnMerkKarb = new System.Windows.Forms.Button();
             this.lBAdmin = new System.Windows.Forms.ListBox();
@@ -38,7 +39,13 @@ namespace Kuldorendszer
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.kuldesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.kuldesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kuldesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kuldesBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnFelhKarb
@@ -72,9 +79,9 @@ namespace Kuldorendszer
             // lBAdmin
             // 
             this.lBAdmin.FormattingEnabled = true;
-            this.lBAdmin.Location = new System.Drawing.Point(491, 16);
+            this.lBAdmin.Location = new System.Drawing.Point(399, 16);
             this.lBAdmin.Name = "lBAdmin";
-            this.lBAdmin.Size = new System.Drawing.Size(297, 420);
+            this.lBAdmin.Size = new System.Drawing.Size(389, 420);
             this.lBAdmin.TabIndex = 50;
             // 
             // btnJvKarb
@@ -107,7 +114,7 @@ namespace Kuldorendszer
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(350, 189);
+            this.button1.Location = new System.Drawing.Point(244, 173);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 47);
             this.button1.TabIndex = 53;
@@ -116,7 +123,7 @@ namespace Kuldorendszer
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(350, 32);
+            this.button2.Location = new System.Drawing.Point(244, 16);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 47);
             this.button2.TabIndex = 54;
@@ -125,7 +132,7 @@ namespace Kuldorendszer
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(350, 108);
+            this.button3.Location = new System.Drawing.Point(244, 92);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 47);
             this.button3.TabIndex = 55;
@@ -145,11 +152,28 @@ namespace Kuldorendszer
             this.panel1.Size = new System.Drawing.Size(150, 450);
             this.panel1.TabIndex = 56;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(235, 108);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(498, 121);
+            this.dataGridView1.TabIndex = 57;
+            // 
+            // kuldesBindingSource
+            // 
+            this.kuldesBindingSource.DataSource = typeof(Kuldorendszer.Kuldes);
+            // 
+            // kuldesBindingSource1
+            // 
+            this.kuldesBindingSource1.DataSource = typeof(Kuldorendszer.Kuldes);
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -158,6 +182,9 @@ namespace Kuldorendszer
             this.Name = "Admin";
             this.Text = "Admin";
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kuldesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kuldesBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -173,5 +200,8 @@ namespace Kuldorendszer
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource kuldesBindingSource;
+        private System.Windows.Forms.BindingSource kuldesBindingSource1;
     }
 }

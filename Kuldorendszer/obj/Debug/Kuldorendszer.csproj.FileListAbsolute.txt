@@ -1,7 +1,6 @@
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\Kuldorendszer.exe.config
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\Kuldorendszer.exe
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\Kuldorendszer.pdb
-C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.csprojAssemblyReference.cache
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.Properties.Resources.resources
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.csproj.GenerateResource.cache
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.csproj.CoreCompileInputs.cache
@@ -34,3 +33,4 @@ C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.csproj.CopyComplete
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.Admin.resources
+C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.csprojAssemblyReference.cache

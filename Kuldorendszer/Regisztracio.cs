@@ -44,7 +44,7 @@ namespace Kuldorendszer
             {
                 MessageBox.Show("Egyik adat sem lehet üres, vagy 4 karakternél rövidebb!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (txtBRegJelszo.Text != txtBJelszoUjra.Text)
+            else if (txtBRegJelszo.Text != txtBJelszoUjra.Text.Trim())
             {
                 MessageBox.Show("A jelszavak nem egyeznek meg!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -53,8 +53,8 @@ namespace Kuldorendszer
                 //\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b regex
                 try
                 {
-                    MailAddress email = new MailAddress(txtBRegEmail.Text);
-                    ervenyes = (email.Address == txtBRegEmail.Text);
+                    MailAddress email = new MailAddress(txtBRegEmail.Text.Trim());
+                    ervenyes = (email.Address == txtBRegEmail.Text.Trim());
                 }
                 catch (FormatException)
                 {
@@ -66,18 +66,31 @@ namespace Kuldorendszer
             {
                 Felhasznalo felh = new Felhasznalo
                 {
-                    felhNev = txtBRegFelh.Text,
-                    email = txtBRegEmail.Text,
-                    jelszo = txtBRegJelszo.Text // titkosítani! sha256_hash
+                    felhNev = txtBRegFelh.Text.Trim(),
+                    email = txtBRegEmail.Text.Trim(),
+                    jelszo = HashExtension.sha256_hash(txtBRegJelszo.Text.Trim()) // titkosítani! sha256_hash
 
                 };
-                cmd = new MySqlCommand("INSERT INTO kuldes.felhasznalo (felhNev,email,jelszo) VALUES (@felhNev,@email,@jelszo)", connection);
+                cmd = new MySqlCommand("INSERT INTO kuldes.felhasznalo (felhNev,email,jelszo,admin,aszf) " +
+                    "VALUES (@felhNev,@email,@jelszo,@admin,@aszf)", connection);
                 try
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@felhNev", txtBRegFelh.Text);
-                    cmd.Parameters.AddWithValue("@email", txtBRegEmail.Text);
-                    cmd.Parameters.AddWithValue("@jelszo", txtBRegJelszo.Text);
+                    cmd.Parameters.AddWithValue("@felhNev", txtBRegFelh.Text.Trim());
+                    cmd.Parameters.AddWithValue("@email", txtBRegEmail.Text.Trim());
+                    cmd.Parameters.AddWithValue("@jelszo", HashExtension.sha256_hash(txtBRegJelszo.Text));
+                    cmd.Parameters.AddWithValue("@admin", 0);
+                    if (chkAszf.Checked)
+                    {
+                        cmd.Parameters.AddWithValue("@aszf", 1);
+                    }
+                    else 
+                        cmd.Parameters.AddWithValue("@aszf", 0);
+                    //if (radioBAdmin.Checked)
+                    //{
+                    //    cmd.Parameters.AddWithValue("@admin", 1);
+                    //}else
+                    //    cmd.Parameters.AddWithValue("@admin", 0);
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }

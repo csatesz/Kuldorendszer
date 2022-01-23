@@ -43,6 +43,7 @@ namespace Kuldorendszer
             this.txtBJelszoUjra = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkAszf = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,11 +100,12 @@ namespace Kuldorendszer
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(84, 205);
+            this.label4.Location = new System.Drawing.Point(-1, 205);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 17);
             this.label4.TabIndex = 16;
             this.label4.Text = "Típus";
+            this.label4.Visible = false;
             // 
             // label3
             // 
@@ -170,11 +172,23 @@ namespace Kuldorendszer
             // 
             this.groupBox1.Controls.Add(this.radioBKuldo);
             this.groupBox1.Controls.Add(this.radioBAdmin);
-            this.groupBox1.Location = new System.Drawing.Point(155, 174);
+            this.groupBox1.Location = new System.Drawing.Point(70, 174);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(75, 75);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Visible = false;
+            // 
+            // chkAszf
+            // 
+            this.chkAszf.AutoSize = true;
+            this.chkAszf.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.chkAszf.Location = new System.Drawing.Point(172, 206);
+            this.chkAszf.Name = "chkAszf";
+            this.chkAszf.Size = new System.Drawing.Size(57, 17);
+            this.chkAszf.TabIndex = 19;
+            this.chkAszf.Text = "ÁSZF";
+            this.chkAszf.UseVisualStyleBackColor = true;
             // 
             // Regisztracio
             // 
@@ -182,6 +196,7 @@ namespace Kuldorendszer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(339, 311);
+            this.Controls.Add(this.chkAszf);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtBJelszoUjra);
             this.Controls.Add(this.label5);
@@ -223,5 +238,6 @@ namespace Kuldorendszer
         private System.Windows.Forms.TextBox txtBJelszoUjra;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox chkAszf;
     }
 }

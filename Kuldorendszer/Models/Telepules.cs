@@ -9,7 +9,7 @@ namespace Kuldorendszer.Models
     class Telepules
     {
         public int idTelepules { get; set; }
-        public string varos { get; set; }
+        public string telepules { get; set; }
         public int irSzam { get; set; }
     }
 }

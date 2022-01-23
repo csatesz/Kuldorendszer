@@ -101,6 +101,7 @@
     <Compile Include="Belepes.Designer.cs">
       <DependentUpon>Belepes.cs</DependentUpon>
     </Compile>
+    <Compile Include="HashExtension.cs" />
     <Compile Include="Kuldes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +148,23 @@
       <DependentUpon>Regisztracio.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Admin.datasource" />
+    <None Include="Properties\DataSources\Belepes.datasource" />
+    <None Include="Properties\DataSources\HashExtension.datasource" />
+    <None Include="Properties\DataSources\Kuldes.datasource" />
+    <None Include="Properties\DataSources\Kuldorendszer.Models.Csapatok.datasource" />
+    <None Include="Properties\DataSources\Kuldorendszer.Models.Elerhetoseg.datasource" />
+    <None Include="Properties\DataSources\Kuldorendszer.Models.Felhasznalo.datasource" />
+    <None Include="Properties\DataSources\Kuldorendszer.Models.Jatekvezeto.datasource" />
+    <None Include="Properties\DataSources\Kuldorendszer.Models.Kuldes.datasource" />
+    <None Include="Properties\DataSources\Kuldorendszer.Models.Merkozes.datasource" />
+    <None Include="Properties\DataSources\Kuldorendszer.Models.Osztaly.datasource" />
+    <None Include="Properties\DataSources\Kuldorendszer.Models.Telepules.datasource" />
+    <None Include="Properties\DataSources\Kuldorendszer.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\Kuldorendszer.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\ListBoxItems.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\Regisztracio.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -162,6 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Labda.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

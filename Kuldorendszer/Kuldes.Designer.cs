@@ -287,6 +287,7 @@ namespace Kuldorendszer
             this.txtBVerseny.Name = "txtBVerseny";
             this.txtBVerseny.Size = new System.Drawing.Size(131, 20);
             this.txtBVerseny.TabIndex = 46;
+            this.txtBVerseny.TextChanged += new System.EventHandler(this.txtBVerseny_TextChanged);
             // 
             // btnKuldes
             // 
@@ -297,7 +298,7 @@ namespace Kuldorendszer
             this.btnKuldes.TabIndex = 47;
             this.btnKuldes.Text = "Küldés készítés";
             this.btnKuldes.UseVisualStyleBackColor = true;
-            this.btnKuldes.Click += new System.EventHandler(this.button1_Click);
+            this.btnKuldes.Click += new System.EventHandler(this.btnKuldes_Click);
             // 
             // btnModosit
             // 
