@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Kuldorendszer.Models
 {
-    public class Felhasznalo
+    public class Felhasznalo 
     {
         public int felhKod { get; set; }
         public string felhNev { get; set; }

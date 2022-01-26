@@ -92,7 +92,9 @@ namespace Kuldorendszer
             this.cBoxAssz1 = new System.Windows.Forms.ComboBox();
             this.cBoxAssz2 = new System.Windows.Forms.ComboBox();
             this.btnVegleg = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtBHazai
@@ -292,7 +294,7 @@ namespace Kuldorendszer
             // btnKuldes
             // 
             this.btnKuldes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnKuldes.Location = new System.Drawing.Point(33, 315);
+            this.btnKuldes.Location = new System.Drawing.Point(38, 369);
             this.btnKuldes.Name = "btnKuldes";
             this.btnKuldes.Size = new System.Drawing.Size(100, 47);
             this.btnKuldes.TabIndex = 47;
@@ -303,7 +305,7 @@ namespace Kuldorendszer
             // btnModosit
             // 
             this.btnModosit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnModosit.Location = new System.Drawing.Point(235, 315);
+            this.btnModosit.Location = new System.Drawing.Point(240, 369);
             this.btnModosit.Name = "btnModosit";
             this.btnModosit.Size = new System.Drawing.Size(100, 47);
             this.btnModosit.TabIndex = 48;
@@ -636,7 +638,7 @@ namespace Kuldorendszer
             // btnVegleg
             // 
             this.btnVegleg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnVegleg.Location = new System.Drawing.Point(441, 315);
+            this.btnVegleg.Location = new System.Drawing.Point(446, 369);
             this.btnVegleg.Name = "btnVegleg";
             this.btnVegleg.Size = new System.Drawing.Size(100, 47);
             this.btnVegleg.TabIndex = 57;
@@ -645,6 +647,16 @@ namespace Kuldorendszer
             this.btnVegleg.Visible = false;
             this.btnVegleg.Click += new System.EventHandler(this.btnVegleg_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(15, 228);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(603, 121);
+            this.dataGridView1.TabIndex = 58;
+            // 
             // Kuldes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -652,6 +664,7 @@ namespace Kuldorendszer
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1134, 461);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnVegleg);
             this.Controls.Add(this.cBoxAssz2);
             this.Controls.Add(this.cBoxAssz1);
@@ -695,6 +708,7 @@ namespace Kuldorendszer
             this.Load += new System.EventHandler(this.Kuldes_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -764,5 +778,6 @@ namespace Kuldorendszer
         private System.Windows.Forms.ComboBox cBoxAssz1;
         private System.Windows.Forms.ComboBox cBoxAssz2;
         private System.Windows.Forms.Button btnVegleg;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

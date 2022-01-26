@@ -92,6 +92,8 @@ namespace Kuldorendszer
             {
                 label3.Visible = true;
                 txtBEmail.Visible = true;
+                Admin a = new Admin(); //itt még vizsgálni kell a belépést is
+                a.ShowDialog();
             }
             else
             {

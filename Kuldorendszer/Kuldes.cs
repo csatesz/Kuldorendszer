@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Kuldorendszer.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,10 @@ namespace Kuldorendszer
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
         MySqlDataAdapter adapter;
         DataTable table = new DataTable();
+        DataTable merkozesekJvel = new DataTable();
+        DataTable jv = new DataTable();
+        DataTable assz = new DataTable();
+        MySqlCommand cmd;
         int pos = 0;
         public Kuldes()
         {
@@ -90,7 +95,7 @@ namespace Kuldorendszer
             txtBJV.Text = ""; // table.Rows[index][3].ToString(); ez a jv-k száma
             txtBAssz1.Text = "";
             txtBAssz1.Text = "";
-
+            MerkozesKiir();
             //connection.Close();
         }
 
@@ -103,7 +108,7 @@ namespace Kuldorendszer
             }
             else
             {
-                MessageBox.Show("Elérte az adatok elejét!");
+                MessageBox.Show("Elérte az adatok elejét!", "Figyelem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -116,14 +121,9 @@ namespace Kuldorendszer
             }
             else
             {
-                MessageBox.Show("Elérte az adatok végét!");
+                MessageBox.Show("Elérte az adatok végét!", "Figyelem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 pos = table.Rows.Count - 1;
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void cBoxVerseny_SelectedIndexChanged(object sender, EventArgs e)
@@ -152,9 +152,7 @@ namespace Kuldorendszer
                         MessageBox.Show("Ebben az osztályban nincs mérkőzés!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                }              
-
-                
+                }
             }
         }
 
@@ -171,7 +169,6 @@ namespace Kuldorendszer
         {
             MessageBox.Show(e.ClickedItem.Text);
             string itemText = e.ClickedItem.Text;
-
 
             switch (itemText)
             {
@@ -198,15 +195,14 @@ namespace Kuldorendszer
 
         private void btnModosit_Click(object sender, EventArgs e)
         {
-            cBoxJv.Visible= true;
+            cBoxJv.Visible = true;
             cBoxAssz1.Visible = true;
             cBoxAssz2.Visible = true;
             btnVegleg.Visible = true;
 
-            cBoxJv.Items.Add("JV");
-            cBoxAssz1.Items.Add("assz1");
-            cBoxAssz2.Items.Add("assz2");
-
+            //cBoxJv.Items.Add("JV");
+            //cBoxAssz1.Items.Add("assz1");
+            //cBoxAssz2.Items.Add("assz2");
         }
 
         private void btnVegleg_Click(object sender, EventArgs e)
@@ -214,38 +210,104 @@ namespace Kuldorendszer
             cBoxJv.Visible = false;
             txtBJV.Text = cBoxJv.Text;
 
-            cBoxAssz1.Visible =false;
+            cBoxAssz1.Visible = false;
             txtBAssz1.Text = cBoxAssz1.Text;
 
-            cBoxAssz2.Visible =false;
+            cBoxAssz2.Visible = false;
             txtBAssz2.Text = cBoxAssz2.Text;
 
-            btnVegleg.Visible =false;
+            btnVegleg.Visible = false;
+            cmd = new MySqlCommand("INSERT INTO kuldes.kuldes (merkozesKod,jvKod,assz1Kod,assz2Kod) " +
+                    "VALUES (@merkozesKod,@jvKod,@assz1Kod,@assz2Kod)", connection);
+            connection.Open();
+            cmd.Parameters.AddWithValue("@merkozesKod", txtBKod.Text.Trim());
+            cmd.Parameters.AddWithValue("@jvKod", cBoxJv.SelectedIndex);
+            cmd.Parameters.AddWithValue("@assz1Kod", cBoxAssz1.SelectedIndex);
+            cmd.Parameters.AddWithValue("@assz2Kod", cBoxAssz2.SelectedIndex);
+            cmd.ExecuteNonQuery();
+            connection.Close();
         }
-
         private void txtBVerseny_TextChanged(object sender, EventArgs e)
         {
-
         }
-
         private void btnKuldes_Click(object sender, EventArgs e)
         {
+            //MerkozesKiir();
+            connection.Open();
+            adapter = new MySqlDataAdapter("SELECT m.merkozesDatum, t.Telepules, c.csapatNev, d.csapatNev " +
+                "FROM (((kuldes.merkozes m INNER JOIN kuldes.telepules t " +
+                "ON t.IdTelepules = m.IdTelepules) INNER JOIN kuldes.csapatok c " +
+                "ON c.idCsapat = m.hazaiCsapatId) " +
+                " INNER JOIN kuldes.csapatok d ON d.idCsapat = m.vendegCsapatId);", connection);
+            //adapter = new MySqlDataAdapter("SELECT kuldes.merkozes.merkozesDatum, kuldes.telepules.Telepules" +
+            //    "FROM kuldes.merkozes JOIN kuldes.telepules USING (kuldes.telepules.IdTelepules);", connection);
+            adapter.Fill(merkozesekJvel);
+
+            merkozesekJvel.Columns.Add("JatekVezeto", typeof(String));
+            merkozesekJvel.Columns.Add("Asszisztens1", typeof(String));
+            merkozesekJvel.Columns.Add("Asszisztens2", typeof(String));
+            for (int i = 0; i < merkozesekJvel.Rows.Count; i++)
+            {
+                adapter = new MySqlDataAdapter("SELECT nev FROM kuldes.jatekvezetok WHERE feladatkor =\"játékvezető\" ;", connection);
+                adapter.Fill(jv);
+                adapter = new MySqlDataAdapter("SELECT nev FROM kuldes.jatekvezetok WHERE feladatkor =\"asszisztens\" ;", connection);
+                adapter.Fill(assz);
+
+                merkozesekJvel.Rows[i][4] = jv.Rows[i][0];
+                cBoxJv.Items.Add(jv.Rows[i][0].ToString());
+
+                merkozesekJvel.Rows[i][5] = assz.Rows[i][0];
+                cBoxAssz1.Items.Add(assz.Rows[i][0].ToString());
+                merkozesekJvel.Rows[i][6] = assz.Rows[i][0];
+                cBoxAssz2.Items.Add(assz.Rows[i][0].ToString());
+            }
+            connection.Close();
+            dataGridView1.DataSource = merkozesekJvel;
+            //feltoltMerkozesekJvel();
+        }
+
+        public void MerkozesKiir()
+        {
             List<ListBoxItems> merkozesek = new List<ListBoxItems>();
+            DataTable hazai = new DataTable();
+            DataTable vendeg = new DataTable();
+
             for (int i = 0; i < table.Rows.Count; i++)
             {
+                adapter = new MySqlDataAdapter($"SELECT csapatNev FROM kuldes.csapatok WHERE idCsapat = {table.Rows[i][1]} ;", connection);
+                adapter.Fill(hazai);
+                adapter = new MySqlDataAdapter($"SELECT csapatNev FROM kuldes.csapatok WHERE idCsapat = {table.Rows[i][2]} ;", connection);
+                adapter.Fill(vendeg);
                 merkozesek.Add(new ListBoxItems
                 {
                     Kod = (int)table.Rows[i][0],
-                    Text = table.Rows[i][1].ToString() + "\t-\t" + table.Rows[i][2].ToString() +
-                    "jv, " +" Assz1 " + " Assz2 "
+                    Text = hazai.Rows[i][0].ToString() + "\t- " + vendeg.Rows[i][0].ToString()
                 });
-
             }
             lBMerkozesek.DisplayMember = "Text";
             lBMerkozesek.ValueMember = "Kod";
             lBMerkozesek.DataSource = merkozesek;
             lBMerkozesek.Refresh();
             lBMerkozesek.SelectedIndex = -1;
+        }
+        public void feltoltMerkozesekJvel()
+        {
+            for (int i = 0; i < merkozesekJvel.Rows.Count; i++)
+            {
+                JatekvezetoKuldes j = new JatekvezetoKuldes
+                {
+                    //kuldKod = dt2.Rows[0][0].ToString(),
+                    idopont = (DateTime)merkozesekJvel.Rows[i][0],
+                    hazaiCsapat = merkozesekJvel.Rows[i][2].ToString(),
+                    vendegCsapat = merkozesekJvel.Rows[i][3].ToString(),
+                    //jatekvezeto =  ,
+                    //asszisztens1 =  ,
+                    //asszisztens2 =
+                };
+
+                lBMerkozesek.DataSource = merkozesekJvel;
+            }
+            //merkozesekJvel => DataTable;
         }
     }
 }

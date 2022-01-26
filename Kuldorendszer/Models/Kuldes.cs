@@ -13,5 +13,8 @@ namespace Kuldorendszer.Models
         public int jvKod { get; set; }
         public int assz1Kod { get; set; }
         public int assz2Kod { get; set; }
+        public int assz3Kod { get; set; }
+        public int assz4Kod { get; set; }
+
     }
 }
