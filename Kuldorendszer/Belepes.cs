@@ -16,6 +16,9 @@ namespace Kuldorendszer
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
         MySqlDataAdapter adapter;
         DataTable dt = new DataTable();
+        string user = null;
+        string userpass = null;
+        bool admin = false;
         public Belepes()
         {
             try
@@ -42,12 +45,12 @@ namespace Kuldorendszer
 
         private void BtnBelep_Click(object sender, EventArgs e)
         {
-            string user = null;
-            string userpass = null;
+
             try
             {
                 connection.Open();
-                adapter = new MySqlDataAdapter($"SELECT * FROM kuldes.felhasznalo WHERE felhNev = \"{txtBFelh.Text}\"; ", connection);
+                adapter = new MySqlDataAdapter($"SELECT * FROM kuldes.felhasznalo WHERE felhNev = \"{txtBFelh.Text}\" " +
+                    $" AND (torolt = 0 OR torolt is NULL); ", connection);
             }
             catch
             {
@@ -62,6 +65,7 @@ namespace Kuldorendszer
                 {
                     user = dt.Rows[0][1].ToString();
                     userpass = dt.Rows[0][3].ToString();
+                    if (radioBAdmin.Checked) { admin = (bool)dt.Rows[0][4]; }
                 }
                 else
                 {
@@ -74,12 +78,19 @@ namespace Kuldorendszer
             {
                 MessageBox.Show("Egyik adat sem lehet üres!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            //else if (HashExtension.sha256_hash(txtBJelszo.Text)== HashExtension.sha256_hash())
             else if (txtBFelh.Text == user && HashExtension.sha256_hash(txtBJelszo.Text) == userpass)
             {
                 this.Visible = false;
-                Kuldes kuld = new Kuldes();
-                kuld.ShowDialog();
+                if (radioBAdmin.Checked && admin)
+                {
+                    Admin a = new Admin();
+                    a.ShowDialog();
+                }
+                else
+                {
+                    Kuldes kuld = new Kuldes();
+                    kuld.ShowDialog();
+                }
                 this.Close();
             }
             else
@@ -88,18 +99,18 @@ namespace Kuldorendszer
         }
         private void radioBAdmin_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioBAdmin.Checked)
-            {
-                label3.Visible = true;
-                txtBEmail.Visible = true;
-                Admin a = new Admin(); //itt még vizsgálni kell a belépést is
-                a.ShowDialog();
-            }
-            else
-            {
-                label3.Visible = false;
-                txtBEmail.Visible = false;
-            }
+            //if (radioBAdmin.Checked)//itt még vizsgálni kell az emailt is
+            //{
+            //    label3.Visible = true;
+            //    txtBEmail.Visible = true;
+            //    Admin a = new Admin(); 
+            //    a.ShowDialog();
+            //}
+            //else
+            //{
+            //    label3.Visible = false;
+            //    txtBEmail.Visible = false;
+            //}
         }
     }
 }

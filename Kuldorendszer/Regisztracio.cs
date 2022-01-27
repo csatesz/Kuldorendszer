@@ -18,6 +18,7 @@ namespace Kuldorendszer
     {
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
         MySqlDataAdapter adapter;
+        DataTable dt = new DataTable();
         MySqlCommand cmd;
         public Regisztracio()
         {
@@ -33,12 +34,16 @@ namespace Kuldorendszer
 
         private void Regisztracio_Load(object sender, EventArgs e)
         {
-
+            adapter = new MySqlDataAdapter($"SELECT felhNev FROM kuldes.felhasznalo ;", connection);
+            if (adapter != null)
+            {
+                adapter.Fill(dt);
+            }
         }
-
         private void BtnReg_Click(object sender, EventArgs e)
         {
             bool ervenyes = false;
+            bool foglalt = false;
 
             if (txtBRegFelh.Text.Length < 4 || txtBRegEmail.Text == "" || txtBRegJelszo.Text.Length < 4)
             {
@@ -62,7 +67,15 @@ namespace Kuldorendszer
                     MessageBox.Show("Az email cím nem érvényes!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            if (ervenyes)
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+             if( dt.Rows[i][0].ToString().Contains(txtBRegFelh.Text.Trim()))
+                {
+                    foglalt = true;
+                    break;
+                }
+            }
+            if (ervenyes && !foglalt)
             {
                 Felhasznalo felh = new Felhasznalo
                 {
@@ -103,7 +116,10 @@ namespace Kuldorendszer
                 MessageBox.Show("Sikeres Regisztráció", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
-
+            else
+            {
+                MessageBox.Show("A felhasználó név már foglalt", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void radioBKuldo_CheckedChanged(object sender, EventArgs e)
