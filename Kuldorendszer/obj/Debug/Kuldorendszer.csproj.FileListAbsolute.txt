@@ -34,3 +34,4 @@ C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.csproj.CopyComplete
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.Admin.resources
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.csprojAssemblyReference.cache
+C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.Adatmodositas.resources

@@ -94,7 +94,6 @@ namespace Kuldorendszer
             this.radioBKuldo.TabStop = true;
             this.radioBKuldo.Text = "Küldő";
             this.radioBKuldo.UseVisualStyleBackColor = true;
-            this.radioBKuldo.CheckedChanged += new System.EventHandler(this.radioBKuldo_CheckedChanged);
             // 
             // label4
             // 

@@ -89,6 +89,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adatmodositas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adatmodositas.Designer.cs">
+      <DependentUpon>Adatmodositas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,9 @@
     <Compile Include="Regisztracio.Designer.cs">
       <DependentUpon>Regisztracio.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Adatmodositas.resx">
+      <DependentUpon>Adatmodositas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Admin.resx">
       <DependentUpon>Admin.cs</DependentUpon>
     </EmbeddedResource>

@@ -27,7 +27,7 @@ namespace Kuldorendszer
         DataTable osztaly = new DataTable();
         DataTable elerhetoseg = new DataTable();
 
-        private string table = null;
+        public string table = null;
         private string kod = null;
         private string id = "";
         public Admin()
@@ -43,8 +43,7 @@ namespace Kuldorendszer
             felhTable.Clear();
             connection.Open();
 
-            adapter = new MySqlDataAdapter("SELECT felhKod AS Kód, felhNev AS Név, email AS Email, " +
-                "admin AS Admin, aszf AS ÁSZF, torolt AS Törölt" +
+            adapter = new MySqlDataAdapter("SELECT felhKod, felhNev, email,admin, aszf, torolt " +
                 " FROM kuldes.felhasznalo", connection);
             if (felhTable.Rows.Count == 0)
             {
@@ -64,6 +63,12 @@ namespace Kuldorendszer
             //    };
             //}
             connection.Close();
+            dGridAdmin.Columns[0].HeaderText = "Kód";
+            dGridAdmin.Columns[1].HeaderText = "Név";
+            dGridAdmin.Columns[2].HeaderText = "Email";
+            dGridAdmin.Columns[3].HeaderText = "Admin";
+            dGridAdmin.Columns[4].HeaderText = "ÁSZF";
+            dGridAdmin.Columns[5].HeaderText = "Törölt";
             table = "felhasznalo";
             kod = "felhKod";
             AdatFeltolt();
@@ -74,8 +79,8 @@ namespace Kuldorendszer
             //merkozesek.Clear();
             connection.Open();
 
-            adapter = new MySqlDataAdapter("SELECT m.merkozesKod AS Kód, m.merkozesDatum AS Dátum, t.Telepules AS Település," +
-                " c.csapatNev AS Hazai_Csapet, d.csapatNev AS Vendég_Csapat, o.osztalyMegnevezes AS Osztály FROM ((((kuldes.merkozes m INNER JOIN " +
+            adapter = new MySqlDataAdapter("SELECT m.merkozesKod, m.merkozesDatum, t.Telepules," +
+                " c.csapatNev, d.csapatNev, o.osztalyMegnevezes  FROM ((((kuldes.merkozes m INNER JOIN " +
                 " kuldes.telepules t ON t.IdTelepules = m.IdTelepules) INNER JOIN kuldes.csapatok c " +
                 " ON c.idCsapat = m.hazaiCsapatId) INNER JOIN kuldes.csapatok d " +
                 " ON d.idCsapat = m.vendegCsapatId) INNER JOIN kuldes.osztaly o " +
@@ -86,6 +91,13 @@ namespace Kuldorendszer
             }
             dGridAdmin.DataSource = merkozesek;
             connection.Close();
+            dGridAdmin.Columns[0].HeaderText = "Kód";
+            dGridAdmin.Columns[1].HeaderText = "Dátum";
+            dGridAdmin.Columns[2].HeaderText = "Település";
+            dGridAdmin.Columns[3].HeaderText = "Hazai Csapet";
+            dGridAdmin.Columns[4].HeaderText = "Vendég Csapat";
+            dGridAdmin.Columns[5].HeaderText = "Osztály";
+
             table = "merkozes";
             kod = "merkozesekKod";
             AdatFeltolt();
@@ -95,8 +107,8 @@ namespace Kuldorendszer
         {
             connection.Open();
 
-            adapter = new MySqlDataAdapter("SELECT j.jvKod AS Kód, j.nev AS Név, j.feladatkor AS Feladatkör, " +
-                "  j.keret AS Keret, j.minosites AS Minősítés, t.Telepules AS Település, j.elerhetosegKod AS Elérhetőség " +
+            adapter = new MySqlDataAdapter("SELECT j.jvKod, j.nev, j.feladatkor, " +
+                "  j.keret, j.minosites, t.Telepules, j.elerhetosegKod " +
                 " FROM kuldes.jatekvezetok j INNER JOIN kuldes.telepules t ON j.idTelepules = t.idTelepules", connection);
             if (jvTable.Rows.Count == 0)
             {
@@ -104,6 +116,13 @@ namespace Kuldorendszer
             }
             dGridAdmin.DataSource = jvTable;
             connection.Close();
+            dGridAdmin.Columns[0].HeaderText = "JV Kód";
+            dGridAdmin.Columns[1].HeaderText = "Név";
+            dGridAdmin.Columns[2].HeaderText = "Feladatkör";
+            dGridAdmin.Columns[3].HeaderText = "Keret";
+            dGridAdmin.Columns[4].HeaderText = "Minősítés";
+            dGridAdmin.Columns[5].HeaderText = "Település";
+            dGridAdmin.Columns[6].HeaderText = "Elérhetőség";
             table = "jatekvezetok";
             kod = "jvKod";
             AdatFeltolt();
@@ -114,8 +133,8 @@ namespace Kuldorendszer
             csapatokTable.Clear();
             connection.Open();
 
-            adapter = new MySqlDataAdapter("SELECT c.idCsapat AS Azonosító, c.csapatnev AS Csapat_Név, " +
-                " c.csapatVezeto AS Csapatvezető, o.osztalyMegnevezes AS Osztály " +
+            adapter = new MySqlDataAdapter("SELECT c.idCsapat, c.csapatnev, " +
+                " c.csapatVezeto, o.osztalyMegnevezes " +
                 " FROM kuldes.csapatok c INNER JOIN kuldes.osztaly o " +
                 " ON c.idOsztaly = o.idOsztaly ;", connection);
             if (csapatokTable.Rows.Count == 0)
@@ -124,6 +143,11 @@ namespace Kuldorendszer
             }
             dGridAdmin.DataSource = csapatokTable;
             connection.Close();
+            dGridAdmin.Columns[0].HeaderText = "Azonosító";
+            dGridAdmin.Columns[1].HeaderText = "Csapat Név";
+            dGridAdmin.Columns[2].HeaderText = "Csapatvezető";
+            dGridAdmin.Columns[3].HeaderText = "Osztály";
+
             table = "csapatok";
             kod = "idOsztaly";
             AdatFeltolt();
@@ -181,7 +205,7 @@ namespace Kuldorendszer
         private void btnModosit_Click(object sender, EventArgs e)
         {
             dGridAdmin.ReadOnly = false;
-
+            btnModosit.Text = "Véglegesít: (" + this.id + ")";
             var a = dGridAdmin.DataSource.GetType();
             if (a != null)
             {
@@ -208,14 +232,25 @@ namespace Kuldorendszer
                 cmd = new MySqlCommand($"DELETE FROM kuldes.{table} WHERE {kod} = {this.id};", connection);
                 cmd.ExecuteNonQuery();
                 connection.Close();
-
+                MessageBox.Show($"Sikeres {id} azonosító rekord törlés!");
                 dGridAdmin.Refresh();
             }
-
         }
 
         private void btnUj_Click(object sender, EventArgs e)
         {
+            DataTable dt = dGridAdmin.DataSource as DataTable;
+            //DataRow row = dt.NewRow();
+            var row = dt.NewRow();
+            row[0] = -1;
+            row[1] = dGridAdmin.Rows[dGridAdmin.CurrentRow.Index].Cells[0].Value.ToString();
+            dt.Rows.Add(row);
+            //row[0] = dGridAdmin.Rows[dGridAdmin.RowCount-1].Cells[0].Value.ToString();
+            //string oszlop = dGridAdmin.Columns[e.ColumnIndex].Name; // az eredeti oszlop nevét kell visszadni!!!
+            //dGridAdmin.Rows.Add(new object[] { -1, "kutya", "cica", "serialkillah" }); //Nem vehetők fel sorok programozott módon a DataGridView vezérlő sorgyűjteményébe, ha a vezérlő adatokhoz van kötve.'
+            //Adatmodositas am = new Adatmodositas(table, id, kod);
+            //Adatmodositas am = new Adatmodositas(table);
+            //am.ShowDialog();
             //    cmd = new MySqlCommand("INSERT INTO kuldes.felhasznalo (felhNev,email,jelszo,admin,aszf) " +
             //            "VALUES (@felhNev,@email,@jelszo,@admin,@aszf)", connection);
             //    connection.Open();
@@ -233,6 +268,10 @@ namespace Kuldorendszer
         {
             //label2.Text = dGridAdmin.CurrentCell.OwningColumn.Name;
             label2.Text = dGridAdmin.Columns[e.ColumnIndex].Name;
+            if (dGridAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                MessageBox.Show(dGridAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+            }
         }
 
         private void btnTelepKarb_Click(object sender, EventArgs e)
@@ -248,9 +287,12 @@ namespace Kuldorendszer
             }
             dGridAdmin.DataSource = telepules;
             connection.Close();
-            telepules.Columns[0].ColumnName = "Azonosító";
-            telepules.Columns[1].ColumnName = "Település";
-            telepules.Columns[2].ColumnName = "Irányítószám";
+            dGridAdmin.Columns[0].HeaderText = "Azonosító";
+            dGridAdmin.Columns[1].HeaderText = "Település";
+            dGridAdmin.Columns[2].HeaderText = "Irányítószám";
+            //telepules.Columns[0].ColumnName = "Azonosító";
+            //telepules.Columns[1].ColumnName = "Település";
+            //telepules.Columns[2].ColumnName = "Irányítószám";
             table = "telepules";
             kod = "idTelepules";
             AdatFeltolt();
@@ -268,8 +310,10 @@ namespace Kuldorendszer
             }
             connection.Close();
             dGridAdmin.DataSource = osztaly;
-            osztaly.Columns[0].ColumnName = "Azonosító";
-            osztaly.Columns[1].ColumnName = "Osztály";
+            dGridAdmin.Columns[0].HeaderText = "Azonosító";
+            dGridAdmin.Columns[1].HeaderText = "Osztály";
+            //osztaly.Columns[0].ColumnName = "Azonosító";
+            //osztaly.Columns[1].ColumnName = "Osztály";
             table = "osztaly";
             kod = "idOsztaly";
             AdatFeltolt();
@@ -288,9 +332,12 @@ namespace Kuldorendszer
             }
             connection.Close();
             dGridAdmin.DataSource = elerhetoseg;
+            dGridAdmin.Columns[0].HeaderText = "Azonosító";
+            dGridAdmin.Columns[1].HeaderText = "Email-cím";
+            dGridAdmin.Columns[2].HeaderText = "Telefonszám";
             //elerhetoseg.Columns[0].ColumnName = "Azonosító";
-            elerhetoseg.Columns[1].ColumnName = "Email-cím";
-            elerhetoseg.Columns[2].ColumnName = "Telefonszám";
+            //elerhetoseg.Columns[1].ColumnName = "Email-cím";
+            //elerhetoseg.Columns[2].ColumnName = "Telefonszám";
             table = "elerhetoseg";
             kod = "elerhetosegKod";
             AdatFeltolt();
@@ -305,20 +352,92 @@ namespace Kuldorendszer
 
         private void dGridAdmin_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            string oszlop = "";
-            switch (table)
+            string oszlop = dGridAdmin.Columns[e.ColumnIndex].Name; // az eredeti oszlop nevét kell visszadni!!!
+            string szoveg = dGridAdmin.CurrentCell.Value.ToString();
+            //switch (table)
+            //{
+            //    case "elerhetoseg":
+            //        switch (e.ColumnIndex)
+            //        {
+            //            case 0:
+            //                oszlop = "elerhetosegKod";
+            //                break;
+            //            case 1:
+            //                oszlop = "email";
+            //                break;
+            //            case 2:
+            //                oszlop = "telefon";
+            //                break;
+            //            default:
+            //                break;
+            //        }
+            //        break;
+            //    case "osztaly":
+            //        switch (e.ColumnIndex)
+            //        {
+            //            case 0:
+            //                oszlop = "idOsztaly";
+            //                break;
+            //            case 1:
+            //                oszlop = "osztalyMegnevezes";
+            //                break;
+            //            default:
+            //                break;
+            //        }
+            //        break;
+            //    case "telepules":
+            //        switch (e.ColumnIndex)
+            //        {
+            //            case 0:
+            //                oszlop = "idTelepules";
+            //                break;
+            //            case 1:
+            //                oszlop = "Telepules";
+            //                break;
+            //            case 2:
+            //                oszlop = "iranyitoszam";
+            //                break;
+            //            default:
+            //                break;
+            //        }
+            //        break;
+            //    case "csapatok":
+            //        switch (e.ColumnIndex)
+            //        {
+            //            case 0:
+            //                oszlop = "idCsapat";
+            //                break;
+            //            case 1:
+            //                oszlop = "csapatNev";
+            //                break;
+            //            case 2:
+            //                oszlop = "elerhetosegKod";
+            //                break;
+            //            case 3:
+            //                oszlop = "csapatVezeto";
+            //                break;
+            //            case 4:
+            //                oszlop = "idOsztaly";
+            //                break;
+            //            default:
+            //                break;
+            //        }
+            //        break;
+            //    default:
+            //        break;
+            //}
+            try
             {
-                case "elerhetoseg":
-                    oszlop = elerhetoseg.Columns[e.ColumnIndex].ToString();
-                    break;
-                default:
-                    break;
+                connection.Open();
+                cmd = new MySqlCommand($"UPDATE kuldes.{table} SET {oszlop} " +
+                    $" = \"{szoveg}\" WHERE {kod} = {this.id};", connection);
+                cmd.ExecuteNonQuery();
+                connection.Close();
             }
-            connection.Open();
-            cmd = new MySqlCommand($"UPDATE kuldes.{table} SET {oszlop}" +
-                $" = {dGridAdmin.CurrentCell.Value} WHERE {kod} = {this.id};", connection);
-            cmd.ExecuteNonQuery();
-            connection.Close();
+            catch
+            {
+                //throw new Exception("Hiba");
+            }
         }
     }
 }

@@ -121,10 +121,5 @@ namespace Kuldorendszer
                 MessageBox.Show("A felhasználó név már foglalt", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-        private void radioBKuldo_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -47,33 +47,48 @@ namespace Kuldorendszer
             {
                 throw new Exception();
             }
+            connection.Close();
             ShowData(pos);
             FillCombo();
-            connection.Close();
         }
 
         private void FillCombo()
         {
             cBoxVerseny.Items.Clear();
+            cBoxFordulo.Items.Clear();
             cBoxVerseny.Items.Add("Összes");
+            //cBoxFordulo.Items.Add("Forduló");
+            connection.Open();
             adapter = new MySqlDataAdapter("SELECT osztalyMegnevezes FROM kuldes.osztaly", connection);
             DataTable dt = new DataTable();
             adapter.Fill(dt);
+            connection.Close();
             //reader = adapter.;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 string osztaly = dt.Rows[i][0].ToString();
                 cBoxVerseny.Items.Add(osztaly);
             }
+            cBoxVerseny.SelectedIndex = -1;
+            List<int> forduloszam = new List<int>();
+            for (int j = 0; j < table.Rows.Count; j++)
+            {
+                if (!forduloszam.Contains((int)table.Rows[j][7]))
+                {
+                    forduloszam.Add((int)table.Rows[j][7]);
+                    cBoxFordulo.Items.Add(table.Rows[j][7].ToString());
+                }
+            }
+            cBoxFordulo.SelectedIndex = -1;
         }
 
         public void ShowData(int index)
         {
-            //connection.Open();
-            adapter = new MySqlDataAdapter($"SELECT osztalyMegnevezes FROM kuldes.osztaly WHERE idOsztaly = {table.Rows[index][6]};", connection);
+            connection.Open();
+            adapter = new MySqlDataAdapter($"SELECT fordulo FROM kuldes.merkozes WHERE merkozesKod = {table.Rows[index][0]};", connection);
             DataTable dt = new DataTable();
             adapter.Fill(dt);
-            txtBVerseny.Text = dt.Rows[0][0].ToString(); // Osztály? idOsztály
+            txtBFordulo.Text = dt.Rows[0][0].ToString(); // Forduló
 
             txtBKod.Text = table.Rows[index][0].ToString(); // mérkőzés kódja
             txtBDatum.Text = table.Rows[index][4].ToString(); // Mérkőzés dátuma
@@ -92,11 +107,21 @@ namespace Kuldorendszer
             adapter.Fill(dt4);
             txtBHely.Text = dt4.Rows[0][0].ToString();// Hol? idTelepules -> 
 
-            txtBJV.Text = ""; // table.Rows[index][3].ToString(); ez a jv-k száma
-            txtBAssz1.Text = "";
-            txtBAssz1.Text = "";
+            adapter = new MySqlDataAdapter($"SELECT j.nev FROM ((kuldes.jatekvezetok j INNER JOIN " +
+                $" kuldes.kuldes k ON j.jvKod = k.jvKod) INNER JOIN kuldes.merkozes m ON " +
+                $" {table.Rows[index][0]} = k.merkozesKod);", connection);
+            DataTable dt5 = new DataTable();
+            adapter.Fill(dt5);
+            if (dt5.Rows.Count != 0)
+            {
+                txtBJV.Text = dt5.Rows[0][0].ToString();// jv-k száma table.Rows[index][3].ToString();
+            }
+            else txtBJV.Text = "";
+
+            //txtBAssz1.Text = dt5.Rows[0][1].ToString(); 1. asszisztens
+            //txtBAssz1.Text = dt5.Rows[0][2].ToString(); 1. asszisztens
             MerkozesKiir();
-            //connection.Close();
+            connection.Close();
         }
 
         private void btnElozo_Click(object sender, EventArgs e)
@@ -294,7 +319,7 @@ namespace Kuldorendszer
         {
             for (int i = 0; i < merkozesekJvel.Rows.Count; i++)
             {
-                JatekvezetoKuldes j = new JatekvezetoKuldes
+                JatekvezetoKuldes jvk = new JatekvezetoKuldes
                 {
                     //kuldKod = dt2.Rows[0][0].ToString(),
                     idopont = (DateTime)merkozesekJvel.Rows[i][0],
@@ -309,5 +334,39 @@ namespace Kuldorendszer
             }
             //merkozesekJvel => DataTable;
         }
+
+        private void cBoxFordulo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            table.Clear();
+            if (cBoxVerseny.SelectedIndex < 0)
+            {
+                cBoxVerseny.SelectedIndex = 1;
+            }
+            var ford = cBoxFordulo.SelectedItem;
+            string query = $"SELECT * FROM kuldes.merkozes WHERE idOsztaly = " +
+                $"(SELECT idOsztaly FROM kuldes.osztaly WHERE osztalyMegnevezes = \"{cBoxVerseny.SelectedItem}\")" +
+                $" AND fordulo = {ford} ;";
+            adapter = new MySqlDataAdapter(query, connection);
+            if (adapter != null)
+            {
+                adapter.Fill(table);
+                if (table.Rows.Count != 0)
+                {
+                    pos = 0;
+                    ShowData(pos);
+                }
+                else
+                {
+                    MessageBox.Show("Ebben a fordulóban nincs mérkőzés!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
     }
 }
+

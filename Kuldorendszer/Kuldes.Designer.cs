@@ -50,7 +50,7 @@ namespace Kuldorendszer
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.txtBVerseny = new System.Windows.Forms.TextBox();
+            this.txtBFordulo = new System.Windows.Forms.TextBox();
             this.btnKuldes = new System.Windows.Forms.Button();
             this.btnModosit = new System.Windows.Forms.Button();
             this.cBoxVerseny = new System.Windows.Forms.ComboBox();
@@ -93,6 +93,8 @@ namespace Kuldorendszer
             this.cBoxAssz2 = new System.Windows.Forms.ComboBox();
             this.btnVegleg = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cBoxFordulo = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -134,7 +136,7 @@ namespace Kuldorendszer
             // 
             // txtBKod
             // 
-            this.txtBKod.Location = new System.Drawing.Point(15, 111);
+            this.txtBKod.Location = new System.Drawing.Point(16, 111);
             this.txtBKod.Name = "txtBKod";
             this.txtBKod.ReadOnly = true;
             this.txtBKod.Size = new System.Drawing.Size(131, 20);
@@ -277,19 +279,19 @@ namespace Kuldorendszer
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label12.Location = new System.Drawing.Point(93, 47);
+            this.label12.Location = new System.Drawing.Point(245, 50);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(60, 17);
+            this.label12.Size = new System.Drawing.Size(64, 17);
             this.label12.TabIndex = 45;
-            this.label12.Text = "Verseny";
+            this.label12.Text = "Verseny:";
             // 
-            // txtBVerseny
+            // txtBFordulo
             // 
-            this.txtBVerseny.Location = new System.Drawing.Point(159, 47);
-            this.txtBVerseny.Name = "txtBVerseny";
-            this.txtBVerseny.Size = new System.Drawing.Size(131, 20);
-            this.txtBVerseny.TabIndex = 46;
-            this.txtBVerseny.TextChanged += new System.EventHandler(this.txtBVerseny_TextChanged);
+            this.txtBFordulo.Location = new System.Drawing.Point(171, 50);
+            this.txtBFordulo.Name = "txtBFordulo";
+            this.txtBFordulo.Size = new System.Drawing.Size(46, 20);
+            this.txtBFordulo.TabIndex = 46;
+            this.txtBFordulo.TextChanged += new System.EventHandler(this.txtBVerseny_TextChanged);
             // 
             // btnKuldes
             // 
@@ -316,7 +318,7 @@ namespace Kuldorendszer
             // cBoxVerseny
             // 
             this.cBoxVerseny.FormattingEnabled = true;
-            this.cBoxVerseny.Location = new System.Drawing.Point(307, 47);
+            this.cBoxVerseny.Location = new System.Drawing.Point(307, 50);
             this.cBoxVerseny.Name = "cBoxVerseny";
             this.cBoxVerseny.Size = new System.Drawing.Size(138, 21);
             this.cBoxVerseny.TabIndex = 49;
@@ -563,7 +565,7 @@ namespace Kuldorendszer
             // 
             this.btnElozo.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnElozo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnElozo.Location = new System.Drawing.Point(15, 44);
+            this.btnElozo.Location = new System.Drawing.Point(15, 50);
             this.btnElozo.Name = "btnElozo";
             this.btnElozo.Size = new System.Drawing.Size(75, 23);
             this.btnElozo.TabIndex = 51;
@@ -575,7 +577,7 @@ namespace Kuldorendszer
             // 
             this.btnKovetkezo.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnKovetkezo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnKovetkezo.Location = new System.Drawing.Point(457, 47);
+            this.btnKovetkezo.Location = new System.Drawing.Point(457, 50);
             this.btnKovetkezo.Name = "btnKovetkezo";
             this.btnKovetkezo.Size = new System.Drawing.Size(75, 23);
             this.btnKovetkezo.TabIndex = 52;
@@ -587,7 +589,7 @@ namespace Kuldorendszer
             // 
             this.btnLast.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnLast.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLast.Location = new System.Drawing.Point(543, 47);
+            this.btnLast.Location = new System.Drawing.Point(543, 50);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(75, 23);
             this.btnLast.TabIndex = 53;
@@ -656,6 +658,26 @@ namespace Kuldorendszer
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(603, 121);
             this.dataGridView1.TabIndex = 58;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label13.Location = new System.Drawing.Point(100, 50);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(60, 17);
+            this.label13.TabIndex = 59;
+            this.label13.Text = "Forduló:";
+            // 
+            // cBoxFordulo
+            // 
+            this.cBoxFordulo.FormattingEnabled = true;
+            this.cBoxFordulo.Location = new System.Drawing.Point(171, 26);
+            this.cBoxFordulo.Name = "cBoxFordulo";
+            this.cBoxFordulo.Size = new System.Drawing.Size(46, 21);
+            this.cBoxFordulo.TabIndex = 60;
+            this.cBoxFordulo.SelectedIndexChanged += new System.EventHandler(this.cBoxFordulo_SelectedIndexChanged);
             // 
             // Kuldes
             // 
@@ -664,6 +686,8 @@ namespace Kuldorendszer
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1134, 461);
+            this.Controls.Add(this.cBoxFordulo);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnVegleg);
             this.Controls.Add(this.cBoxAssz2);
@@ -676,7 +700,7 @@ namespace Kuldorendszer
             this.Controls.Add(this.cBoxVerseny);
             this.Controls.Add(this.btnModosit);
             this.Controls.Add(this.btnKuldes);
-            this.Controls.Add(this.txtBVerseny);
+            this.Controls.Add(this.txtBFordulo);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -736,7 +760,7 @@ namespace Kuldorendszer
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox txtBVerseny;
+        private System.Windows.Forms.TextBox txtBFordulo;
         private System.Windows.Forms.Button btnKuldes;
         private System.Windows.Forms.Button btnModosit;
         private System.Windows.Forms.ComboBox cBoxVerseny;
@@ -779,5 +803,7 @@ namespace Kuldorendszer
         private System.Windows.Forms.ComboBox cBoxAssz2;
         private System.Windows.Forms.Button btnVegleg;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cBoxFordulo;
     }
 }

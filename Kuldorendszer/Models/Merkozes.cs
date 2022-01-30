@@ -15,5 +15,6 @@ namespace Kuldorendszer.Models
         public DateTime merkozesDatum { get; set; }
         public int idTelepules { get; set; }
         public int idOsztaly { get; set; }
+        public int fordulo { get; set; }
     }
 }
