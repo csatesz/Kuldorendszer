@@ -54,7 +54,7 @@ namespace Kuldorendszer
             }
             catch
             {
-                throw new Exception("Hiba");
+                throw new Exception("Nem csatlakozik az adatbázishoz, indítsa újra a programot!"); // ha nem megy az xampp hiba
             }
             connection.Close();
 

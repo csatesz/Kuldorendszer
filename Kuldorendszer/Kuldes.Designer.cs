@@ -95,6 +95,7 @@ namespace Kuldorendszer
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label13 = new System.Windows.Forms.Label();
             this.cBoxFordulo = new System.Windows.Forms.ComboBox();
+            this.txtBVerseny = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -679,6 +680,13 @@ namespace Kuldorendszer
             this.cBoxFordulo.TabIndex = 60;
             this.cBoxFordulo.SelectedIndexChanged += new System.EventHandler(this.cBoxFordulo_SelectedIndexChanged);
             // 
+            // txtBVerseny
+            // 
+            this.txtBVerseny.Location = new System.Drawing.Point(307, 27);
+            this.txtBVerseny.Name = "txtBVerseny";
+            this.txtBVerseny.Size = new System.Drawing.Size(92, 20);
+            this.txtBVerseny.TabIndex = 61;
+            // 
             // Kuldes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -686,6 +694,7 @@ namespace Kuldorendszer
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1134, 461);
+            this.Controls.Add(this.txtBVerseny);
             this.Controls.Add(this.cBoxFordulo);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.dataGridView1);
@@ -805,5 +814,6 @@ namespace Kuldorendszer
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox cBoxFordulo;
+        private System.Windows.Forms.TextBox txtBVerseny;
     }
 }

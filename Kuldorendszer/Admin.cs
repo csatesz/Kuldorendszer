@@ -352,7 +352,7 @@ namespace Kuldorendszer
 
         private void dGridAdmin_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            string oszlop = dGridAdmin.Columns[e.ColumnIndex].Name; // az eredeti oszlop nevét kell visszadni!!!
+            string oszlop = dGridAdmin.Columns[e.ColumnIndex].Name;//az eredeti oszlop nevét kell visszadni!!!
             string szoveg = dGridAdmin.CurrentCell.Value.ToString();
             //switch (table)
             //{
