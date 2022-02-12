@@ -48,7 +48,7 @@ namespace Kuldorendszer
             // BtnUjFelh
             // 
             this.BtnUjFelh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnUjFelh.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BtnUjFelh.BackColor = System.Drawing.Color.LightSteelBlue;
             this.BtnUjFelh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnUjFelh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.BtnUjFelh.Location = new System.Drawing.Point(310, 251);
@@ -58,11 +58,13 @@ namespace Kuldorendszer
             this.BtnUjFelh.Text = "Új felhasználó";
             this.BtnUjFelh.UseVisualStyleBackColor = false;
             this.BtnUjFelh.Click += new System.EventHandler(this.BtnUjFelh_Click);
+            this.BtnUjFelh.MouseLeave += new System.EventHandler(this.BtnUjFelh_MouseLeave);
+            this.BtnUjFelh.MouseHover += new System.EventHandler(this.BtnUjFelh_MouseHover);
             // 
             // BtnBelep
             // 
             this.BtnBelep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BtnBelep.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BtnBelep.BackColor = System.Drawing.Color.LightSteelBlue;
             this.BtnBelep.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnBelep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.BtnBelep.Location = new System.Drawing.Point(151, 251);
@@ -72,11 +74,15 @@ namespace Kuldorendszer
             this.BtnBelep.Text = "Belép";
             this.BtnBelep.UseVisualStyleBackColor = false;
             this.BtnBelep.Click += new System.EventHandler(this.BtnBelep_Click);
+            this.BtnBelep.MouseEnter += new System.EventHandler(this.BtnBelep_MouseEnter);
+            this.BtnBelep.MouseLeave += new System.EventHandler(this.BtnBelep_MouseLeave);
+            this.BtnBelep.MouseHover += new System.EventHandler(this.BtnBelep_MouseHover);
             // 
             // btnElfJsz
             // 
             this.btnElfJsz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnElfJsz.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnElfJsz.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnElfJsz.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnElfJsz.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnElfJsz.Location = new System.Drawing.Point(6, 251);
             this.btnElfJsz.Name = "btnElfJsz";
@@ -84,6 +90,9 @@ namespace Kuldorendszer
             this.btnElfJsz.TabIndex = 2;
             this.btnElfJsz.Text = "Elfelejtett jelszó";
             this.btnElfJsz.UseVisualStyleBackColor = false;
+            this.btnElfJsz.Click += new System.EventHandler(this.btnElfJsz_Click);
+            this.btnElfJsz.MouseLeave += new System.EventHandler(this.btnElfJsz_MouseLeave);
+            this.btnElfJsz.MouseHover += new System.EventHandler(this.btnElfJsz_MouseHover);
             // 
             // label1
             // 

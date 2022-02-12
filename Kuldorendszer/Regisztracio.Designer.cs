@@ -148,6 +148,8 @@ namespace Kuldorendszer
             this.BtnReg.Text = "Regisztráció";
             this.BtnReg.UseVisualStyleBackColor = false;
             this.BtnReg.Click += new System.EventHandler(this.BtnReg_Click);
+            this.BtnReg.MouseLeave += new System.EventHandler(this.BtnReg_MouseLeave);
+            this.BtnReg.MouseHover += new System.EventHandler(this.BtnReg_MouseHover);
             // 
             // txtBJelszoUjra
             // 

@@ -112,5 +112,41 @@ namespace Kuldorendszer
             //    txtBEmail.Visible = false;
             //}
         }
+
+        private void BtnBelep_MouseHover(object sender, EventArgs e)
+        {
+            BtnBelep.BackColor = Color.RoyalBlue;
+        }
+        private void BtnBelep_MouseLeave(object sender, EventArgs e)
+        {
+            BtnBelep.BackColor = Color.LightSteelBlue;
+        }
+        private void BtnBelep_MouseEnter(object sender, EventArgs e)
+        {
+           
+        }
+        private void BtnUjFelh_MouseHover(object sender, EventArgs e)
+        {
+            BtnUjFelh.BackColor = Color.RoyalBlue;
+        }
+        private void BtnUjFelh_MouseLeave(object sender, EventArgs e)
+        {
+            BtnUjFelh.BackColor = Color.LightSteelBlue;
+        }
+
+        private void btnElfJsz_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnElfJsz_MouseHover(object sender, EventArgs e)
+        {
+            btnElfJsz.BackColor = Color.RoyalBlue;
+        }
+
+        private void btnElfJsz_MouseLeave(object sender, EventArgs e)
+        {
+            btnElfJsz.BackColor = Color.LightSteelBlue;
+        }
     }
 }

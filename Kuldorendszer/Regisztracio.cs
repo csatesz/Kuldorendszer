@@ -121,5 +121,15 @@ namespace Kuldorendszer
                 MessageBox.Show("A felhasználó név már foglalt", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void BtnReg_MouseHover(object sender, EventArgs e)
+        {
+            BtnReg.BackColor = Color.RoyalBlue;
+        }
+
+        private void BtnReg_MouseLeave(object sender, EventArgs e)
+        {
+            BtnReg.BackColor = Color.LightSteelBlue;
+        }
     }
 }

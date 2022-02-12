@@ -59,7 +59,7 @@ namespace Kuldorendszer
             this.btnFelhKarb.Location = new System.Drawing.Point(24, 16);
             this.btnFelhKarb.Name = "btnFelhKarb";
             this.btnFelhKarb.Size = new System.Drawing.Size(100, 47);
-            this.btnFelhKarb.TabIndex = 48;
+            this.btnFelhKarb.TabIndex = 1;
             this.btnFelhKarb.Text = "Felhasználók karbantartása";
             this.btnFelhKarb.UseVisualStyleBackColor = true;
             this.btnFelhKarb.Click += new System.EventHandler(this.btnFelhKarb_Click);
@@ -73,7 +73,7 @@ namespace Kuldorendszer
             this.btnMerkKarb.Location = new System.Drawing.Point(24, 78);
             this.btnMerkKarb.Name = "btnMerkKarb";
             this.btnMerkKarb.Size = new System.Drawing.Size(100, 47);
-            this.btnMerkKarb.TabIndex = 49;
+            this.btnMerkKarb.TabIndex = 2;
             this.btnMerkKarb.Text = "Mérkőzések karbantartása";
             this.btnMerkKarb.UseVisualStyleBackColor = true;
             this.btnMerkKarb.Click += new System.EventHandler(this.btnMerkKarb_Click);
@@ -86,7 +86,7 @@ namespace Kuldorendszer
             this.lBAdmin.Location = new System.Drawing.Point(399, 16);
             this.lBAdmin.Name = "lBAdmin";
             this.lBAdmin.Size = new System.Drawing.Size(407, 199);
-            this.lBAdmin.TabIndex = 50;
+            this.lBAdmin.TabIndex = 13;
             // 
             // btnJvKarb
             // 
@@ -97,7 +97,7 @@ namespace Kuldorendszer
             this.btnJvKarb.Location = new System.Drawing.Point(24, 142);
             this.btnJvKarb.Name = "btnJvKarb";
             this.btnJvKarb.Size = new System.Drawing.Size(100, 47);
-            this.btnJvKarb.TabIndex = 51;
+            this.btnJvKarb.TabIndex = 3;
             this.btnJvKarb.Text = "Játékvezetők karbantartása";
             this.btnJvKarb.UseVisualStyleBackColor = true;
             this.btnJvKarb.Click += new System.EventHandler(this.btnJvKarb_Click);
@@ -111,40 +111,59 @@ namespace Kuldorendszer
             this.btnCsapKarb.Location = new System.Drawing.Point(24, 207);
             this.btnCsapKarb.Name = "btnCsapKarb";
             this.btnCsapKarb.Size = new System.Drawing.Size(100, 47);
-            this.btnCsapKarb.TabIndex = 52;
+            this.btnCsapKarb.TabIndex = 4;
             this.btnCsapKarb.Text = "Csapatok karbantartása";
             this.btnCsapKarb.UseVisualStyleBackColor = true;
             this.btnCsapKarb.Click += new System.EventHandler(this.btnCsapKarb_Click);
             // 
             // btnTorol
             // 
+            this.btnTorol.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTorol.Enabled = false;
+            this.btnTorol.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btnTorol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTorol.Location = new System.Drawing.Point(244, 168);
             this.btnTorol.Name = "btnTorol";
             this.btnTorol.Size = new System.Drawing.Size(100, 47);
-            this.btnTorol.TabIndex = 53;
+            this.btnTorol.TabIndex = 10;
             this.btnTorol.Text = "Töröl";
             this.btnTorol.UseVisualStyleBackColor = true;
             this.btnTorol.Click += new System.EventHandler(this.btnTorol_Click);
+            this.btnTorol.MouseLeave += new System.EventHandler(this.btnTorol_MouseLeave);
+            this.btnTorol.MouseHover += new System.EventHandler(this.btnTorol_MouseHover);
             // 
             // btnUj
             // 
+            this.btnUj.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUj.Enabled = false;
+            this.btnUj.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.btnUj.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btnUj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUj.Location = new System.Drawing.Point(244, 16);
             this.btnUj.Name = "btnUj";
             this.btnUj.Size = new System.Drawing.Size(100, 47);
-            this.btnUj.TabIndex = 54;
+            this.btnUj.TabIndex = 8;
             this.btnUj.Text = "Új adat";
             this.btnUj.UseVisualStyleBackColor = true;
             this.btnUj.Click += new System.EventHandler(this.btnUj_Click);
+            this.btnUj.MouseLeave += new System.EventHandler(this.btnUj_MouseLeave);
+            this.btnUj.MouseHover += new System.EventHandler(this.btnUj_MouseHover);
             // 
             // btnModosit
             // 
+            this.btnModosit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnModosit.Enabled = false;
+            this.btnModosit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btnModosit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModosit.Location = new System.Drawing.Point(244, 94);
             this.btnModosit.Name = "btnModosit";
             this.btnModosit.Size = new System.Drawing.Size(100, 47);
-            this.btnModosit.TabIndex = 55;
+            this.btnModosit.TabIndex = 9;
             this.btnModosit.Text = "Módosít";
             this.btnModosit.UseVisualStyleBackColor = true;
             this.btnModosit.Click += new System.EventHandler(this.btnModosit_Click);
+            this.btnModosit.MouseLeave += new System.EventHandler(this.btnModosit_MouseLeave);
+            this.btnModosit.MouseHover += new System.EventHandler(this.btnModosit_MouseHover);
             // 
             // panel1
             // 
@@ -171,7 +190,7 @@ namespace Kuldorendszer
             this.btnElerhetKarb.Location = new System.Drawing.Point(24, 420);
             this.btnElerhetKarb.Name = "btnElerhetKarb";
             this.btnElerhetKarb.Size = new System.Drawing.Size(100, 47);
-            this.btnElerhetKarb.TabIndex = 55;
+            this.btnElerhetKarb.TabIndex = 7;
             this.btnElerhetKarb.Text = "Elérhetőségek karbantartása";
             this.btnElerhetKarb.UseVisualStyleBackColor = true;
             this.btnElerhetKarb.Click += new System.EventHandler(this.btnElerhetKarb_Click);
@@ -185,7 +204,7 @@ namespace Kuldorendszer
             this.btnOsztKarb.Location = new System.Drawing.Point(24, 347);
             this.btnOsztKarb.Name = "btnOsztKarb";
             this.btnOsztKarb.Size = new System.Drawing.Size(100, 47);
-            this.btnOsztKarb.TabIndex = 54;
+            this.btnOsztKarb.TabIndex = 6;
             this.btnOsztKarb.Text = "Osztályok karbantartása";
             this.btnOsztKarb.UseVisualStyleBackColor = true;
             this.btnOsztKarb.Click += new System.EventHandler(this.btnOsztKarb_Click);
@@ -199,7 +218,7 @@ namespace Kuldorendszer
             this.btnTelepKarb.Location = new System.Drawing.Point(24, 277);
             this.btnTelepKarb.Name = "btnTelepKarb";
             this.btnTelepKarb.Size = new System.Drawing.Size(100, 47);
-            this.btnTelepKarb.TabIndex = 53;
+            this.btnTelepKarb.TabIndex = 5;
             this.btnTelepKarb.Text = "Települések karbantartása";
             this.btnTelepKarb.UseVisualStyleBackColor = true;
             this.btnTelepKarb.Click += new System.EventHandler(this.btnTelepKarb_Click);
@@ -215,7 +234,7 @@ namespace Kuldorendszer
             this.dGridAdmin.Name = "dGridAdmin";
             this.dGridAdmin.ReadOnly = true;
             this.dGridAdmin.Size = new System.Drawing.Size(583, 190);
-            this.dGridAdmin.TabIndex = 57;
+            this.dGridAdmin.TabIndex = 14;
             this.dGridAdmin.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGridAdmin_CellClick);
             this.dGridAdmin.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGridAdmin_CellContentClick);
             this.dGridAdmin.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGridAdmin_CellEndEdit);
@@ -226,18 +245,24 @@ namespace Kuldorendszer
             this.textBKeres.Location = new System.Drawing.Point(399, 234);
             this.textBKeres.Name = "textBKeres";
             this.textBKeres.Size = new System.Drawing.Size(407, 20);
-            this.textBKeres.TabIndex = 58;
+            this.textBKeres.TabIndex = 12;
             this.textBKeres.TextChanged += new System.EventHandler(this.textBKeres_TextChanged);
             // 
             // btnKeres
             // 
+            this.btnKeres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnKeres.Enabled = false;
+            this.btnKeres.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
+            this.btnKeres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnKeres.Location = new System.Drawing.Point(244, 232);
             this.btnKeres.Name = "btnKeres";
             this.btnKeres.Size = new System.Drawing.Size(100, 23);
-            this.btnKeres.TabIndex = 59;
+            this.btnKeres.TabIndex = 11;
             this.btnKeres.Text = "Keres";
             this.btnKeres.UseVisualStyleBackColor = true;
             this.btnKeres.Click += new System.EventHandler(this.btnKeres_Click);
+            this.btnKeres.MouseLeave += new System.EventHandler(this.btnKeres_MouseLeave);
+            this.btnKeres.MouseHover += new System.EventHandler(this.btnKeres_MouseHover);
             // 
             // label1
             // 
@@ -272,6 +297,7 @@ namespace Kuldorendszer
             this.Controls.Add(this.btnUj);
             this.Controls.Add(this.btnTorol);
             this.Controls.Add(this.lBAdmin);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.MinimumSize = new System.Drawing.Size(835, 515);
             this.Name = "Admin";
             this.Text = "Admin";

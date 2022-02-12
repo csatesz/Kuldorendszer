@@ -96,12 +96,14 @@ namespace Kuldorendszer
             this.label13 = new System.Windows.Forms.Label();
             this.cBoxFordulo = new System.Windows.Forms.ComboBox();
             this.txtBVerseny = new System.Windows.Forms.TextBox();
+            this.btnFirst = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtBHazai
             // 
+            this.txtBHazai.Cursor = System.Windows.Forms.Cursors.No;
             this.txtBHazai.Location = new System.Drawing.Point(329, 111);
             this.txtBHazai.Name = "txtBHazai";
             this.txtBHazai.ReadOnly = true;
@@ -120,6 +122,7 @@ namespace Kuldorendszer
             // 
             // txtBVendeg
             // 
+            this.txtBVendeg.Cursor = System.Windows.Forms.Cursors.No;
             this.txtBVendeg.Location = new System.Drawing.Point(487, 111);
             this.txtBVendeg.Multiline = true;
             this.txtBVendeg.Name = "txtBVendeg";
@@ -129,6 +132,7 @@ namespace Kuldorendszer
             // 
             // txtBDatum
             // 
+            this.txtBDatum.Cursor = System.Windows.Forms.Cursors.No;
             this.txtBDatum.Location = new System.Drawing.Point(171, 111);
             this.txtBDatum.Name = "txtBDatum";
             this.txtBDatum.ReadOnly = true;
@@ -137,6 +141,7 @@ namespace Kuldorendszer
             // 
             // txtBKod
             // 
+            this.txtBKod.Cursor = System.Windows.Forms.Cursors.No;
             this.txtBKod.Location = new System.Drawing.Point(16, 111);
             this.txtBKod.Name = "txtBKod";
             this.txtBKod.ReadOnly = true;
@@ -175,6 +180,7 @@ namespace Kuldorendszer
             // 
             // txtBHely
             // 
+            this.txtBHely.Cursor = System.Windows.Forms.Cursors.No;
             this.txtBHely.Location = new System.Drawing.Point(15, 180);
             this.txtBHely.Name = "txtBHely";
             this.txtBHely.ReadOnly = true;
@@ -193,6 +199,7 @@ namespace Kuldorendszer
             // 
             // txtBAssz1
             // 
+            this.txtBAssz1.Cursor = System.Windows.Forms.Cursors.No;
             this.txtBAssz1.Location = new System.Drawing.Point(329, 180);
             this.txtBAssz1.Name = "txtBAssz1";
             this.txtBAssz1.ReadOnly = true;
@@ -211,6 +218,7 @@ namespace Kuldorendszer
             // 
             // txtBAssz2
             // 
+            this.txtBAssz2.Cursor = System.Windows.Forms.Cursors.No;
             this.txtBAssz2.Location = new System.Drawing.Point(487, 180);
             this.txtBAssz2.Multiline = true;
             this.txtBAssz2.Name = "txtBAssz2";
@@ -220,6 +228,7 @@ namespace Kuldorendszer
             // 
             // txtBJV
             // 
+            this.txtBJV.Cursor = System.Windows.Forms.Cursors.No;
             this.txtBJV.Location = new System.Drawing.Point(171, 180);
             this.txtBJV.Name = "txtBJV";
             this.txtBJV.ReadOnly = true;
@@ -280,7 +289,7 @@ namespace Kuldorendszer
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label12.Location = new System.Drawing.Point(245, 50);
+            this.label12.Location = new System.Drawing.Point(300, 44);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(64, 17);
             this.label12.TabIndex = 45;
@@ -288,8 +297,10 @@ namespace Kuldorendszer
             // 
             // txtBFordulo
             // 
-            this.txtBFordulo.Location = new System.Drawing.Point(171, 50);
+            this.txtBFordulo.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtBFordulo.Location = new System.Drawing.Point(241, 35);
             this.txtBFordulo.Name = "txtBFordulo";
+            this.txtBFordulo.ReadOnly = true;
             this.txtBFordulo.Size = new System.Drawing.Size(46, 20);
             this.txtBFordulo.TabIndex = 46;
             this.txtBFordulo.TextChanged += new System.EventHandler(this.txtBVerseny_TextChanged);
@@ -319,9 +330,9 @@ namespace Kuldorendszer
             // cBoxVerseny
             // 
             this.cBoxVerseny.FormattingEnabled = true;
-            this.cBoxVerseny.Location = new System.Drawing.Point(307, 50);
+            this.cBoxVerseny.Location = new System.Drawing.Point(362, 56);
             this.cBoxVerseny.Name = "cBoxVerseny";
-            this.cBoxVerseny.Size = new System.Drawing.Size(138, 21);
+            this.cBoxVerseny.Size = new System.Drawing.Size(116, 21);
             this.cBoxVerseny.TabIndex = 49;
             this.cBoxVerseny.SelectedIndexChanged += new System.EventHandler(this.cBoxVerseny_SelectedIndexChanged);
             // 
@@ -566,7 +577,7 @@ namespace Kuldorendszer
             // 
             this.btnElozo.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnElozo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnElozo.Location = new System.Drawing.Point(15, 50);
+            this.btnElozo.Location = new System.Drawing.Point(94, 44);
             this.btnElozo.Name = "btnElozo";
             this.btnElozo.Size = new System.Drawing.Size(75, 23);
             this.btnElozo.TabIndex = 51;
@@ -578,7 +589,8 @@ namespace Kuldorendszer
             // 
             this.btnKovetkezo.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnKovetkezo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnKovetkezo.Location = new System.Drawing.Point(457, 50);
+            this.btnKovetkezo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
+            this.btnKovetkezo.Location = new System.Drawing.Point(502, 44);
             this.btnKovetkezo.Name = "btnKovetkezo";
             this.btnKovetkezo.Size = new System.Drawing.Size(75, 23);
             this.btnKovetkezo.TabIndex = 52;
@@ -590,7 +602,7 @@ namespace Kuldorendszer
             // 
             this.btnLast.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnLast.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLast.Location = new System.Drawing.Point(543, 50);
+            this.btnLast.Location = new System.Drawing.Point(583, 44);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(75, 23);
             this.btnLast.TabIndex = 53;
@@ -610,6 +622,7 @@ namespace Kuldorendszer
             this.lBMerkozesek.Size = new System.Drawing.Size(422, 372);
             this.lBMerkozesek.TabIndex = 1;
             this.lBMerkozesek.SelectedIndexChanged += new System.EventHandler(this.lBMerkozesek_SelectedIndexChanged);
+            this.lBMerkozesek.DoubleClick += new System.EventHandler(this.lBMerkozesek_DoubleClick);
             // 
             // cBoxJv
             // 
@@ -665,7 +678,7 @@ namespace Kuldorendszer
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label13.Location = new System.Drawing.Point(100, 50);
+            this.label13.Location = new System.Drawing.Point(175, 44);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(60, 17);
             this.label13.TabIndex = 59;
@@ -674,7 +687,7 @@ namespace Kuldorendszer
             // cBoxFordulo
             // 
             this.cBoxFordulo.FormattingEnabled = true;
-            this.cBoxFordulo.Location = new System.Drawing.Point(171, 26);
+            this.cBoxFordulo.Location = new System.Drawing.Point(241, 56);
             this.cBoxFordulo.Name = "cBoxFordulo";
             this.cBoxFordulo.Size = new System.Drawing.Size(46, 21);
             this.cBoxFordulo.TabIndex = 60;
@@ -682,10 +695,24 @@ namespace Kuldorendszer
             // 
             // txtBVerseny
             // 
-            this.txtBVerseny.Location = new System.Drawing.Point(307, 27);
+            this.txtBVerseny.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtBVerseny.Location = new System.Drawing.Point(362, 35);
             this.txtBVerseny.Name = "txtBVerseny";
-            this.txtBVerseny.Size = new System.Drawing.Size(92, 20);
+            this.txtBVerseny.ReadOnly = true;
+            this.txtBVerseny.Size = new System.Drawing.Size(116, 20);
             this.txtBVerseny.TabIndex = 61;
+            // 
+            // btnFirst
+            // 
+            this.btnFirst.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnFirst.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFirst.Location = new System.Drawing.Point(16, 44);
+            this.btnFirst.Name = "btnFirst";
+            this.btnFirst.Size = new System.Drawing.Size(75, 23);
+            this.btnFirst.TabIndex = 62;
+            this.btnFirst.Text = "Első";
+            this.btnFirst.UseVisualStyleBackColor = false;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // Kuldes
             // 
@@ -694,6 +721,7 @@ namespace Kuldorendszer
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1134, 461);
+            this.Controls.Add(this.btnFirst);
             this.Controls.Add(this.txtBVerseny);
             this.Controls.Add(this.cBoxFordulo);
             this.Controls.Add(this.label13);
@@ -815,5 +843,6 @@ namespace Kuldorendszer
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox cBoxFordulo;
         private System.Windows.Forms.TextBox txtBVerseny;
+        private System.Windows.Forms.Button btnFirst;
     }
 }

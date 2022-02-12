@@ -181,6 +181,7 @@ namespace Kuldorendszer
         public void AdatFeltolt()
         {
             DataGridView dgv1 = dGridAdmin;
+            btnUj.Enabled = btnModosit.Enabled = btnTorol.Enabled = btnKeres.Enabled = true;
 
             this.id = Convert.ToString(dgv1.CurrentRow.Cells[0].Value);
             btnModosit.Text = "Módosít (" + this.id + ")";
@@ -239,6 +240,7 @@ namespace Kuldorendszer
 
         private void btnUj_Click(object sender, EventArgs e)
         {
+            dGridAdmin.ReadOnly = false;
             DataTable dt = dGridAdmin.DataSource as DataTable;
             //DataRow row = dt.NewRow();
             var row = dt.NewRow();
@@ -436,8 +438,48 @@ namespace Kuldorendszer
             }
             catch
             {
-                //throw new Exception("Hiba");
+                throw new Exception("Hiba");
             }
+        }
+
+        private void btnUj_MouseHover(object sender, EventArgs e)
+        {
+            btnUj.BackColor = Color.RoyalBlue;
+        }
+
+        private void btnUj_MouseLeave(object sender, EventArgs e)
+        {
+            btnUj.BackColor = Color.Transparent;
+        }
+
+        private void btnModosit_MouseLeave(object sender, EventArgs e)
+        {
+            btnModosit.BackColor = Color.Transparent;
+        }
+
+        private void btnModosit_MouseHover(object sender, EventArgs e)
+        {
+            btnModosit.BackColor = Color.RoyalBlue;
+        }
+
+        private void btnTorol_MouseHover(object sender, EventArgs e)
+        {
+            btnTorol.BackColor = Color.RoyalBlue;
+        }
+
+        private void btnTorol_MouseLeave(object sender, EventArgs e)
+        {
+            btnTorol.BackColor = Color.Transparent;
+        }
+
+        private void btnKeres_MouseHover(object sender, EventArgs e)
+        {
+            btnKeres.BackColor = Color.RoyalBlue;
+        }
+
+        private void btnKeres_MouseLeave(object sender, EventArgs e)
+        {
+            btnKeres.BackColor = Color.Transparent;
         }
     }
 }
