@@ -89,11 +89,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adatmodositas.cs">
+    <Compile Include="Csapat.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Adatmodositas.Designer.cs">
-      <DependentUpon>Adatmodositas.cs</DependentUpon>
+    <Compile Include="Csapat.Designer.cs">
+      <DependentUpon>Csapat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Elerhetoseg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Elerhetoseg.Designer.cs">
+      <DependentUpon>Elerhetoseg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Jatekvezeto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Jatekvezeto.Designer.cs">
+      <DependentUpon>Jatekvezeto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Merkozesek.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Merkozesek.Designer.cs">
+      <DependentUpon>Merkozesek.cs</DependentUpon>
     </Compile>
     <Compile Include="Admin.cs">
       <SubType>Form</SubType>
@@ -132,8 +150,23 @@
     <Compile Include="Regisztracio.Designer.cs">
       <DependentUpon>Regisztracio.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Adatmodositas.resx">
-      <DependentUpon>Adatmodositas.cs</DependentUpon>
+    <Compile Include="Telepules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Telepules.Designer.cs">
+      <DependentUpon>Telepules.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Csapat.resx">
+      <DependentUpon>Csapat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Elerhetoseg.resx">
+      <DependentUpon>Elerhetoseg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Jatekvezeto.resx">
+      <DependentUpon>Jatekvezeto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Merkozesek.resx">
+      <DependentUpon>Merkozesek.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin.resx">
       <DependentUpon>Admin.cs</DependentUpon>
@@ -156,6 +189,9 @@
     </Compile>
     <EmbeddedResource Include="Regisztracio.resx">
       <DependentUpon>Regisztracio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Telepules.resx">
+      <DependentUpon>Telepules.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Admin.datasource" />

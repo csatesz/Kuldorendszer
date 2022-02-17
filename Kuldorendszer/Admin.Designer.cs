@@ -136,7 +136,6 @@ namespace Kuldorendszer
             // 
             this.btnUj.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUj.Enabled = false;
-            this.btnUj.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
             this.btnUj.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Blue;
             this.btnUj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUj.Location = new System.Drawing.Point(244, 16);
@@ -301,6 +300,7 @@ namespace Kuldorendszer
             this.MinimumSize = new System.Drawing.Size(835, 515);
             this.Name = "Admin";
             this.Text = "Admin";
+            this.Load += new System.EventHandler(this.Admin_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dGridAdmin)).EndInit();
             this.ResumeLayout(false);

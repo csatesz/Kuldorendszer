@@ -219,9 +219,7 @@ namespace Kuldorendszer
                 $"(SELECT idOsztaly FROM kuldes.osztaly WHERE osztalyMegnevezes = \"{cBoxVerseny.SelectedItem}\"" +
                 $" AND fordulo = {cBoxFordulo.SelectedItem}) ;";
             }
-            //connection.Open();
             adapter = new MySqlDataAdapter(query, connection);
-            //connection.Close();
             if (adapter != null)
             {
                 adapter.Fill(table);
@@ -318,13 +316,17 @@ namespace Kuldorendszer
             //MerkozesKiir();
             //connection.Open();
             adapter = new MySqlDataAdapter("SELECT m.merkozesDatum, t.Telepules, c.csapatNev, d.csapatNev, j.nev " +
-                "FROM ((((kuldes.merkozes m INNER JOIN kuldes.telepules t ON t.IdTelepules = m.IdTelepules)" +
+                "FROM (((((kuldes.merkozes m INNER JOIN kuldes.telepules t ON t.IdTelepules = m.IdTelepules)" +
                 " INNER JOIN kuldes.csapatok c ON c.idCsapat = m.hazaiCsapatId)" +
-                " INNER JOIN kuldes.csapatok d ON d.idCsapat = m.vendegCsapatId) " +
+                " INNER JOIN kuldes.csapatok d ON d.idCsapat = m.vendegCsapatId)" +
+                " INNER JOIN kuldes.kuldes k ON m.merkozesKod = k.merkozesKod) " +
                 " INNER JOIN kuldes.jatekvezetok j ON k.jvKod = j.jvKod);", connection);
             //adapter = new MySqlDataAdapter("SELECT kuldes.merkozes.merkozesDatum, kuldes.telepules.Telepules" +
             //  "FROM kuldes.merkozes JOIN kuldes.telepules USING (kuldes.telepules.IdTelepules);", connection);
-            adapter.Fill(merkozesekJvel);
+            adapter.Fill(merkozesekJvel); 
+            /*
+             * Javítani kell ezt a részt!!!
+            */
             if (merkozesekJvel.Columns.Count <= 5)
             {
                 merkozesekJvel.Columns.Add("JatekVezeto", typeof(String));

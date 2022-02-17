@@ -18,7 +18,7 @@ namespace Kuldorendszer
         MySqlDataAdapter adapter;
         MySqlCommand cmd;
 
-        Felhasznalo felhasznalok = new Felhasznalo();
+        //Felhasznalo felhasznalok = new Felhasznalo();
         DataTable felhTable = new DataTable();
         DataTable jvTable = new DataTable();
         DataTable csapatokTable = new DataTable();
@@ -33,6 +33,7 @@ namespace Kuldorendszer
         public Admin()
         {
             InitializeComponent();
+            
             dGridAdmin.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             dGridAdmin.BorderStyle = BorderStyle.Fixed3D;
             dGridAdmin.EditMode = DataGridViewEditMode.EditOnEnter;
@@ -240,13 +241,42 @@ namespace Kuldorendszer
 
         private void btnUj_Click(object sender, EventArgs e)
         {
-            dGridAdmin.ReadOnly = false;
-            DataTable dt = dGridAdmin.DataSource as DataTable;
-            //DataRow row = dt.NewRow();
-            var row = dt.NewRow();
-            row[0] = -1;
-            row[1] = dGridAdmin.Rows[dGridAdmin.CurrentRow.Index].Cells[0].Value.ToString();
-            dt.Rows.Add(row);
+            switch (table)
+            { 
+                case "csapatok":
+                    Csapat cs = new Csapat();
+                    cs.Show();
+                    break;
+                case "elerhetoseg":
+                    Elerhetoseg el = new Elerhetoseg();
+                    el.Show();
+                    break;
+                case "felhasznalo":
+                    Regisztracio r = new Regisztracio();
+                    r.Show();
+                    break;
+                case "jatekvezetok":
+                    Jatekvezeto j = new Jatekvezeto();
+                    j.Show();
+                    break;
+                case "merkozes":
+                    Merkozesek m = new Merkozesek();
+                    m.Show();
+                    break;
+                case "telepules":
+                    Telepules t = new Telepules();
+                    t.Show();
+                    break;
+            }
+
+            //dGridAdmin.ReadOnly = false;
+            //DataTable dt = dGridAdmin.DataSource as DataTable;
+            ////DataRow row = dt.NewRow();
+            //var row = dt.NewRow();
+            //row[0] = -1;
+            //row[1] = dGridAdmin.Rows[dGridAdmin.CurrentRow.Index].Cells[0].Value.ToString();
+            //dt.Rows.Add(row);
+
             //row[0] = dGridAdmin.Rows[dGridAdmin.RowCount-1].Cells[0].Value.ToString();
             //string oszlop = dGridAdmin.Columns[e.ColumnIndex].Name; // az eredeti oszlop nevét kell visszadni!!!
             //dGridAdmin.Rows.Add(new object[] { -1, "kutya", "cica", "serialkillah" }); //Nem vehetők fel sorok programozott módon a DataGridView vezérlő sorgyűjteményébe, ha a vezérlő adatokhoz van kötve.'
@@ -347,7 +377,6 @@ namespace Kuldorendszer
 
         private void dGridAdmin_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
-
             //label2.Text = dGridAdmin.CurrentCell.OwningColumn.Name;
             //label2.Text = dGridAdmin.Columns[e.ColumnIndex].Name;
         }
@@ -480,6 +509,11 @@ namespace Kuldorendszer
         private void btnKeres_MouseLeave(object sender, EventArgs e)
         {
             btnKeres.BackColor = Color.Transparent;
+        }
+
+        private void Admin_Load(object sender, EventArgs e)
+        {
+            //if (table != null) AdatFeltolt();
         }
     }
 }
