@@ -45,7 +45,6 @@ namespace Kuldorendszer
             this.textBKeres = new System.Windows.Forms.TextBox();
             this.btnKeres = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGridAdmin)).BeginInit();
             this.SuspendLayout();
@@ -266,27 +265,17 @@ namespace Kuldorendszer
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(260, 261);
+            this.label1.Location = new System.Drawing.Point(156, 260);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(16, 13);
             this.label1.TabIndex = 53;
             this.label1.Text = "...";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(175, 237);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 60;
-            this.label2.Text = "label2";
             // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(819, 479);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnKeres);
             this.Controls.Add(this.textBKeres);
@@ -299,6 +288,7 @@ namespace Kuldorendszer
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.MinimumSize = new System.Drawing.Size(835, 515);
             this.Name = "Admin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin";
             this.Load += new System.EventHandler(this.Admin_Load);
             this.panel1.ResumeLayout(false);
@@ -326,6 +316,5 @@ namespace Kuldorendszer
         private System.Windows.Forms.Button btnOsztKarb;
         private System.Windows.Forms.Button btnTelepKarb;
         private System.Windows.Forms.Button btnElerhetKarb;
-        private System.Windows.Forms.Label label2;
     }
 }

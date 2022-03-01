@@ -17,6 +17,7 @@ namespace Kuldorendszer
         MySqlDataAdapter adapter;
         DataTable dt = new DataTable();
         MySqlCommand cmd;
+        int osztId = 0;
         public Csapat()
         {
             InitializeComponent();
@@ -42,27 +43,27 @@ namespace Kuldorendszer
 
             if (Int32.TryParse(txtBCsapatKod.Text, out int csKod))
             {
-                if (csKod > 99999999)
+                if (csKod > 99999999 || csKod < 1)
                 {
                     MessageBox.Show("A csapat kódja nem lehet ennyi!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     ervenyes = false;
                 }
-                //else ervenyes = true;
+                else ervenyes = true;
             }
             else
-                MessageBox.Show("A csapat kódja csak számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            
+                MessageBox.Show("A csapat kódja csak pozitív számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
             adapter = new MySqlDataAdapter($"SELECT idCsapat FROM kuldes.csapatok ;", connection);
             if (adapter != null)
             {
                 adapter.Fill(dt);
-            }
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                if (dt.Rows[i][0].ToString() == txtBCsapatKod.Text) // nem teljes számot vizsgál
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    foglalt = true;
-                    break;
+                    if (dt.Rows[i][0].ToString() == txtBCsapatKod.Text) // nem teljes számot vizsgál
+                    {
+                        foglalt = true;
+                        break;
+                    }
                 }
             }
             if (foglalt)
@@ -71,14 +72,27 @@ namespace Kuldorendszer
             }
             if (ervenyes && !foglalt)
             {
+                adapter = new MySqlDataAdapter($"SELECT elerhetosegKod FROM kuldes.elerhetoseg e" +
+                    $" WHERE e.email = \"{cBoxElerhetoseg.Text}\" ;", connection);
+                DataTable dt2 = new DataTable();
+                adapter.Fill(dt2);
+                if (!Int32.TryParse(dt2.Rows[0][0].ToString(), out int kod))
+                    MessageBox.Show("Nincs ilyen elérhetőség.");
+
+                adapter = new MySqlDataAdapter($"SELECT idOsztaly FROM kuldes.osztaly o" +
+                    $" WHERE o.osztalyMegnevezes = \"{cBoxOsztaly.Text}\" ;", connection);
+                DataTable dt3 = new DataTable();
+                adapter.Fill(dt3);
+                if (!Int32.TryParse(dt3.Rows[0][0].ToString(), out int osztKod))
+                    MessageBox.Show("Nincs ilyen osztály!");
 
                 cmd = new MySqlCommand($"INSERT INTO kuldes.csapatok VALUES ({csKod}, " +
-                    $" \"{txtBCsapatNev.Text}\", @elerhetoseg, \"{txtBCsapatvezeto.Text}\", @osztaly ) ;", connection);
+                $" \"{txtBCsapatNev.Text}\", {kod}, \"{txtBCsapatvezeto.Text}\", {osztKod} ) ;", connection);
                 try
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@elerhetoseg", cBoxElerhetoseg.Text.Trim()); //id csapatokból névől kódot visszaadni
-                    cmd.Parameters.AddWithValue("@osztaly", cBoxOsztaly.Text.Trim());// itt is osztálykód
+                    //cmd.Parameters.AddWithValue("@elerhetoseg", kod); //id csapatokból névől kódot visszaadni
+                    //cmd.Parameters.AddWithValue("@osztaly", cBoxOsztaly.Text.Trim());// itt is osztálykód
 
                     cmd.ExecuteNonQuery();
                     connection.Close();
@@ -122,9 +136,24 @@ namespace Kuldorendszer
         {
             if (cBoxElerhetoseg.Text == "Új elérhetőség")
             {
-                Regisztracio r = new Regisztracio(); //elérhetőség felvitel
-                r.Show();
+                Elerhetoseg el = new Elerhetoseg(); //elérhetőség felvitel
+                el.Show();
+                FillCombos();
             }
+        }
+
+        private void cBoxOsztaly_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cBoxOsztaly.Text == "Új elérhetőség")
+            {
+                Osztaly o = new Osztaly(); //osztály felvitel
+                o.Show();
+                FillCombos();
+            }
+            //adapter = new MySqlDataAdapter($"SELECT idOsztaly FROM kuldes.osztaly WHERE osztalyMegnevezes = \"{cBoxOsztaly.SelectedItem}\"", connection);
+            //DataTable dto = new DataTable();
+            //adapter.Fill(dto);
+            //Int32.TryParse(dto.Rows[0][0].ToString(), out osztId);
         }
     }
 }

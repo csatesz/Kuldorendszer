@@ -56,6 +56,7 @@ namespace Kuldorendszer
             this.cBoxOsztaly.Name = "cBoxOsztaly";
             this.cBoxOsztaly.Size = new System.Drawing.Size(121, 21);
             this.cBoxOsztaly.TabIndex = 23;
+            this.cBoxOsztaly.SelectedIndexChanged += new System.EventHandler(this.cBoxOsztaly_SelectedIndexChanged);
             // 
             // txtBJvNev
             // 
@@ -228,7 +229,11 @@ namespace Kuldorendszer
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnMegse);
             this.Controls.Add(this.btnOk);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Jatekvezeto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Jatekvezeto";
             this.Load += new System.EventHandler(this.Jatekvezeto_Load);
             this.ResumeLayout(false);

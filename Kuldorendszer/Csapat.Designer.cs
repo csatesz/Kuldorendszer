@@ -58,6 +58,7 @@ namespace Kuldorendszer
             this.cBoxOsztaly.Name = "cBoxOsztaly";
             this.cBoxOsztaly.Size = new System.Drawing.Size(121, 21);
             this.cBoxOsztaly.TabIndex = 41;
+            this.cBoxOsztaly.SelectedIndexChanged += new System.EventHandler(this.cBoxOsztaly_SelectedIndexChanged);
             // 
             // txtBCsapatNev
             // 
@@ -174,6 +175,9 @@ namespace Kuldorendszer
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnMegse);
             this.Controls.Add(this.btnOk);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Csapat";
             this.Text = "Csapat";
             this.Load += new System.EventHandler(this.Csapat_Load);

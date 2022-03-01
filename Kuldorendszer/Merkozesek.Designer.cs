@@ -174,6 +174,7 @@ namespace Kuldorendszer
             this.cBoxHazai.Name = "cBoxHazai";
             this.cBoxHazai.Size = new System.Drawing.Size(121, 21);
             this.cBoxHazai.TabIndex = 2;
+            this.cBoxHazai.SelectedIndexChanged += new System.EventHandler(this.cBoxHazai_SelectedIndexChanged);
             // 
             // cBoxVendeg
             // 
@@ -182,6 +183,7 @@ namespace Kuldorendszer
             this.cBoxVendeg.Name = "cBoxVendeg";
             this.cBoxVendeg.Size = new System.Drawing.Size(121, 21);
             this.cBoxVendeg.TabIndex = 3;
+            this.cBoxVendeg.SelectedIndexChanged += new System.EventHandler(this.cBoxVendeg_SelectedIndexChanged);
             // 
             // txtBJvSzam
             // 
@@ -197,6 +199,7 @@ namespace Kuldorendszer
             this.cBoxTelepules.Name = "cBoxTelepules";
             this.cBoxTelepules.Size = new System.Drawing.Size(121, 21);
             this.cBoxTelepules.TabIndex = 6;
+            this.cBoxTelepules.SelectedIndexChanged += new System.EventHandler(this.cBoxTelepules_SelectedIndexChanged);
             // 
             // txtBFordulo
             // 
@@ -212,6 +215,7 @@ namespace Kuldorendszer
             this.cBoxOsztaly.Name = "cBoxOsztaly";
             this.cBoxOsztaly.Size = new System.Drawing.Size(121, 21);
             this.cBoxOsztaly.TabIndex = 7;
+            this.cBoxOsztaly.SelectedIndexChanged += new System.EventHandler(this.cBoxOsztaly_SelectedIndexChanged);
             // 
             // dateTimePicker
             // 
@@ -249,6 +253,9 @@ namespace Kuldorendszer
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnMegse);
             this.Controls.Add(this.btnOk);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Merkozesek";
             this.Text = "Mérkőzések felvitele";
             this.Load += new System.EventHandler(this.Merkozesek_Load);

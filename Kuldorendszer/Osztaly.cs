@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace Kuldorendszer
 {
-    public partial class Telepules : Form
+    public partial class Osztaly : Form
     {
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
         MySqlDataAdapter adapter;
         DataTable dt = new DataTable();
         MySqlCommand cmd;
-        public Telepules()
+        public Osztaly()
         {
             InitializeComponent();
         }
@@ -25,7 +25,7 @@ namespace Kuldorendszer
         private void btnMegse_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Biztos hogy bezárod az ablakot!", "Bezár",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+               MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
                 this.Close();
             }
@@ -36,38 +36,26 @@ namespace Kuldorendszer
             bool ervenyes = false;
             bool foglalt = false;
 
-            if (Int32.TryParse(txtBTelepulesKod.Text, out int telepulesKod))
+            if (Int32.TryParse(txtBOsztalyKod.Text, out int osztalyKod))
             {
-                if (telepulesKod > 99999999)
+                if (osztalyKod > 99999999)
                 {
-                    MessageBox.Show("A település kódja nem lehet ennyi!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Az osztály kódja nem lehet ennyi!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     ervenyes = false;
                 }
                 else ervenyes = true;
             }
             else
-                MessageBox.Show("A település kódja csak számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Az osztály kódja csak számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            if (Int32.TryParse(txtBIrSzam.Text, out int irSzam))
-            {
-                if (irSzam > 9999)
-                {
-                    MessageBox.Show("Az irányítószám nem lehet ennyi!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    ervenyes = false;
-                }
-                else ervenyes = true;
-            }
-            else
-                MessageBox.Show("A irányítószám csak 4 jegyű számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-            adapter = new MySqlDataAdapter($"SELECT idTelepules FROM kuldes.telepules ;", connection);
+            adapter = new MySqlDataAdapter($"SELECT idOsztaly FROM kuldes.osztaly ;", connection);
             if (adapter != null)
             {
                 adapter.Fill(dt);
             }
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                if (dt.Rows[i][0].ToString() == txtBTelepulesKod.Text) // nem teljes számot vizsgál
+                if (dt.Rows[i][0].ToString() == txtBOsztalyKod.Text.Trim()) 
                 {
                     foglalt = true;
                     break;
@@ -75,18 +63,17 @@ namespace Kuldorendszer
             }
             if (foglalt)
             {
-                MessageBox.Show("Már van ilyen kódú település.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Már van ilyen kódú osztáy!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             if (ervenyes && !foglalt)
             {
 
-                cmd = new MySqlCommand($"INSERT INTO kuldes.telepules VALUES ({telepulesKod}, " +
-                    $" @telep, {irSzam} );", connection);
+                cmd = new MySqlCommand($"INSERT INTO kuldes.osztaly VALUES ({osztalyKod}, " +
+                    $" @osztaly);", connection);
                 try
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@telep", txtBTelepules.Text.Trim());
-
+                    cmd.Parameters.AddWithValue("@osztaly", txtBOsztaly.Text.Trim()); 
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }

@@ -17,7 +17,7 @@ namespace Kuldorendszer
         MySqlDataAdapter adapter;
         DataTable dt = new DataTable();
         MySqlCommand cmd;
-
+        int hazaiId, vendegId, telepId, osztId = 0;
         //string table = "";
         //string kod = "";
         public Merkozesek()
@@ -133,13 +133,13 @@ namespace Kuldorendszer
             {
 
                 cmd = new MySqlCommand($"INSERT INTO kuldes.merkozes VALUES ({merkozesKod}, " +
-                    $"@hazai, @vendeg, {jvSzam}, @datum, @telepules, @osztaly, {fordulo})", connection);
+                    $"{hazaiId}, {vendegId}, {jvSzam}, @datum, {telepId}, {osztId}, {fordulo})", connection);
                 try
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@hazai", cBoxHazai.Text.Trim()); //id csapatokból névől kódot visszaadni
-                    cmd.Parameters.AddWithValue("@vendeg", cBoxVendeg.Text.Trim());// itt is id csapatokból 
-                    cmd.Parameters.AddWithValue("@telepules", cBoxTelepules.Text.Trim()); //itt is település kód
+                    //cmd.Parameters.AddWithValue("@hazai", cBoxHazai.Text.Trim()); //id csapatokból névől kódot visszaadni
+                    //cmd.Parameters.AddWithValue("@vendeg", cBoxVendeg.Text.Trim());// itt is id csapatokból 
+                    //cmd.Parameters.AddWithValue("@telepules", cBoxTelepules.Text.Trim()); //itt is település kód
                     cmd.Parameters.AddWithValue("@datum", dateTimePicker.Value);
                     cmd.Parameters.AddWithValue("@osztaly", cBoxOsztaly.Text.Trim());// itt is osztálykód
 
@@ -155,6 +155,41 @@ namespace Kuldorendszer
                 this.Close();
             }
 
+        }
+
+        private void cBoxHazai_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            adapter = new MySqlDataAdapter($"SELECT idCsapat FROM kuldes.csapatok" +
+                $" WHERE csapatNev = \"{cBoxHazai.SelectedItem}\"", connection);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            Int32.TryParse(dt.Rows[0][0].ToString(), out hazaiId);
+        }
+
+        private void cBoxVendeg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            adapter = new MySqlDataAdapter($"SELECT idCsapat FROM kuldes.csapatok" +
+                $" WHERE csapatNev = \"{cBoxVendeg.SelectedItem}\"", connection);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            Int32.TryParse(dt.Rows[0][0].ToString(), out vendegId);
+        }
+
+        private void cBoxTelepules_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            adapter = new MySqlDataAdapter($"SELECT idTelepules FROM kuldes.telepules " +
+                $" WHERE Telepules = \"{cBoxTelepules.SelectedItem}\"", connection);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            Int32.TryParse(dt.Rows[0][0].ToString(), out telepId);
+        }
+
+        private void cBoxOsztaly_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            adapter = new MySqlDataAdapter($"SELECT idOsztaly FROM kuldes.osztaly WHERE osztalyMegnevezes = \"{cBoxOsztaly.SelectedItem}\"", connection);
+            DataTable dto = new DataTable();
+            adapter.Fill(dto);
+            Int32.TryParse(dto.Rows[0][0].ToString(), out osztId);
         }
     }
 }

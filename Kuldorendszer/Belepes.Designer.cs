@@ -220,7 +220,10 @@ namespace Kuldorendszer
             this.Controls.Add(this.btnElfJsz);
             this.Controls.Add(this.BtnBelep);
             this.Controls.Add(this.BtnUjFelh);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(580, 440);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(470, 360);
             this.Name = "Belepes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
