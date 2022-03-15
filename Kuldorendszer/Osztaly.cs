@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using KuldorendszerBLL;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +14,7 @@ namespace Kuldorendszer
 {
     public partial class Osztaly : Form
     {
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-        MySqlDataAdapter adapter;
         DataTable dt = new DataTable();
-        MySqlCommand cmd;
         public Osztaly()
         {
             InitializeComponent();
@@ -47,43 +45,25 @@ namespace Kuldorendszer
             }
             else
                 MessageBox.Show("Az osztály kódja csak számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-            adapter = new MySqlDataAdapter($"SELECT idOsztaly FROM kuldes.osztaly ;", connection);
-            if (adapter != null)
+            OsztalyBLL oszt = new OsztalyBLL();
+            dt = oszt.GetOsztalyById(osztalyKod);
+            if (dt.Rows.Count > 0)
             {
-                adapter.Fill(dt);
-            }
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                if (dt.Rows[i][0].ToString() == txtBOsztalyKod.Text.Trim()) 
-                {
-                    foglalt = true;
-                    break;
-                }
-            }
-            if (foglalt)
-            {
+                foglalt = true;
                 MessageBox.Show("Már van ilyen kódú osztáy!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+
             if (ervenyes && !foglalt)
             {
-
-                cmd = new MySqlCommand($"INSERT INTO kuldes.osztaly VALUES ({osztalyKod}, " +
-                    $" @osztaly);", connection);
-                try
+                if (oszt.AddOsztaly(osztalyKod, txtBOsztaly.Text.Trim()))
                 {
-                    connection.Open();
-                    cmd.Parameters.AddWithValue("@osztaly", txtBOsztaly.Text.Trim()); 
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
+                    MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Jatekvezeto j = new Jatekvezeto();
+                    j.FillCombos();
+                    this.Close();
                 }
-                catch
-                {
-                    throw new Exception("Hiba");
-                }
-                connection.Close();
-                MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                else
+                    MessageBox.Show("Sikertelen adatfelvitel", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

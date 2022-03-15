@@ -132,16 +132,6 @@
     <Compile Include="Kuldes.Designer.cs">
       <DependentUpon>Kuldes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Csapatok.cs" />
-    <Compile Include="Models\Elerhetoseg.cs" />
-    <Compile Include="Models\Felhasznalo.cs" />
-    <Compile Include="Models\Jatekvezeto.cs" />
-    <Compile Include="Models\JatekvezetoKuldes.cs" />
-    <Compile Include="Models\Kuldes.cs" />
-    <Compile Include="Models\ListBoxItems.cs" />
-    <Compile Include="Models\Merkozes.cs" />
-    <Compile Include="Models\Osztaly.cs" />
-    <Compile Include="Models\Telepules.cs" />
     <Compile Include="Osztaly.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,7 +146,12 @@
     <Compile Include="Regisztracio.Designer.cs">
       <DependentUpon>Regisztracio.cs</DependentUpon>
     </Compile>
-    <Compile Include="SqlTevekenyseg.cs" />
+    <Compile Include="Statisztika.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statisztika.Designer.cs">
+      <DependentUpon>Statisztika.cs</DependentUpon>
+    </Compile>
     <Compile Include="Telepules.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +195,9 @@
     <EmbeddedResource Include="Regisztracio.resx">
       <DependentUpon>Regisztracio.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Statisztika.resx">
+      <DependentUpon>Statisztika.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Telepules.resx">
       <DependentUpon>Telepules.cs</DependentUpon>
     </EmbeddedResource>
@@ -239,6 +237,16 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KuldorendszerBLL\KuldorendszerBLL.csproj">
+      <Project>{746735e4-aeb3-463d-ae4f-0849ea0fc6e3}</Project>
+      <Name>KuldorendszerBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KuldorendszerModels\KuldorendszerModels.csproj">
+      <Project>{e10d0afb-fddd-4d33-88a0-71c3c620ea53}</Project>
+      <Name>KuldorendszerModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

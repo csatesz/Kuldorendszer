@@ -1,23 +1,14 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using KuldorendszerBLL;
 
 namespace Kuldorendszer
 {
     public partial class Jatekvezeto : Form
     {
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-        MySqlDataAdapter adapter;
-        //DataTable dt = new DataTable();
-        MySqlCommand cmd;
-        int telep, elKod = 0;
+        int telep, elKod, keret = 0;
+        DataTable dt = new DataTable();
 
         public Jatekvezeto()
         {
@@ -30,13 +21,13 @@ namespace Kuldorendszer
 
         private void txtBFordulo_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
             bool ervenyes = false;
             bool foglalt = false;
+            JatekvezetoBLL jv = new JatekvezetoBLL();
 
             if (Int32.TryParse(txtBJvKod.Text, out int jvKod))
             {
@@ -48,11 +39,19 @@ namespace Kuldorendszer
                 else ervenyes = true;
             }
             else
-                MessageBox.Show("A játékvezető kódja csak számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("A játékvezető kódja csak számot tartalmazhat!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+
+            dt = jv.GetJatekvezetoById(jvKod);
+            if (dt.Rows.Count > 0)
+            {
+                MessageBox.Show("A játékvezető kódja foglalt!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                foglalt = true;
+            }
 
             if (String.IsNullOrEmpty(txtBJvNev.Text))
             {
-                MessageBox.Show("A játékvezető neve nem lehet üres.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("A játékvezető neve nem lehet üres!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 ervenyes = false;
             }
@@ -61,29 +60,17 @@ namespace Kuldorendszer
                 MessageBox.Show("Válassz ki keretet/települést/elérhetőséget!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 ervenyes = false;
             }
+
             if (ervenyes && !foglalt)
             {
-
-                cmd = new MySqlCommand($"INSERT INTO kuldes.jatekvezetok VALUES ({jvKod}, " +
-                    $" \"{txtBJvNev.Text}\", {elKod}, {telep}, \"{txtBMinosites.Text}\", \"{cBoxOsztaly.Text}\", " +
-                    $" \"{cBoxFeladat.Text}\", 0)", connection);
-                try
+                if (jv.AddJatekvezeto(jvKod, txtBJvNev.Text, elKod, telep, txtBMinosites.Text,
+                    cBoxOsztaly.Text, cBoxFeladat.Text, 0))
                 {
-                    connection.Open();
-                    //cmd.Parameters.AddWithValue("@elerhetoseg", cBoxElerhetoseg.Text.Trim()); //id csapatokból névől kódot visszaadni
-                    //cmd.Parameters.AddWithValue("@telepules", cBoxTelepules.Text.Trim()); //itt is település kód
-                    //cmd.Parameters.AddWithValue("@keret", cBoxOsztaly.Text.Trim());
-                    //cmd.Parameters.AddWithValue("@osztaly", cBoxOsztaly.Text.Trim());// itt is osztálykód
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
+                    MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
                 }
-                catch
-                {
-                    throw new Exception("Hiba");
-                }
-                connection.Close();
-                MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                else
+                    MessageBox.Show("Sikertelen adatfelvitel", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void btnMegse_Click(object sender, EventArgs e)
@@ -94,7 +81,7 @@ namespace Kuldorendszer
                 this.Close();
             }
         }
-        private void FillCombos()
+        public void FillCombos()
         {
             cBoxElerhetoseg.Items.Clear();
             cBoxOsztaly.Items.Clear();
@@ -106,30 +93,25 @@ namespace Kuldorendszer
             cBoxFeladat.Items.Add("asszisztens");
             cBoxFeladat.Items.Add("játékvezető");
 
-            adapter = new MySqlDataAdapter("SELECT osztalyMegnevezes FROM kuldes.osztaly", connection);
-            DataTable dt1 = new DataTable();
-            adapter.Fill(dt1);
+            OsztalyBLL o = new OsztalyBLL();
+            DataTable dt1 = o.GetAllMegnevezes();
             for (int i = 0; i < dt1.Rows.Count; i++)
             {
                 string osztaly = dt1.Rows[i][0].ToString();
                 cBoxOsztaly.Items.Add(osztaly);
             }
-            //cBoxOsztaly.SelectedIndex = -1;
-            adapter = new MySqlDataAdapter("SELECT email FROM kuldes.elerhetoseg", connection);
-            DataTable dt2 = new DataTable();
-            adapter.Fill(dt2);
+            ElerhetosegBLL el = new ElerhetosegBLL();
+            DataTable dt2 = el.GetAllEmail();
             for (int i = 0; i < dt2.Rows.Count; i++)
             {
                 string nev = dt2.Rows[i][0].ToString();
                 cBoxElerhetoseg.Items.Add(nev);
             }
-            //cBoxFordulo.SelectedIndex = -1;
-            adapter = new MySqlDataAdapter("SELECT Telepules FROM kuldes.telepules", connection);
-            DataTable dt3 = new DataTable();
-            adapter.Fill(dt3);
+            TelepulesBLL t = new TelepulesBLL();
+            DataTable dt3 = t.GetAllTelepules();
             for (int i = 0; i < dt3.Rows.Count; i++)
             {
-                string telepules = dt3.Rows[i][0].ToString();
+                string telepules = dt3.Rows[i][1].ToString();
                 cBoxTelepules.Items.Add(telepules);
             }
         }
@@ -140,14 +122,11 @@ namespace Kuldorendszer
             {
                 Elerhetoseg el = new Elerhetoseg(); //elérhetőség felvitel
                 el.Show();
-                FillCombos();
             }
             else
             {
-                adapter = new MySqlDataAdapter($"SELECT elerhetosegKod FROM kuldes.elerhetoseg e" +
-                   $" WHERE e.email = \"{cBoxElerhetoseg.Text}\" ;", connection);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
+                ElerhetosegBLL el = new ElerhetosegBLL();
+                DataTable dt = el.GetIdByEmail(cBoxElerhetoseg.Text);
                 Int32.TryParse(dt.Rows[0][0].ToString(), out elKod);
             }
         }
@@ -158,24 +137,20 @@ namespace Kuldorendszer
             {
                 Telepules t = new Telepules();
                 t.Show();
-                FillCombos();
             }
             else
             {
-                adapter = new MySqlDataAdapter($"SELECT idTelepules FROM kuldes.telepules " +
-                    $"WHERE Telepules = \"{cBoxTelepules.SelectedItem}\"", connection);
-                DataTable dto = new DataTable();
-                adapter.Fill(dto);
-                Int32.TryParse(dto.Rows[0][0].ToString(), out telep);
+                TelepulesBLL tel = new TelepulesBLL();
+                DataTable dt = tel.GetIdByTelepulesNev(cBoxTelepules.SelectedItem.ToString());
+                Int32.TryParse(dt.Rows[0][0].ToString(), out telep);
             }
         }
 
         private void cBoxOsztaly_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //adapter = new MySqlDataAdapter($"SELECT idOsztaly FROM kuldes.osztaly WHERE osztalyMegnevezes = \"{cBoxOsztaly.SelectedItem}\"", connection);
-            //DataTable dto = new DataTable();
-            //adapter.Fill(dto);
-            //Int32.TryParse(dto.Rows[0][0].ToString(), out keret);
+            OsztalyBLL o = new OsztalyBLL();
+            DataTable dt = o.GetIdByOsztalyNev(cBoxOsztaly.SelectedItem.ToString());
+            Int32.TryParse(dt.Rows[0][0].ToString(), out keret);
         }
     }
 }

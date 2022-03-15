@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using KuldorendszerBLL;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Kuldorendszer
 {
     public partial class Csapat : Form
@@ -16,8 +18,8 @@ namespace Kuldorendszer
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
         MySqlDataAdapter adapter;
         DataTable dt = new DataTable();
-        MySqlCommand cmd;
-        int osztId = 0;
+        //MySqlCommand cmd;
+        //int osztId = 0;
         public Csapat()
         {
             InitializeComponent();
@@ -53,24 +55,14 @@ namespace Kuldorendszer
             else
                 MessageBox.Show("A csapat kódja csak pozitív számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            adapter = new MySqlDataAdapter($"SELECT idCsapat FROM kuldes.csapatok ;", connection);
-            if (adapter != null)
-            {
-                adapter.Fill(dt);
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    if (dt.Rows[i][0].ToString() == txtBCsapatKod.Text) // nem teljes számot vizsgál
-                    {
-                        foglalt = true;
-                        break;
-                    }
-                }
-            }
+            CsapatBLL csap = new CsapatBLL();
+            dt = csap.GetCsapatById(csKod);
+            if (dt.Rows.Count > 0) foglalt = true;
             if (foglalt)
             {
                 MessageBox.Show("Már van ilyen kódú csapat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            if (ervenyes && !foglalt)
+            if (ervenyes && !foglalt)// a többi Bll-ből kell majd lekjérni!
             {
                 adapter = new MySqlDataAdapter($"SELECT elerhetosegKod FROM kuldes.elerhetoseg e" +
                     $" WHERE e.email = \"{cBoxElerhetoseg.Text}\" ;", connection);
@@ -83,27 +75,17 @@ namespace Kuldorendszer
                     $" WHERE o.osztalyMegnevezes = \"{cBoxOsztaly.Text}\" ;", connection);
                 DataTable dt3 = new DataTable();
                 adapter.Fill(dt3);
+
                 if (!Int32.TryParse(dt3.Rows[0][0].ToString(), out int osztKod))
                     MessageBox.Show("Nincs ilyen osztály!");
 
-                cmd = new MySqlCommand($"INSERT INTO kuldes.csapatok VALUES ({csKod}, " +
-                $" \"{txtBCsapatNev.Text}\", {kod}, \"{txtBCsapatvezeto.Text}\", {osztKod} ) ;", connection);
-                try
+                if (csap.AddCsapat(csKod, txtBCsapatNev.Text, kod, txtBCsapatvezeto.Text, osztKod))
                 {
-                    connection.Open();
-                    //cmd.Parameters.AddWithValue("@elerhetoseg", kod); //id csapatokból névől kódot visszaadni
-                    //cmd.Parameters.AddWithValue("@osztaly", cBoxOsztaly.Text.Trim());// itt is osztálykód
-
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
+                    MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
                 }
-                catch
-                {
-                    throw new Exception("Hiba");
-                }
-                connection.Close();
-                MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                else
+                    MessageBox.Show("Sikertelen adatfelvitel", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void FillCombos()

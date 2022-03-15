@@ -97,8 +97,9 @@ namespace Kuldorendszer
             this.cBoxFordulo = new System.Windows.Forms.ComboBox();
             this.txtBVerseny = new System.Windows.Forms.TextBox();
             this.btnFirst = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnStat = new System.Windows.Forms.Button();
+            this.chkBoxJV = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -305,7 +306,6 @@ namespace Kuldorendszer
             this.txtBFordulo.ReadOnly = true;
             this.txtBFordulo.Size = new System.Drawing.Size(46, 20);
             this.txtBFordulo.TabIndex = 46;
-            this.txtBFordulo.TextChanged += new System.EventHandler(this.txtBVerseny_TextChanged);
             // 
             // btnKuldes
             // 
@@ -321,7 +321,7 @@ namespace Kuldorendszer
             // btnModosit
             // 
             this.btnModosit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnModosit.Location = new System.Drawing.Point(240, 402);
+            this.btnModosit.Location = new System.Drawing.Point(202, 402);
             this.btnModosit.Name = "btnModosit";
             this.btnModosit.Size = new System.Drawing.Size(100, 47);
             this.btnModosit.TabIndex = 48;
@@ -376,7 +376,7 @@ namespace Kuldorendszer
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.newToolStripMenuItem.Text = "&New";
             // 
             // openToolStripMenuItem
@@ -385,13 +385,13 @@ namespace Kuldorendszer
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.openToolStripMenuItem.Text = "&Open";
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -399,19 +399,19 @@ namespace Kuldorendszer
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
             // 
             // printToolStripMenuItem
             // 
@@ -419,7 +419,7 @@ namespace Kuldorendszer
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.printToolStripMenuItem.Text = "&Print";
             // 
             // printPreviewToolStripMenuItem
@@ -427,18 +427,18 @@ namespace Kuldorendszer
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // editToolStripMenuItem
@@ -460,20 +460,20 @@ namespace Kuldorendszer
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.undoToolStripMenuItem.Text = "&Undo";
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.redoToolStripMenuItem.Text = "&Redo";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
             // 
             // cutToolStripMenuItem
             // 
@@ -481,7 +481,7 @@ namespace Kuldorendszer
             this.cutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.cutToolStripMenuItem.Text = "Cu&t";
             // 
             // copyToolStripMenuItem
@@ -490,7 +490,7 @@ namespace Kuldorendszer
             this.copyToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.copyToolStripMenuItem.Text = "&Copy";
             // 
             // pasteToolStripMenuItem
@@ -499,18 +499,18 @@ namespace Kuldorendszer
             this.pasteToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.pasteToolStripMenuItem.Text = "&Paste";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(141, 6);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.selectAllToolStripMenuItem.Text = "Select &All";
             // 
             // toolsToolStripMenuItem
@@ -525,13 +525,13 @@ namespace Kuldorendszer
             // customizeToolStripMenuItem
             // 
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.customizeToolStripMenuItem.Text = "&Customize";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
             // 
             // helpToolStripMenuItem
@@ -549,30 +549,30 @@ namespace Kuldorendszer
             // contentsToolStripMenuItem
             // 
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.contentsToolStripMenuItem.Text = "&Contents";
             // 
             // indexToolStripMenuItem
             // 
             this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
-            this.indexToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.indexToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.indexToolStripMenuItem.Text = "&Index";
             // 
             // searchToolStripMenuItem
             // 
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.searchToolStripMenuItem.Text = "&Search";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(119, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             // 
             // btnElozo
@@ -623,7 +623,6 @@ namespace Kuldorendszer
             this.lBMerkozesek.Name = "lBMerkozesek";
             this.lBMerkozesek.Size = new System.Drawing.Size(422, 372);
             this.lBMerkozesek.TabIndex = 1;
-            this.lBMerkozesek.SelectedIndexChanged += new System.EventHandler(this.lBMerkozesek_SelectedIndexChanged);
             this.lBMerkozesek.DoubleClick += new System.EventHandler(this.lBMerkozesek_DoubleClick);
             // 
             // cBoxJv
@@ -632,8 +631,10 @@ namespace Kuldorendszer
             this.cBoxJv.Location = new System.Drawing.Point(171, 180);
             this.cBoxJv.Name = "cBoxJv";
             this.cBoxJv.Size = new System.Drawing.Size(131, 21);
+            this.cBoxJv.Sorted = true;
             this.cBoxJv.TabIndex = 54;
             this.cBoxJv.Visible = false;
+            this.cBoxJv.SelectedIndexChanged += new System.EventHandler(this.cBoxJv_SelectedIndexChanged);
             // 
             // cBoxAssz1
             // 
@@ -641,8 +642,10 @@ namespace Kuldorendszer
             this.cBoxAssz1.Location = new System.Drawing.Point(329, 180);
             this.cBoxAssz1.Name = "cBoxAssz1";
             this.cBoxAssz1.Size = new System.Drawing.Size(131, 21);
+            this.cBoxAssz1.Sorted = true;
             this.cBoxAssz1.TabIndex = 55;
             this.cBoxAssz1.Visible = false;
+            this.cBoxAssz1.SelectedIndexChanged += new System.EventHandler(this.cBoxAssz1_SelectedIndexChanged);
             // 
             // cBoxAssz2
             // 
@@ -650,13 +653,15 @@ namespace Kuldorendszer
             this.cBoxAssz2.Location = new System.Drawing.Point(487, 180);
             this.cBoxAssz2.Name = "cBoxAssz2";
             this.cBoxAssz2.Size = new System.Drawing.Size(131, 21);
+            this.cBoxAssz2.Sorted = true;
             this.cBoxAssz2.TabIndex = 56;
             this.cBoxAssz2.Visible = false;
+            this.cBoxAssz2.SelectedIndexChanged += new System.EventHandler(this.cBoxAssz2_SelectedIndexChanged);
             // 
             // btnVegleg
             // 
             this.btnVegleg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnVegleg.Location = new System.Drawing.Point(446, 402);
+            this.btnVegleg.Location = new System.Drawing.Point(362, 402);
             this.btnVegleg.Name = "btnVegleg";
             this.btnVegleg.Size = new System.Drawing.Size(100, 47);
             this.btnVegleg.TabIndex = 57;
@@ -674,10 +679,9 @@ namespace Kuldorendszer
             this.dataGridView1.Location = new System.Drawing.Point(15, 252);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(603, 144);
+            this.dataGridView1.Size = new System.Drawing.Size(643, 144);
             this.dataGridView1.TabIndex = 58;
             this.dataGridView1.TabStop = false;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // lblFordulo
             // 
@@ -719,15 +723,6 @@ namespace Kuldorendszer
             this.btnFirst.UseVisualStyleBackColor = false;
             this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 63;
-            this.label1.Text = "label1";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -738,6 +733,28 @@ namespace Kuldorendszer
             this.label2.TabIndex = 64;
             this.label2.Text = "Jövőbeni mérkőzések játékvezetőkkel:";
             // 
+            // btnStat
+            // 
+            this.btnStat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStat.Location = new System.Drawing.Point(536, 402);
+            this.btnStat.Name = "btnStat";
+            this.btnStat.Size = new System.Drawing.Size(100, 47);
+            this.btnStat.TabIndex = 65;
+            this.btnStat.Text = "Statisztika készítés";
+            this.btnStat.UseVisualStyleBackColor = true;
+            this.btnStat.Click += new System.EventHandler(this.btnStat_Click);
+            // 
+            // chkBoxJV
+            // 
+            this.chkBoxJV.AutoSize = true;
+            this.chkBoxJV.Location = new System.Drawing.Point(390, 140);
+            this.chkBoxJV.Name = "chkBoxJV";
+            this.chkBoxJV.Size = new System.Drawing.Size(161, 17);
+            this.chkBoxJV.TabIndex = 67;
+            this.chkBoxJV.Text = "Játékvezetőket is megjelenít";
+            this.chkBoxJV.UseVisualStyleBackColor = true;
+            this.chkBoxJV.CheckedChanged += new System.EventHandler(this.chkBoxJV_CheckedChanged);
+            // 
             // Kuldes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -745,8 +762,9 @@ namespace Kuldorendszer
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1134, 461);
+            this.Controls.Add(this.chkBoxJV);
+            this.Controls.Add(this.btnStat);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnFirst);
             this.Controls.Add(this.txtBVerseny);
             this.Controls.Add(this.cBoxFordulo);
@@ -755,7 +773,6 @@ namespace Kuldorendszer
             this.Controls.Add(this.btnVegleg);
             this.Controls.Add(this.cBoxAssz2);
             this.Controls.Add(this.cBoxAssz1);
-            this.Controls.Add(this.cBoxJv);
             this.Controls.Add(this.lBMerkozesek);
             this.Controls.Add(this.btnLast);
             this.Controls.Add(this.btnKovetkezo);
@@ -771,7 +788,6 @@ namespace Kuldorendszer
             this.Controls.Add(this.txtBAssz1);
             this.Controls.Add(this.lblAssz1);
             this.Controls.Add(this.txtBAssz2);
-            this.Controls.Add(this.txtBJV);
             this.Controls.Add(this.lblAssz2);
             this.Controls.Add(this.lblJv);
             this.Controls.Add(this.txtBHely);
@@ -785,6 +801,8 @@ namespace Kuldorendszer
             this.Controls.Add(this.lblDatum);
             this.Controls.Add(this.lblKod);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.cBoxJv);
+            this.Controls.Add(this.txtBJV);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1150, 500);
@@ -870,7 +888,8 @@ namespace Kuldorendszer
         private System.Windows.Forms.ComboBox cBoxFordulo;
         private System.Windows.Forms.TextBox txtBVerseny;
         private System.Windows.Forms.Button btnFirst;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnStat;
+        private System.Windows.Forms.CheckBox chkBoxJV;
     }
 }

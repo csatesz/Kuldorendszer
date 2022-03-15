@@ -179,6 +179,7 @@ namespace Kuldorendszer
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Csapat";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Csapat";
             this.Load += new System.EventHandler(this.Csapat_Load);
             this.ResumeLayout(false);

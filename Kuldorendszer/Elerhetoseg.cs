@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using KuldorendszerBLL;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,10 +15,7 @@ namespace Kuldorendszer
 {
     public partial class Elerhetoseg : Form
     {
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-        MySqlDataAdapter adapter;
         DataTable dt = new DataTable();
-        MySqlCommand cmd;
         public Elerhetoseg()
         {
             InitializeComponent();
@@ -52,54 +50,26 @@ namespace Kuldorendszer
                     MessageBox.Show("Az email cím nem érvényes!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            adapter = new MySqlDataAdapter($"SELECT email FROM kuldes.elerhetoseg ;", connection);
-
-            //Külön osztályba szervezni a CRUD műveleteket!
-            //SqlTevekenyseg.sql = "SELECT email FROM kuldes.elerhetoseg ;";
-            //SqlTevekenyseg.cmd = new MySqlCommand(SqlTevekenyseg.sql, SqlTevekenyseg.conn);
-            //SqlTevekenyseg.cmd.Parameters.Clear(); // itt hiba van
-            //SqlTevekenyseg.cmd.Parameters.AddWithValue("", e); // paraméter hozzáadása
-            //DataTable dt =  SqlTevekenyseg.CRUD(SqlTevekenyseg.cmd);
-
-            if (adapter != null)
+            ElerhetosegBLL el = new ElerhetosegBLL();
+            dt = el.GetIdByEmail(txtBEmail.Text.Trim());
+            if (dt.Rows.Count > 0)
             {
-                adapter.Fill(dt);
+                MessageBox.Show("Ez az e-mail cím már használatban van!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                foglalt = true;
             }
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                if (dt.Rows[i][0].ToString() == txtBEmail.Text)
-                {
-                    foglalt = true;
-                    break;
-                }
-            }
+
             if (ervenyes && !foglalt)
             {
-                cmd = new MySqlCommand($"INSERT INTO kuldes.elerhetoseg VALUES (\"{txtBElerhetosegKod.Text}\", " +
-                    $" \"{txtBEmail.Text}\", \"{txtBTelSzam.Text}\") ;", connection);
-                try
+                if (el.AddElerhetoseg(txtBEmail.Text, txtBTelSzam.Text))
                 {
-                    connection.Open();
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
+                    MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Jatekvezeto j = new Jatekvezeto();
+                    j.FillCombos();
+                    this.Close();
                 }
-                catch
-                {
-                    throw new Exception("Hiba");
-                }
-                connection.Close();
-                MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                else
+                    MessageBox.Show("Sikertelen adatfelvitel", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else
-            {
-                MessageBox.Show("Az email cím már foglalt, vagy nem érvényes!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -1,22 +1,13 @@
-﻿using MySql.Data.MySqlClient;
+﻿using KuldorendszerBLL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kuldorendszer
 {
     public partial class Telepules : Form
     {
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-        MySqlDataAdapter adapter;
         DataTable dt = new DataTable();
-        MySqlCommand cmd;
         public Telepules()
         {
             InitializeComponent();
@@ -60,43 +51,27 @@ namespace Kuldorendszer
             else
                 MessageBox.Show("A irányítószám csak 4 jegyű számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            adapter = new MySqlDataAdapter($"SELECT idTelepules FROM kuldes.telepules ;", connection);
-            if (adapter != null)
+            TelepulesBLL tel = new TelepulesBLL();
+            dt = tel.GetIdByTelepulesNev(txtBTelepules.Text.Trim());
+            if (dt.Rows.Count > 0)
             {
-                adapter.Fill(dt);
-            }
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                if (dt.Rows[i][0].ToString() == txtBTelepulesKod.Text) // nem teljes számot vizsgál
-                {
-                    foglalt = true;
-                    break;
-                }
+                MessageBox.Show("Már van ilyen kódú település.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                foglalt = true;
             }
             if (foglalt)
             {
-                MessageBox.Show("Már van ilyen kódú település.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             if (ervenyes && !foglalt)
             {
-
-                cmd = new MySqlCommand($"INSERT INTO kuldes.telepules VALUES ({telepulesKod}, " +
-                    $" @telep, {irSzam} );", connection);
-                try
+                if (tel.AddTelepules(telepulesKod, txtBTelepules.Text, irSzam))
                 {
-                    connection.Open();
-                    cmd.Parameters.AddWithValue("@telep", txtBTelepules.Text.Trim());
-
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
+                    MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                    Jatekvezeto j = new Jatekvezeto();
+                    j.FillCombos();
                 }
-                catch
-                {
-                    throw new Exception("Hiba");
-                }
-                connection.Close();
-                MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                else
+                    MessageBox.Show("Sikertelen adatfelvitel", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

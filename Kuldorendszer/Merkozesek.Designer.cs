@@ -169,6 +169,7 @@ namespace Kuldorendszer
             // 
             // cBoxHazai
             // 
+            this.cBoxHazai.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxHazai.FormattingEnabled = true;
             this.cBoxHazai.Location = new System.Drawing.Point(152, 42);
             this.cBoxHazai.Name = "cBoxHazai";
@@ -178,6 +179,7 @@ namespace Kuldorendszer
             // 
             // cBoxVendeg
             // 
+            this.cBoxVendeg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxVendeg.FormattingEnabled = true;
             this.cBoxVendeg.Location = new System.Drawing.Point(152, 75);
             this.cBoxVendeg.Name = "cBoxVendeg";
@@ -194,6 +196,7 @@ namespace Kuldorendszer
             // 
             // cBoxTelepules
             // 
+            this.cBoxTelepules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxTelepules.FormattingEnabled = true;
             this.cBoxTelepules.Location = new System.Drawing.Point(152, 178);
             this.cBoxTelepules.Name = "cBoxTelepules";
@@ -210,6 +213,7 @@ namespace Kuldorendszer
             // 
             // cBoxOsztaly
             // 
+            this.cBoxOsztaly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxOsztaly.FormattingEnabled = true;
             this.cBoxOsztaly.Location = new System.Drawing.Point(152, 217);
             this.cBoxOsztaly.Name = "cBoxOsztaly";
@@ -220,7 +224,7 @@ namespace Kuldorendszer
             // dateTimePicker
             // 
             this.dateTimePicker.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dateTimePicker.CustomFormat = "yyyy-MM-dd hh-mm";
+            this.dateTimePicker.CustomFormat = "yyyy-MM-dd HH-mm";
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker.Location = new System.Drawing.Point(152, 106);
             this.dateTimePicker.Name = "dateTimePicker";
@@ -257,6 +261,7 @@ namespace Kuldorendszer
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Merkozesek";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mérkőzések felvitele";
             this.Load += new System.EventHandler(this.Merkozesek_Load);
             this.ResumeLayout(false);

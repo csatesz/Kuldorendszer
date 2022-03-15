@@ -51,10 +51,12 @@ namespace Kuldorendszer
             // 
             // cBoxOsztaly
             // 
+            this.cBoxOsztaly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxOsztaly.FormattingEnabled = true;
             this.cBoxOsztaly.Location = new System.Drawing.Point(158, 222);
             this.cBoxOsztaly.Name = "cBoxOsztaly";
             this.cBoxOsztaly.Size = new System.Drawing.Size(121, 21);
+            this.cBoxOsztaly.Sorted = true;
             this.cBoxOsztaly.TabIndex = 23;
             this.cBoxOsztaly.SelectedIndexChanged += new System.EventHandler(this.cBoxOsztaly_SelectedIndexChanged);
             // 
@@ -68,19 +70,22 @@ namespace Kuldorendszer
             // 
             // cBoxTelepules
             // 
-            this.cBoxTelepules.FormattingEnabled = true;
+            this.cBoxTelepules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxTelepules.Location = new System.Drawing.Point(158, 144);
             this.cBoxTelepules.Name = "cBoxTelepules";
             this.cBoxTelepules.Size = new System.Drawing.Size(122, 21);
+            this.cBoxTelepules.Sorted = true;
             this.cBoxTelepules.TabIndex = 21;
             this.cBoxTelepules.SelectedIndexChanged += new System.EventHandler(this.cBoxTelepules_SelectedIndexChanged);
             // 
             // cBoxElerhetoseg
             // 
+            this.cBoxElerhetoseg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxElerhetoseg.FormattingEnabled = true;
             this.cBoxElerhetoseg.Location = new System.Drawing.Point(158, 97);
             this.cBoxElerhetoseg.Name = "cBoxElerhetoseg";
             this.cBoxElerhetoseg.Size = new System.Drawing.Size(121, 21);
+            this.cBoxElerhetoseg.Sorted = true;
             this.cBoxElerhetoseg.TabIndex = 15;
             this.cBoxElerhetoseg.SelectedIndexChanged += new System.EventHandler(this.cBoxElerhetoseg_SelectedIndexChanged);
             // 

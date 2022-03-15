@@ -290,7 +290,6 @@ namespace Kuldorendszer
             this.Name = "Admin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin";
-            this.Load += new System.EventHandler(this.Admin_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dGridAdmin)).EndInit();
             this.ResumeLayout(false);

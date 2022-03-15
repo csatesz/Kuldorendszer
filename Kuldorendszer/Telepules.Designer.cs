@@ -135,6 +135,7 @@ namespace Kuldorendszer
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Telepules";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Telepules";
             this.ResumeLayout(false);
             this.PerformLayout();

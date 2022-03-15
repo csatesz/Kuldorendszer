@@ -40,3 +40,11 @@ C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.Elerhetoseg.resources
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.Osztaly.resources
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.csprojAssemblyReference.cache
+C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\obj\Debug\Kuldorendszer.Statisztika.resources
+C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\KuldorendszerModels.dll
+C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\KuldorendszerModels.pdb
+C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\KuldorendszerBLL.dll
+C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\KuldorendszerDAL.dll
+C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\KuldorendszerBLL.pdb
+C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\KuldorendszerDAL.pdb
+C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\Kuldorendszer\bin\Debug\KuldorendszerDAL.dll.config

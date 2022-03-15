@@ -74,7 +74,6 @@ namespace Kuldorendszer
             this.BtnBelep.Text = "Belép";
             this.BtnBelep.UseVisualStyleBackColor = false;
             this.BtnBelep.Click += new System.EventHandler(this.BtnBelep_Click);
-            this.BtnBelep.MouseEnter += new System.EventHandler(this.BtnBelep_MouseEnter);
             this.BtnBelep.MouseLeave += new System.EventHandler(this.BtnBelep_MouseLeave);
             this.BtnBelep.MouseHover += new System.EventHandler(this.BtnBelep_MouseHover);
             // 
@@ -161,7 +160,6 @@ namespace Kuldorendszer
             this.radioBAdmin.TabIndex = 8;
             this.radioBAdmin.Text = "Admin";
             this.radioBAdmin.UseVisualStyleBackColor = true;
-            this.radioBAdmin.CheckedChanged += new System.EventHandler(this.radioBAdmin_CheckedChanged);
             // 
             // txtBFelh
             // 

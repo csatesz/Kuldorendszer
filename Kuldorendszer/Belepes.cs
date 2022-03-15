@@ -8,13 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KuldorendszerBLL;
 
 namespace Kuldorendszer
 {
     public partial class Belepes : Form
     {
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-        MySqlDataAdapter adapter;
         DataTable dt = new DataTable();
         string user = null;
         string userpass = null;
@@ -40,27 +39,15 @@ namespace Kuldorendszer
         {
             Regisztracio reg = new Regisztracio();
             reg.ShowDialog();
-            //Regisztracio.Show();
         }
 
         private void BtnBelep_Click(object sender, EventArgs e)
         {
+            FelhasznaloBLL felh = new FelhasznaloBLL();
+            dt = felh.SelectUserByName(txtBFelh.Text);
 
-            try
+            if (dt != null)
             {
-                connection.Open();
-                adapter = new MySqlDataAdapter($"SELECT * FROM kuldes.felhasznalo WHERE felhNev = \"{txtBFelh.Text}\" " +
-                    $" AND (torolt = 0 OR torolt is NULL); ", connection);
-            }
-            catch
-            {
-                throw new Exception("Nem csatlakozik az adatbázishoz, indítsa újra a programot!"); // ha nem megy az xampp hiba
-            }
-            connection.Close();
-
-            if (adapter != null)
-            {
-                adapter.Fill(dt);
                 if (dt.Rows.Count != 0)
                 {
                     user = dt.Rows[0][1].ToString();
@@ -95,22 +82,6 @@ namespace Kuldorendszer
             }
             else
                 MessageBox.Show("Téves jelszó vagy felhasználó név!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-        }
-        private void radioBAdmin_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (radioBAdmin.Checked)//itt még vizsgálni kell az emailt is
-            //{
-            //    label3.Visible = true;
-            //    txtBEmail.Visible = true;
-            //    Admin a = new Admin(); 
-            //    a.ShowDialog();
-            //}
-            //else
-            //{
-            //    label3.Visible = false;
-            //    txtBEmail.Visible = false;
-            //}
         }
 
         private void BtnBelep_MouseHover(object sender, EventArgs e)
@@ -121,10 +92,6 @@ namespace Kuldorendszer
         {
             BtnBelep.BackColor = Color.LightSteelBlue;
         }
-        private void BtnBelep_MouseEnter(object sender, EventArgs e)
-        {
-           
-        }
         private void BtnUjFelh_MouseHover(object sender, EventArgs e)
         {
             BtnUjFelh.BackColor = Color.RoyalBlue;
@@ -132,11 +99,6 @@ namespace Kuldorendszer
         private void BtnUjFelh_MouseLeave(object sender, EventArgs e)
         {
             BtnUjFelh.BackColor = Color.LightSteelBlue;
-        }
-
-        private void btnElfJsz_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnElfJsz_MouseHover(object sender, EventArgs e)
@@ -147,6 +109,10 @@ namespace Kuldorendszer
         private void btnElfJsz_MouseLeave(object sender, EventArgs e)
         {
             btnElfJsz.BackColor = Color.LightSteelBlue;
+        }
+        private void btnElfJsz_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

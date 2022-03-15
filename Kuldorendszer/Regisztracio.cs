@@ -1,25 +1,15 @@
-﻿using Kuldorendszer.Models;
-using MySql.Data.MySqlClient;
+﻿using KuldorendszerBLL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kuldorendszer
 {
     public partial class Regisztracio : Form
     {
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-        MySqlDataAdapter adapter;
         DataTable dt = new DataTable();
-        MySqlCommand cmd;
         public Regisztracio()
         {
             try
@@ -34,11 +24,6 @@ namespace Kuldorendszer
 
         private void Regisztracio_Load(object sender, EventArgs e)
         {
-            adapter = new MySqlDataAdapter($"SELECT felhNev FROM kuldes.felhasznalo ;", connection);
-            if (adapter != null)
-            {
-                adapter.Fill(dt);
-            }
         }
         private void BtnReg_Click(object sender, EventArgs e)
         {
@@ -63,63 +48,26 @@ namespace Kuldorendszer
                 }
                 catch (FormatException)
                 {
-                    //txtBRegEmail.Text = "";
                     MessageBox.Show("Az email cím nem érvényes!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                 }
             }
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-             if( dt.Rows[i][0].ToString().Contains(txtBRegFelh.Text.Trim()))
-                {
-                    foglalt = true;
-                    break;
-                }
-            }
+            FelhasznaloBLL felh = new FelhasznaloBLL();
+            dt = felh.SelectUserByName(txtBRegFelh.Text);// ha sikertelen úgy is jó lehet?!
+            if (dt.Rows.Count > 0) foglalt = true;
             if (ervenyes && !foglalt)
             {
-                Felhasznalo felh = new Felhasznalo
+                if (felh.AddUser(txtBRegFelh.Text.Trim(), txtBRegEmail.Text.Trim(),
+                    HashExtension.sha256_hash(txtBRegJelszo.Text), false, chkAszf.Checked))
                 {
-                    felhNev = txtBRegFelh.Text.Trim(),
-                    email = txtBRegEmail.Text.Trim(),
-                    jelszo = HashExtension.sha256_hash(txtBRegJelszo.Text.Trim()) // titkosítani! sha256_hash
-
-                };
-                cmd = new MySqlCommand("INSERT INTO kuldes.felhasznalo (felhNev,email,jelszo,admin,aszf) " +
-                    "VALUES (@felhNev,@email,@jelszo,@admin,@aszf)", connection);
-                try
-                {
-                    connection.Open();
-                    cmd.Parameters.AddWithValue("@felhNev", txtBRegFelh.Text.Trim());
-                    cmd.Parameters.AddWithValue("@email", txtBRegEmail.Text.Trim());
-                    cmd.Parameters.AddWithValue("@jelszo", HashExtension.sha256_hash(txtBRegJelszo.Text));
-                    cmd.Parameters.AddWithValue("@admin", 0);
-                    if (chkAszf.Checked)
-                    {
-                        cmd.Parameters.AddWithValue("@aszf", 1);
-                    }
-                    else 
-                        cmd.Parameters.AddWithValue("@aszf", 0);
-                    //if (radioBAdmin.Checked)
-                    //{
-                    //    cmd.Parameters.AddWithValue("@admin", 1);
-                    //}else
-                    //    cmd.Parameters.AddWithValue("@admin", 0);
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
+                    MessageBox.Show("Sikeres Regisztráció", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
                 }
-                catch
-                {
-                    throw new Exception("Hiba");
-                }
-
-                connection.Close();
-                MessageBox.Show("Sikeres Regisztráció", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                else
+                    MessageBox.Show("Sikertelen Regisztráció", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-            {
                 MessageBox.Show("A felhasználó név már foglalt", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
         }
 
         private void BtnReg_MouseHover(object sender, EventArgs e)
