@@ -1,9 +1,10 @@
-﻿using System;
+﻿using KuldorendszerBLL;
+using KuldorendszerModels;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
-using KuldorendszerBLL;
-using KuldorendszerModels;
 
 namespace Kuldorendszer
 {
@@ -29,7 +30,7 @@ namespace Kuldorendszer
 
         private void Kuldes_Load(object sender, EventArgs e)
         {
-            MerkozesBLL m = new MerkozesBLL();
+            MerkozesService m = new MerkozesService();
             merkozesTable = m.GetAllMerkozes();
             ShowData(pos);
             FillCombo();
@@ -46,8 +47,8 @@ namespace Kuldorendszer
             cBoxVerseny.SelectedItem = "Összes";
             cBoxFordulo.SelectedItem = "Összes";
 
-            OsztalyBLL o = new OsztalyBLL();
-            DataTable dt = o.GetAllMegnevezes();
+            OsztalyService o = new OsztalyService();
+            DataTable dt = o.GetAllOsztalyMegnevezes();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 string osztaly = dt.Rows[i][0].ToString();
@@ -65,35 +66,35 @@ namespace Kuldorendszer
             }
         }
 
-        public void ShowData(int index)
+        public void ShowData(int index) // itt kellene feltölteni a mérkőzést jvvel?!
         {
             int szam = (int)merkozesTable.Rows[index][0];
-            MerkozesBLL m = new MerkozesBLL();
+            MerkozesService m = new MerkozesService();
             DataTable dt = m.GetForduloJvSzamById(szam);
             jvszam = Int32.Parse(merkozesTable.Rows[index][3].ToString()); // Jv-k száma
             txtBFordulo.Text = dt.Rows[0][0].ToString(); // Forduló
 
             //cBoxFordulo.SelectedItem = txtBFordulo.Text;
-            OsztalyBLL o = new OsztalyBLL();
+            OsztalyService o = new OsztalyService();
             DataTable dt1 = o.GetOsztalyById(Int32.Parse(merkozesTable.Rows[index][6].ToString()));
 
             txtBVerseny.Text = dt1.Rows[0][0].ToString(); //verseny
             txtBKod.Text = merkozesTable.Rows[index][0].ToString(); // mérkőzés kódja
             txtBDatum.Text = merkozesTable.Rows[index][4].ToString(); // Mérkőzés dátuma
 
-            CsapatBLL cs = new CsapatBLL();
+            CsapatService cs = new CsapatService();
             DataTable dt2 = cs.GetCsapatById(Int32.Parse(merkozesTable.Rows[index][1].ToString()));
             txtBHazai.Text = dt2.Rows[0][0].ToString(); // hazai csapat ID
 
             DataTable dt3 = cs.GetCsapatById(Int32.Parse(merkozesTable.Rows[index][2].ToString()));
             txtBVendeg.Text = dt3.Rows[0][0].ToString();// vendég csapat ID
 
-            TelepulesBLL t = new TelepulesBLL();
+            TelepulesService t = new TelepulesService();
             DataTable dt4 = t.GetTelepulesById(Int32.Parse(merkozesTable.Rows[index][5].ToString()));
 
             txtBHely.Text = dt4.Rows[0][0].ToString();// Hol? idTelepules -> 
 
-            JatekvezetoBLL j = new JatekvezetoBLL();
+            JatekvezetoService j = new JatekvezetoService();
             DataTable dt5 = j.GetJatekvezetoNevIdByMerkozesKod(Int32.Parse(merkozesTable.Rows[index][0].ToString()), "jvKod");
             if (dt5.Rows.Count != 0)
             {
@@ -172,7 +173,7 @@ namespace Kuldorendszer
         private void VersenyForduloValt()
         {
             merkozesTable.Clear();
-            MerkozesBLL m = new MerkozesBLL();
+            MerkozesService m = new MerkozesService();
 
             if (cBoxVerseny.SelectedIndex <= 0 && cBoxFordulo.SelectedIndex <= 0)
             {
@@ -236,7 +237,7 @@ namespace Kuldorendszer
 
         private void btnModosit_Click(object sender, EventArgs e)
         {
-            cBoxJv.Visible = cBoxAssz1.Visible = cBoxAssz2.Visible = btnVegleg.Visible = true;
+            chkBoxJV.Visible = cBoxJv.Visible = cBoxAssz1.Visible = cBoxAssz2.Visible = btnVegleg.Visible = true;
             dataGridView1.Enabled = lBMerkozesek.Enabled = cBoxFordulo.Enabled = cBoxVerseny.Enabled = btnKuldes.Enabled = btnStat.Enabled = btnElozo.Enabled = btnFirst.Enabled = btnKovetkezo.Enabled = btnLast.Enabled = false;
             cBoxJv.Text = txtBJV.Text;
             cBoxAssz1.Text = txtBAssz1.Text; ;
@@ -248,7 +249,7 @@ namespace Kuldorendszer
             cBoxAssz1.Items.Clear();
             cBoxAssz2.Items.Clear();
 
-            JatekvezetoBLL j = new JatekvezetoBLL();
+            JatekvezetoService j = new JatekvezetoService();
             jv = j.GetJatekvezetoByFeladat("játékvezető");
             assz = j.GetJatekvezetoByFeladat("asszisztens");
             //jvszam = (int)merkozesTable.Rows[i][3];
@@ -282,17 +283,16 @@ namespace Kuldorendszer
         private void btnVegleg_Click(object sender, EventArgs e)
         {
             dataGridView1.Enabled = lBMerkozesek.Enabled = cBoxFordulo.Enabled = cBoxVerseny.Enabled = btnStat.Enabled = btnKuldes.Enabled = btnElozo.Enabled = btnFirst.Enabled = btnKovetkezo.Enabled = btnLast.Enabled = true;
-            cBoxJv.Visible = cBoxAssz1.Visible = cBoxAssz2.Visible = btnVegleg.Visible = false;
+            chkBoxJV.Visible = cBoxJv.Visible = cBoxAssz1.Visible = cBoxAssz2.Visible = btnVegleg.Visible = false;
 
             // meg kell nézni, hogy van-e már ilyen kódú mérkőzésen játékvezető - 
             // ha nincs fel kell vinni 
-            KuldesBLL m = new KuldesBLL();
+            KuldesService m = new KuldesService();
             if (txtBJV.Text == "" || txtBJV.Text == null)
             {
                 if (m.AddKuldes(txtBKod.Text, lblJvKod.Text, lblJvKod.Text, lblAssz2Kod.Text, 0))
                 {
                     MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
                 }
                 else
                     MessageBox.Show("Sikertelen adatfelvitel", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -314,60 +314,78 @@ namespace Kuldorendszer
 
         private void btnKuldes_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Biztos elkészíted a küldést?", "Küldés készítés",
+            if (MessageBox.Show("Biztos elkészíti a küldést?", "Küldés készítés",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-            {
-                //ide jön a fő rész küldés készítés
-                //connection.Open();           
-                //MerkozesJvvel(); frissíteni!
+            {// ha nincs jv abban a sorban, akkor kell arra a meccsre jvt, asszisztenst beírni jvszám függvényében
+             //merkozesTable-ba vannak a mérkőzések, merkozesekJvel-ben jv vel!
+
+                for (int i = 0; i < merkozesTable.Rows.Count; i++)// ha nincs ilyen kódú mérkőzésre jv küldeni kell
+                {
+                    //bool exists = merkozesekJvel.Select().ToList()
+                    //    .Exists(row => row["merkozesKod"].ToString() == 
+                    //    merkozesTable.Rows[i][0].ToString());
+
+                    // ha nincs még benne a mérkőzés a merkozesekjvvel-ben és a dátum későbbi
+                    DateTime date = DateTime.Parse(merkozesTable.Rows[i][4].ToString());
+                    if (merkozesekJvel.Rows.IndexOf(merkozesekJvel.AsEnumerable()
+                        .Where(c => c.Field<int>(0) == Int32.Parse(merkozesTable.Rows[i][0].ToString()))
+                        .FirstOrDefault()) < 0 && date > DateTime.Now)
+                    {
+                        KuldesService k = new KuldesService();
+                        if (k.KuldesKeszit(Int32.Parse(merkozesTable.Rows[i][0].ToString()), date, (int)merkozesTable.Rows[i][3]))
+                            MessageBox.Show($"Sikeres  küldés készítés a {merkozesTable.Rows[i][0]} kódú mérkőzésre!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //else
+                        //    MessageBox.Show("Sikertelen küldés készítés!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error); ;//ide jön a fő rész küldés készítés
+                    }
+                }
             }
+            MerkozesJvvel();
             MerkozesKiir();
         }
         public void MerkozesJvvel()
         {
             merkozesekJvel.Clear();
-            KuldesBLL k = new KuldesBLL();
+            KuldesService k = new KuldesService();
             merkozesekJvel = k.GetMerkozesJvvel();
-            /*
-             * Javítani kell ezt a részt!!!
-            */
-            if (merkozesekJvel.Columns.Count <= 5)
+            if (merkozesekJvel.Columns.Count <= 6)
             {
                 merkozesekJvel.Columns.Add("Asszisztens 1", typeof(String));
                 merkozesekJvel.Columns.Add("Asszisztens 2", typeof(String));
             }
-
-            for (int i = 0; i < merkozesekJvel.Rows.Count; i++)
+            int z = 0; int n = 0;
+            for (int i = 0; i < merkozesTable.Rows.Count; i++)
             {
-                DataTable assziszt1 = k.GetJatekvezetoOnKuldesByMerkozesKod(merkozesTable.Rows[i][0].ToString(), "assz1Kod");
-                if (assziszt1.Rows.Count != 0)
+                if ((DateTime)merkozesTable.Rows[i][4] > DateTime.Now)
                 {
-                    merkozesekJvel.Rows[i][5] = assziszt1.Rows[0][0];
+                    DataTable assziszt1 = k.GetJatekvezetoOnKuldesByMerkozesKod(merkozesTable.Rows[i][0].ToString(), "assz1Kod");
+                    if (assziszt1.Rows.Count != 0)
+                    {
+                        merkozesekJvel.Rows[z][6] = assziszt1.Rows[0][0];
+                        z++;
+                    }
+                    assziszt1.Clear();
+                    DataTable assziszt2 = k.GetJatekvezetoOnKuldesByMerkozesKod(merkozesTable.Rows[i][0].ToString(), "assz2Kod");
+                    if (assziszt2.Rows.Count != 0)
+                    {
+                        merkozesekJvel.Rows[n][7] = assziszt2.Rows[0][0];
+                        n++;
+                    }
+                    assziszt2.Clear();
                 }
-                assziszt1.Clear();
-            }
-            for (int i = 0; i < merkozesekJvel.Rows.Count; i++)
-            {
-                DataTable assziszt2 = k.GetJatekvezetoOnKuldesByMerkozesKod(merkozesTable.Rows[i][0].ToString(), "assz2Kod");
-                if (assziszt2.Rows.Count != 0)
-                {
-                    merkozesekJvel.Rows[i][6] = assziszt2.Rows[0][0];
-                }
-                assziszt2.Clear();
             }
             dataGridView1.DataSource = merkozesekJvel;
-            dataGridView1.Columns[0].HeaderText = "Dátum";
-            dataGridView1.Columns[1].HeaderText = "Helyszín";
-            dataGridView1.Columns[2].HeaderText = "Hazai";
-            dataGridView1.Columns[3].HeaderText = "Vendég";
-            dataGridView1.Columns[4].HeaderText = "Játékvezető";
-            //feltoltMerkozesekJvel();
+            dataGridView1.Columns[0].HeaderText = "Kód";
+            dataGridView1.Columns[1].HeaderText = "Dátum";
+            dataGridView1.Columns[2].HeaderText = "Helyszín";
+            dataGridView1.Columns[3].HeaderText = "Hazai";
+            dataGridView1.Columns[4].HeaderText = "Vendég";
+            dataGridView1.Columns[5].HeaderText = "Játékvezető";
         }
 
         public void MerkozesKiir()
         {
             List<ListBoxItems> merkozesek = new List<ListBoxItems>();
-            CsapatBLL cs = new CsapatBLL();
+            CsapatService cs = new CsapatService();
             for (int i = 0; i < merkozesTable.Rows.Count; i++)
             {
                 DataTable hazai = cs.GetCsapatById(Int32.Parse(merkozesTable.Rows[i][1].ToString()));
@@ -375,7 +393,7 @@ namespace Kuldorendszer
                 merkozesek.Add(new ListBoxItems
                 {
                     Kod = (int)merkozesTable.Rows[0][0],
-                    Text = hazai.Rows[0][0].ToString() + "\t- " + vendeg.Rows[0][0].ToString()
+                    Text = hazai.Rows[0][0].ToString() + "\t\t-\t\t" + vendeg.Rows[0][0].ToString()
                 });
             }
             lBMerkozesek.DisplayMember = "Text";
@@ -384,7 +402,7 @@ namespace Kuldorendszer
             lBMerkozesek.Refresh();
             lBMerkozesek.SelectedIndex = pos;
         }
-    
+
         private void btnFirst_Click(object sender, EventArgs e)
         {
             pos = 0;
@@ -399,7 +417,7 @@ namespace Kuldorendszer
 
         private void cBoxJv_SelectedIndexChanged(object sender, EventArgs e)
         {
-            JatekvezetoBLL jv = new JatekvezetoBLL();
+            JatekvezetoService jv = new JatekvezetoService();
             DataTable dt = jv.GetJatekvezetoIdByNev(cBoxJv.SelectedItem.ToString());
             if (dt.Rows.Count != 0)
             {
@@ -409,7 +427,7 @@ namespace Kuldorendszer
 
         private void cBoxAssz1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            JatekvezetoBLL jv = new JatekvezetoBLL();
+            JatekvezetoService jv = new JatekvezetoService();
             DataTable dt = jv.GetJatekvezetoIdByNev(cBoxAssz1.SelectedItem.ToString());
             if (dt.Rows.Count != 0)
             {
@@ -419,7 +437,7 @@ namespace Kuldorendszer
 
         private void cBoxAssz2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            JatekvezetoBLL jv = new JatekvezetoBLL();
+            JatekvezetoService jv = new JatekvezetoService();
             DataTable dt = jv.GetJatekvezetoIdByNev(cBoxAssz2.SelectedItem.ToString());
             if (dt.Rows.Count != 0)
             {

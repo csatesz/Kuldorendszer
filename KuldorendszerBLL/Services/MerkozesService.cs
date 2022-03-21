@@ -1,26 +1,16 @@
-﻿using KuldorendszerDAL;
+﻿using KuldorendszerBLL.Interfaces;
+using KuldorendszerDAL;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
 namespace KuldorendszerBLL
 {
-    public class MerkozesBLL
+    public class MerkozesService: IMerkozesService
     {
         public DataTable GetAllMerkozes()
         {
             string sqlQuery = "SELECT * FROM kuldes.merkozes ORDER BY merkozesKod;";
-            return CRUD.Select(sqlQuery);
-        }
-        public DataTable GetMerkozesSearch(string keres)
-        {
-            string sqlQuery = "SELECT m.merkozesKod, m.merkozesDatum, t.Telepules," +
-                " c.csapatNev, d.csapatNev, o.osztalyMegnevezes  FROM ((((kuldes.merkozes m INNER JOIN " +
-                " kuldes.telepules t ON t.IdTelepules = m.IdTelepules) INNER JOIN kuldes.csapatok c " +
-                " ON c.idCsapat = m.hazaiCsapatId) INNER JOIN kuldes.csapatok d " +
-                " ON d.idCsapat = m.vendegCsapatId) INNER JOIN kuldes.osztaly o " +
-                $" ON o.idOsztaly = m.idOsztaly) WHERE merkozesKod LIKE %{keres}% ;";
-
             return CRUD.Select(sqlQuery);
         }
         public DataTable GetMerkozes()
@@ -34,12 +24,23 @@ namespace KuldorendszerBLL
 
             return CRUD.Select(sqlQuery);
         }
+        public DataTable GetMerkozesSearch(string keres)
+        {
+            string sqlQuery = "SELECT m.merkozesKod, m.merkozesDatum, t.Telepules," +
+                " c.csapatNev, d.csapatNev, o.osztalyMegnevezes  FROM ((((kuldes.merkozes m INNER JOIN " +
+                " kuldes.telepules t ON t.IdTelepules = m.IdTelepules) INNER JOIN kuldes.csapatok c " +
+                " ON c.idCsapat = m.hazaiCsapatId) INNER JOIN kuldes.csapatok d " +
+                " ON d.idCsapat = m.vendegCsapatId) INNER JOIN kuldes.osztaly o " +
+                $" ON o.idOsztaly = m.idOsztaly) WHERE m.merkozesKod LIKE \"%{keres}%\" OR m.merkozesDatum LIKE \"%{keres}%\" ;";
+
+            return CRUD.Select(sqlQuery);
+        }
         public bool ArchiveMerkozes(string id)
         {
             string sqlQuery = $"UPDATE kuldes.merkozes SET torolt = true WHERE merkozesKod = @id;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool UpdateMerkozes(int id, string oszlop, string adat)
         {
@@ -48,7 +49,7 @@ namespace KuldorendszerBLL
             parameters.Add("@id", id);
             parameters.Add("@adat", adat);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool AddMerkozes(int kod, int hazai, int vendeg, int jvSzam, DateTime date,
                     int telep, int osztaly, int fordulo, int torolt)
@@ -67,7 +68,7 @@ namespace KuldorendszerBLL
             parameters.Add("@fordulo", fordulo);
             parameters.Add("@torolt", torolt);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public DataTable GetMerkozesById(int id)
         {

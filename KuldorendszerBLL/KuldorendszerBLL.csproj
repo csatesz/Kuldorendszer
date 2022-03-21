@@ -41,15 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CsapatBLL.cs" />
-    <Compile Include="ElerhetosegBLL.cs" />
-    <Compile Include="FelhasznaloBLL.cs" />
-    <Compile Include="JatekvezetoBLL.cs" />
-    <Compile Include="KuldesBLL.cs" />
-    <Compile Include="MerkozesBLL.cs" />
-    <Compile Include="OsztalyBLL.cs" />
+    <Compile Include="Interfaces\ICsapatService.cs" />
+    <Compile Include="Interfaces\IFelhasznaloService.cs" />
+    <Compile Include="Interfaces\IJatekvezetoService.cs" />
+    <Compile Include="Interfaces\IKuldesService.cs" />
+    <Compile Include="Interfaces\IMerkozesService.cs" />
+    <Compile Include="Interfaces\IOsztalyService.cs" />
+    <Compile Include="Interfaces\ITelepulesService.cs" />
+    <Compile Include="Services\CsapatService.cs" />
+    <Compile Include="Interfaces\IElerhetosegService.cs" />
+    <Compile Include="Services\ElerhetosegService.cs" />
+    <Compile Include="Services\FelhasznaloService.cs" />
+    <Compile Include="Services\JatekvezetoService.cs" />
+    <Compile Include="Services\KuldesService.cs" />
+    <Compile Include="Services\MerkozesService.cs" />
+    <Compile Include="Services\OsztalyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TelepulesBLL.cs" />
+    <Compile Include="Services\TelepulesService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KuldorendszerDAL\KuldorendszerDAL.csproj">
@@ -61,5 +69,6 @@
       <Name>KuldorendszerModels</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

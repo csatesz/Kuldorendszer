@@ -1,14 +1,8 @@
-﻿using MySql.Data.MySqlClient;
+﻿using KuldorendszerBLL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using KuldorendszerBLL;
 
 namespace Kuldorendszer
 {
@@ -43,7 +37,7 @@ namespace Kuldorendszer
 
         private void BtnBelep_Click(object sender, EventArgs e)
         {
-            FelhasznaloBLL felh = new FelhasznaloBLL();
+            FelhasznaloService felh = new FelhasznaloService();
             dt = felh.SelectUserByName(txtBFelh.Text);
 
             if (dt != null)

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using KuldorendszerBLL;
+using System;
 using System.Data;
 using System.Windows.Forms;
-using KuldorendszerBLL;
 
 namespace Kuldorendszer
 {
@@ -27,7 +27,7 @@ namespace Kuldorendszer
         {
             bool ervenyes = false;
             bool foglalt = false;
-            JatekvezetoBLL jv = new JatekvezetoBLL();
+            JatekvezetoService jv = new JatekvezetoService();
 
             if (Int32.TryParse(txtBJvKod.Text, out int jvKod))
             {
@@ -93,21 +93,21 @@ namespace Kuldorendszer
             cBoxFeladat.Items.Add("asszisztens");
             cBoxFeladat.Items.Add("játékvezető");
 
-            OsztalyBLL o = new OsztalyBLL();
-            DataTable dt1 = o.GetAllMegnevezes();
+            OsztalyService o = new OsztalyService();
+            DataTable dt1 = o.GetAllOsztalyMegnevezes();
             for (int i = 0; i < dt1.Rows.Count; i++)
             {
                 string osztaly = dt1.Rows[i][0].ToString();
                 cBoxOsztaly.Items.Add(osztaly);
             }
-            ElerhetosegBLL el = new ElerhetosegBLL();
+            ElerhetosegService el = new ElerhetosegService();
             DataTable dt2 = el.GetAllEmail();
             for (int i = 0; i < dt2.Rows.Count; i++)
             {
                 string nev = dt2.Rows[i][0].ToString();
                 cBoxElerhetoseg.Items.Add(nev);
             }
-            TelepulesBLL t = new TelepulesBLL();
+            TelepulesService t = new TelepulesService();
             DataTable dt3 = t.GetAllTelepules();
             for (int i = 0; i < dt3.Rows.Count; i++)
             {
@@ -125,7 +125,7 @@ namespace Kuldorendszer
             }
             else
             {
-                ElerhetosegBLL el = new ElerhetosegBLL();
+                ElerhetosegService el = new ElerhetosegService();
                 DataTable dt = el.GetIdByEmail(cBoxElerhetoseg.Text);
                 Int32.TryParse(dt.Rows[0][0].ToString(), out elKod);
             }
@@ -140,7 +140,7 @@ namespace Kuldorendszer
             }
             else
             {
-                TelepulesBLL tel = new TelepulesBLL();
+                TelepulesService tel = new TelepulesService();
                 DataTable dt = tel.GetIdByTelepulesNev(cBoxTelepules.SelectedItem.ToString());
                 Int32.TryParse(dt.Rows[0][0].ToString(), out telep);
             }
@@ -148,7 +148,7 @@ namespace Kuldorendszer
 
         private void cBoxOsztaly_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OsztalyBLL o = new OsztalyBLL();
+            OsztalyService o = new OsztalyService();
             DataTable dt = o.GetIdByOsztalyNev(cBoxOsztaly.SelectedItem.ToString());
             Int32.TryParse(dt.Rows[0][0].ToString(), out keret);
         }

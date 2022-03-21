@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KuldorendszerModels
+﻿namespace KuldorendszerModels
 {
-    public class Felhasznalo 
+    public class Felhasznalo
     {
         public int felhKod { get; set; }
         public string felhNev { get; set; }

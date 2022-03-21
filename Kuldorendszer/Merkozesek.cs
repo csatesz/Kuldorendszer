@@ -7,13 +7,7 @@ namespace Kuldorendszer
 {
     public partial class Merkozesek : Form
     {
-        //MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-        //MySqlDataAdapter adapter;
-        DataTable dt = new DataTable();
-        //MySqlCommand cmd;
-        int hazaiId, vendegId, telepId, osztId = 0;
-        //string table = "";
-        //string kod = "";
+        int hazaiId, vendegId, telepId, osztId;
         public Merkozesek()
         {
             InitializeComponent();
@@ -21,37 +15,45 @@ namespace Kuldorendszer
         }
         private void Merkozesek_Load(object sender, EventArgs e)
         {
-            FillCombos();
+            FillOsztalyCombo();
+            FillCsapatCombos();
+            FillTelepulesCombo();
             this.dateTimePicker.Value = DateTime.Now;
         }
-        private void FillCombos()
+        private void FillOsztalyCombo()
         {
-            cBoxHazai.Items.Clear();
-            cBoxVendeg.Items.Clear();
-            cBoxTelepules.Items.Clear();
             cBoxOsztaly.Items.Clear();
-
-            OsztalyBLL o = new OsztalyBLL();
-            DataTable dt1 = o.GetAllMegnevezes(); ;
+            OsztalyService o = new OsztalyService();
+            DataTable dt1 = o.GetAllOsztalyMegnevezes(); ;
             for (int i = 0; i < dt1.Rows.Count; i++)
             {
                 string osztaly = dt1.Rows[i][0].ToString();
                 cBoxOsztaly.Items.Add(osztaly);
             }
-            CsapatBLL cs = new CsapatBLL();
-            DataTable dt2 = cs.GetAllCsapatName();
-            for (int i = 0; i < dt2.Rows.Count; i++)
-            {
-                string nev = dt2.Rows[i][0].ToString();
-                cBoxHazai.Items.Add(nev);
-                cBoxVendeg.Items.Add(nev);
-            }
-            TelepulesBLL t = new TelepulesBLL();
+        }
+        private void FillTelepulesCombo()
+        {
+            cBoxTelepules.Items.Clear();
+            TelepulesService t = new TelepulesService();
             DataTable dt3 = t.GetAllTelepulesName();
             for (int i = 0; i < dt3.Rows.Count; i++)
             {
                 string telepules = dt3.Rows[i][0].ToString();
                 cBoxTelepules.Items.Add(telepules);
+            }
+        }
+        private void FillCsapatCombos()
+        {
+            cBoxHazai.Items.Clear();
+            cBoxVendeg.Items.Clear();
+
+            CsapatService cs = new CsapatService();
+            DataTable dt2 = cs.GetAllCsapatNameByOsztaly(osztId);
+            for (int i = 0; i < dt2.Rows.Count; i++)
+            {
+                string nev = dt2.Rows[i][0].ToString();
+                cBoxHazai.Items.Add(nev);
+                cBoxVendeg.Items.Add(nev);
             }
         }
 
@@ -79,7 +81,10 @@ namespace Kuldorendszer
                 else ervenyes = true;
             }
             else
+            {
                 MessageBox.Show("A mérkőzés kódja csak számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                ervenyes = false;
+            }
 
             if (Int32.TryParse(txtBJvSzam.Text, out int jvSzam))
             {
@@ -105,8 +110,8 @@ namespace Kuldorendszer
             else
                 MessageBox.Show("A forduló csak szám lehet!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            MerkozesBLL m = new MerkozesBLL();
-            dt = m.GetMerkozesById(merkozesKod);
+            MerkozesService m = new MerkozesService();
+            DataTable dt = m.GetMerkozesById(merkozesKod);
             if (dt.Rows.Count > 0)
             {
                 MessageBox.Show("Ez a kód foglalt!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -128,30 +133,31 @@ namespace Kuldorendszer
 
         private void cBoxHazai_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CsapatBLL cs = new CsapatBLL();
-            DataTable dt = cs.GetIdByCsapatName(cBoxHazai.SelectedItem.ToString());
+            CsapatService cs = new CsapatService();
+            DataTable dt = cs.GetIdByCsapatNev(cBoxHazai.SelectedItem.ToString());
             Int32.TryParse(dt.Rows[0][0].ToString(), out hazaiId);
         }
 
         private void cBoxVendeg_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CsapatBLL cs = new CsapatBLL();
-            DataTable dt = cs.GetIdByCsapatName(cBoxVendeg.SelectedItem.ToString());
+            CsapatService cs = new CsapatService();
+            DataTable dt = cs.GetIdByCsapatNev(cBoxVendeg.SelectedItem.ToString());
             Int32.TryParse(dt.Rows[0][0].ToString(), out vendegId);
         }
 
         private void cBoxTelepules_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TelepulesBLL t = new TelepulesBLL();
+            TelepulesService t = new TelepulesService();
             DataTable dt = t.GetIdByTelepulesNev(cBoxTelepules.SelectedItem.ToString());
             Int32.TryParse(dt.Rows[0][0].ToString(), out telepId);
         }
 
         private void cBoxOsztaly_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OsztalyBLL o = new OsztalyBLL();
+            OsztalyService o = new OsztalyService();
             DataTable dt = o.GetIdByOsztalyNev(cBoxOsztaly.SelectedItem.ToString());
             Int32.TryParse(dt.Rows[0][0].ToString(), out osztId);
+            FillCsapatCombos();
         }
     }
 }

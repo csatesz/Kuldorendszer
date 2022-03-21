@@ -51,7 +51,7 @@ namespace Kuldorendszer
             else
                 MessageBox.Show("A irányítószám csak 4 jegyű számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            TelepulesBLL tel = new TelepulesBLL();
+            TelepulesService tel = new TelepulesService();
             dt = tel.GetIdByTelepulesNev(txtBTelepules.Text.Trim());
             if (dt.Rows.Count > 0)
             {

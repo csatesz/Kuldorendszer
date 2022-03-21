@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using KuldorendszerBLL.Interfaces;
 using KuldorendszerDAL;
+using System.Collections.Generic;
+using System.Data;
 
 namespace KuldorendszerBLL
 {
-    public class CsapatBLL
+    public class CsapatService : ICsapatService
     {
-        //DataTable dt = new DataTable();
         public DataTable GetAllCsapat()
         {
             string sqlQuery = "SELECT c.idCsapat, c.csapatnev, c.csapatVezeto, o.osztalyMegnevezes " +
@@ -18,7 +18,8 @@ namespace KuldorendszerBLL
         {
             string sqlQuery = "SELECT c.idCsapat, c.csapatnev, c.csapatVezeto, o.osztalyMegnevezes " +
                 " FROM kuldes.csapatok c INNER JOIN kuldes.osztaly o " +
-                $" ON c.idOsztaly = o.idOsztaly WHERE c.csapatnev LIKE \"%{keres}%\" ;";
+                $" ON c.idOsztaly = o.idOsztaly WHERE c.csapatnev LIKE \"%{keres}%\" " +
+                $" OR c.csapatVezeto LIKE \"%{keres}%\";";
             return CRUD.Select(sqlQuery);
         }
         public DataTable GetCsapatById(int csapatId)
@@ -40,14 +41,14 @@ namespace KuldorendszerBLL
             parameters.Add("@admin", csapatVezeto);
             parameters.Add("@aszf", osztalyId);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool DeleteCsapat(string id)
         {
             string sqlQuery = "DELETE FROM kuldes.csapatok WHERE idCsapat= @id ; ";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
 
         public bool UpdateCsapat(int id, string oszlop, string adat)
@@ -57,20 +58,34 @@ namespace KuldorendszerBLL
             parameters.Add("@id", id);
             parameters.Add("@adat", adat);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public DataTable GetAllCsapatName()
         {
             string sqlQuery = "SELECT csapatnev FROM kuldes.csapatok ;";
             return CRUD.Select(sqlQuery);
         }
-        public DataTable GetIdByCsapatName(string nev)
+        public DataTable GetAllCsapatNameByOsztaly(int idOsztaly)
         {
-            string sqlQuery = "SELECT idCsapat FROM kuldes.csapatok WHERE csapatnev = @csapatnev; ;";
+            if (idOsztaly <= 0)
+            {
+                return GetAllCsapatName();
+            }
+            else
+            {
+                string sqlQuery = "SELECT csapatnev FROM kuldes.csapatok WHERE idOsztaly = @idOsztaly;";
+                Dictionary<string, object> parameters = new Dictionary<string, object>();
+                parameters.Add("@idOsztaly", idOsztaly);
+                return CRUD.Select(sqlQuery, parameters);
+            }
+        }
+        public DataTable GetIdByCsapatNev(string nev)
+        {
+            string sqlQuery = "SELECT idCsapat FROM kuldes.csapatok WHERE csapatNev = @csapatnev ;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@csapatnev", nev);
 
-            return CRUD.Select(sqlQuery);
+            return CRUD.Select(sqlQuery, parameters);
         }
     }
 }

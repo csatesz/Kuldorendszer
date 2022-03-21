@@ -1,24 +1,19 @@
-﻿using MySql.Data.MySqlClient;
+﻿using KuldorendszerBLL;
+using KuldorendszerModels; // ezt ki kell venni innen!
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kuldorendszer
 {
     public partial class Statisztika : Form
     {
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-        MySqlDataAdapter adapter;
-       
         DataTable jv = new DataTable();
         DataTable osztaly = new DataTable();
-        int jvKod, osztKod = 0;
+
+        int jvKod = 0;
+        int osztKod = 0;
         public Statisztika()
         {
             InitializeComponent();
@@ -30,61 +25,71 @@ namespace Kuldorendszer
         private void btnStat_Click(object sender, EventArgs e)
         {
             StatisztikaKiir();
-
         }
         private void FillCombos()
         {
             cBoxJv.Items.Clear();
             cBoxOsztaly.Items.Clear();
-
-            adapter = new MySqlDataAdapter($"SELECT nev FROM kuldes.jatekvezetok ;", connection);
-            adapter.Fill(jv);
+            JatekvezetoService j = new JatekvezetoService();
+            jv = j.GetAllJatekvezeto();// Jv kód és név 
             for (int i = 0; i < jv.Rows.Count; i++)
             {
-                string jvNev = jv.Rows[i][0].ToString();
+                string jvNev = jv.Rows[i][1].ToString();
                 cBoxJv.Items.Add(jvNev);
             }
 
-            adapter = new MySqlDataAdapter($"SELECT osztalyMegnevezes FROM kuldes.osztaly ;", connection);
-            adapter.Fill(osztaly);
-            for (int j = 0; j < osztaly.Rows.Count; j++)
+            OsztalyService o = new OsztalyService();
+            osztaly = o.GetAllOsztalyMegnevezes();
+            for (int k = 0; k < osztaly.Rows.Count; k++)
             {
-                string oszt = osztaly.Rows[j][0].ToString();
+                string oszt = osztaly.Rows[k][0].ToString();
                 cBoxOsztaly.Items.Add(oszt);
             }
+            cBoxJv.SelectedIndex = 0;
         }
 
         public void StatisztikaKiir()
         {
-            //List<ListBoxItems> statisztika = new List<ListBoxItems>();
-            adapter = new MySqlDataAdapter($"SELECT COUNT(k.jvKod OR k.assz1Kod OR k.assz2Kod) FROM kuldes.kuldes k " +
-            //$" INNER JOIN kuldes.merkozes m ON m.merkozesDatum BETWEEN \"{dTPTol.Value}\" AND \"{dTPIg.Value}\") " +
-            $" WHERE k.jvKod = {jvKod} OR k.assz1Kod = {jvKod} OR k.assz2Kod = {jvKod} " +
-            $";", connection); // Ez a lekérdezés még nem jó számolja külön a jvt az asszisztenst 
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            for (int i = 0; i < dt.Rows.Count; i++)
+            List<ListBoxItems> statisztika = new List<ListBoxItems>();
+            KuldesService k = new KuldesService();
+            DataTable dt = k.JatekvezetoOsszesMerkozesStat(jvKod);// Összes mérkőzés - osztKod?            
+            statisztika.Add(new ListBoxItems
             {
-                //statisztika.Add(new ListBoxItems
-                //{
-                //    Kod = jvKod,
-                //    Text = $"{cBoxJv.SelectedItem}:\n-játékvezetés: "+ dt.Rows[i][0].ToString() + "\n-asszisztálás: "
-                //});
-            }
+                Kod = jvKod,
+                Text = $"{cBoxJv.SelectedItem}:"
+            });
+            statisztika.Add(new ListBoxItems
+            {
+                Kod = jvKod,
+                Text = $"- Összes működése: {dt.Rows[0][0]} mérkőzés"
+            });
+
+            DataTable dt1 = k.JatekvezetoJvSzamStat(jvKod);
+            statisztika.Add(new ListBoxItems
+            {
+                Kod = jvKod,
+                Text = $"- Játékvezetés: {dt1.Rows[0][0]} mérkőzés"
+            });
+            DataTable dt2 = k.JatekvezetoAsszisztSzamStat(jvKod);
+            statisztika.Add(new ListBoxItems
+            {
+                Kod = jvKod,
+                Text = $"- Asszisztálás: {dt2.Rows[0][0]} mérkőzés"
+            });
+
             lBStat.DisplayMember = "Text";
             lBStat.ValueMember = "Kod";
-            //lBStat.DataSource = statisztika;
+            lBStat.DataSource = statisztika;
             lBStat.Refresh();
-            //lBStat.SelectedIndex = pos;
+            lBStat.SelectedIndex = -1;
         }
 
         private void cBoxJv_SelectedIndexChanged(object sender, EventArgs e)
         {
-            adapter = new MySqlDataAdapter($"SELECT jvKod  FROM kuldes.jatekvezetok" +
-               $" WHERE nev = \"{cBoxJv.SelectedItem}\"", connection);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            Int32.TryParse(dt.Rows[0][0].ToString(), out jvKod);
+            JatekvezetoService jv = new JatekvezetoService();
+            DataTable dt = jv.GetJatekvezetoIdByNev(cBoxJv.SelectedItem.ToString());
+            if (dt.Rows.Count != 0)
+                Int32.TryParse(dt.Rows[0][0].ToString(), out jvKod);
         }
 
         private void btnBezar_Click(object sender, EventArgs e)
@@ -98,11 +103,41 @@ namespace Kuldorendszer
 
         private void cBoxOsztaly_SelectedIndexChanged(object sender, EventArgs e)
         {
-            adapter = new MySqlDataAdapter($"SELECT idOsztaly FROM kuldes.osztaly" +
-               $" WHERE osztalyMegnevezes = \"{cBoxOsztaly.SelectedItem}\"", connection);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            Int32.TryParse(dt.Rows[0][0].ToString(), out osztKod);
+            OsztalyService o = new OsztalyService();
+            DataTable dt = o.GetIdByOsztalyNev(cBoxOsztaly.SelectedItem.ToString());
+            if (dt.Rows.Count != 0)
+                Int32.TryParse(dt.Rows[0][0].ToString(), out osztKod);
+        }
+
+        private void chkBOsztaly_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBOsztaly.Checked)
+            {
+                cBoxOsztaly.Enabled = true;
+                cBoxOsztaly.SelectedIndex = 0;
+            }
+            else
+            {
+                cBoxOsztaly.Enabled = false;
+                //cBoxOsztaly.SelectedIndex = -1;
+            }
+
+        }
+
+        private void chkBFrom_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBFrom.Checked)
+                dTPTol.Enabled = true;
+            else
+                dTPTol.Enabled = false;
+        }
+
+        private void chkBTo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBTo.Checked)
+                dTPIg.Enabled = true;
+            else
+                dTPIg.Enabled = false;
         }
     }
 }

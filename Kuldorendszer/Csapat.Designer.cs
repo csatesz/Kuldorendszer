@@ -159,8 +159,8 @@ namespace Kuldorendszer
             // 
             // Csapat
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(426, 381);
             this.Controls.Add(this.txtBCsapatvezeto);
             this.Controls.Add(this.cBoxOsztaly);

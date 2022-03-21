@@ -1,14 +1,12 @@
-﻿using KuldorendszerDAL;
+﻿using KuldorendszerBLL.Interfaces;
+using KuldorendszerDAL;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KuldorendszerBLL
 {
-    public class ElerhetosegBLL
+    public class ElerhetosegService : IElerhetosegService
     {
         public DataTable GetAllElerhetoseg()
         {
@@ -33,7 +31,8 @@ namespace KuldorendszerBLL
         }
         public DataTable GetElerhetosegSearch(string keres)
         {
-            string sqlQuery = $"SELECT * FROM kuldes.elerhetoseg WHERE email LIKE \"%{keres}%\" ;";
+            string sqlQuery = $"SELECT * FROM kuldes.elerhetoseg WHERE email LIKE \"%{keres}%\" " +
+                $" OR telefon LIKE \"%{keres}%\" ;";
 
             return CRUD.Select(sqlQuery);
         }
@@ -44,7 +43,7 @@ namespace KuldorendszerBLL
             parameters.Add("@email", email);
             parameters.Add("@telefon", Int32.Parse(telefon));
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool UpdateElerhetoseg(int id, string oszlop, string adat)
         {
@@ -55,7 +54,7 @@ namespace KuldorendszerBLL
                 parameters.Add("@adat", adat);
             else
                 parameters.Add("@adat", Int32.Parse(adat));
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool DeleteElerhetoseg(string id)
         {
@@ -63,7 +62,7 @@ namespace KuldorendszerBLL
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public DataTable GetAllEmail()
         {

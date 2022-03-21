@@ -1,10 +1,11 @@
-﻿using KuldorendszerDAL;
+﻿using KuldorendszerBLL.Interfaces;
+using KuldorendszerDAL;
 using System.Collections.Generic;
 using System.Data;
 
 namespace KuldorendszerBLL
 {
-    public class JatekvezetoBLL
+    public class JatekvezetoService: IJatekvezetoService
     {
         public DataTable GetAllJatekvezeto()
         {
@@ -19,8 +20,8 @@ namespace KuldorendszerBLL
         {
             string sqlQuery = "SELECT j.jvKod, j.nev, j.feladatkor, j.keret, j.minosites, t.Telepules, e.telefon " +
                 " FROM ((kuldes.jatekvezetok j INNER JOIN kuldes.telepules t ON j.idTelepules = t.idTelepules) " +
-                " INNER JOIN kuldes.elerhetoseg e ON e.elerhetosegKod = j.elerhetosegKod) "+
-                $" WHERE nev LIKE \"%{keres}%\" OR feladatkor LIKE \"%{keres}%\";";
+                " INNER JOIN kuldes.elerhetoseg e ON e.elerhetosegKod = j.elerhetosegKod) " +
+                $" WHERE nev LIKE \"%{keres}%\" OR feladatkor LIKE \"%{keres}%\" OR keret LIKE \"%{keres}%\";";
 
             return CRUD.Select(sqlQuery);
         }
@@ -29,7 +30,7 @@ namespace KuldorendszerBLL
             string sqlQuery = $"UPDATE kuldes.jatekvezetok SET torolt = true WHERE jvKod = @id;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool UpdateJatekvezeto(int id, string oszlop, string adat)
         {
@@ -38,10 +39,10 @@ namespace KuldorendszerBLL
             parameters.Add("@id", id);
             parameters.Add("@adat", adat);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool AddJatekvezeto(int jvKod, string nev, int elKod, int telep, string min,
-                    string oszt, string feladat , int torolt)
+                    string oszt, string feladat, int torolt)
         {
             string sqlQuery = "INSERT INTO kuldes.jatekvezetok VALUES(@jvKod, @nev, @elKod, " +
                     " @telep, @min, @oszt,@feladat, @torolt)";
@@ -56,7 +57,7 @@ namespace KuldorendszerBLL
             parameters.Add("@feladat", feladat);
             parameters.Add("@torolt", torolt);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public DataTable GetJatekvezetoById(int id)
         {

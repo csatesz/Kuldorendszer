@@ -44,6 +44,8 @@ namespace Kuldorendszer
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkAszf = new System.Windows.Forms.CheckBox();
+            this.txtBRegEmailUjra = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,7 +101,7 @@ namespace Kuldorendszer
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(-1, 205);
+            this.label4.Location = new System.Drawing.Point(13, 248);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 17);
             this.label4.TabIndex = 16;
@@ -110,11 +112,11 @@ namespace Kuldorendszer
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(82, 148);
+            this.label3.Location = new System.Drawing.Point(57, 148);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 17);
+            this.label3.Size = new System.Drawing.Size(72, 17);
             this.label3.TabIndex = 15;
-            this.label3.Text = "E-mail";
+            this.label3.Text = "E-mail cím";
             // 
             // label2
             // 
@@ -141,11 +143,11 @@ namespace Kuldorendszer
             this.BtnReg.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnReg.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnReg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.BtnReg.Location = new System.Drawing.Point(141, 269);
+            this.BtnReg.Location = new System.Drawing.Point(139, 312);
             this.BtnReg.Name = "BtnReg";
             this.BtnReg.Size = new System.Drawing.Size(130, 25);
             this.BtnReg.TabIndex = 12;
-            this.BtnReg.Text = "Regisztráció";
+            this.BtnReg.Text = "Új felhasználó";
             this.BtnReg.UseVisualStyleBackColor = false;
             this.BtnReg.Click += new System.EventHandler(this.BtnReg_Click);
             this.BtnReg.MouseLeave += new System.EventHandler(this.BtnReg_MouseLeave);
@@ -163,7 +165,7 @@ namespace Kuldorendszer
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(31, 108);
+            this.label5.Location = new System.Drawing.Point(33, 108);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(96, 17);
             this.label5.TabIndex = 22;
@@ -173,7 +175,7 @@ namespace Kuldorendszer
             // 
             this.groupBox1.Controls.Add(this.radioBKuldo);
             this.groupBox1.Controls.Add(this.radioBAdmin);
-            this.groupBox1.Location = new System.Drawing.Point(70, 174);
+            this.groupBox1.Location = new System.Drawing.Point(84, 217);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(75, 75);
             this.groupBox1.TabIndex = 24;
@@ -184,19 +186,39 @@ namespace Kuldorendszer
             // 
             this.chkAszf.AutoSize = true;
             this.chkAszf.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.chkAszf.Location = new System.Drawing.Point(172, 206);
+            this.chkAszf.Location = new System.Drawing.Point(181, 240);
             this.chkAszf.Name = "chkAszf";
             this.chkAszf.Size = new System.Drawing.Size(57, 17);
             this.chkAszf.TabIndex = 19;
             this.chkAszf.Text = "ÁSZF";
             this.chkAszf.UseVisualStyleBackColor = true;
             // 
+            // txtBRegEmailUjra
+            // 
+            this.txtBRegEmailUjra.Location = new System.Drawing.Point(141, 191);
+            this.txtBRegEmailUjra.Multiline = true;
+            this.txtBRegEmailUjra.Name = "txtBRegEmailUjra";
+            this.txtBRegEmailUjra.Size = new System.Drawing.Size(130, 20);
+            this.txtBRegEmailUjra.TabIndex = 26;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label6.Location = new System.Drawing.Point(29, 192);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(100, 17);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "E-mail cím újra";
+            // 
             // Regisztracio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(339, 311);
+            this.ClientSize = new System.Drawing.Size(340, 351);
+            this.Controls.Add(this.txtBRegEmailUjra);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.chkAszf);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtBJelszoUjra);
@@ -240,5 +262,7 @@ namespace Kuldorendszer
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chkAszf;
+        private System.Windows.Forms.TextBox txtBRegEmailUjra;
+        private System.Windows.Forms.Label label6;
     }
 }

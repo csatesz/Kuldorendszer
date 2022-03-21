@@ -1,14 +1,11 @@
-﻿using KuldorendszerDAL;
-using System;
+﻿using KuldorendszerBLL.Interfaces;
+using KuldorendszerDAL;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KuldorendszerBLL
 {
-    public class OsztalyBLL
+    public class OsztalyService: IOsztalyService
     {
         public DataTable GetAllOsztaly()
         {
@@ -30,6 +27,7 @@ namespace KuldorendszerBLL
 
             return CRUD.Select(sqlQuery, parameters);
         }
+
         public DataTable GetIdByOsztalyNev(string nev)
         {
             string sqlQuery = "SELECT idOsztaly FROM kuldes.osztaly WHERE  osztalyMegnevezes = @nev;";
@@ -47,7 +45,7 @@ namespace KuldorendszerBLL
             parameters.Add("@id", id);
             parameters.Add("@nev", nev);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool DeleteOsztaly(string id)
         {
@@ -55,7 +53,7 @@ namespace KuldorendszerBLL
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool UpdateOsztaly(int id, string oszlop, string adat)
         {
@@ -64,11 +62,17 @@ namespace KuldorendszerBLL
             parameters.Add("@id", id);
             parameters.Add("@adat", adat);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
-        public DataTable GetAllMegnevezes()
+        public DataTable GetAllOsztalyMegnevezes()
         {
             string sqlQuery = "SELECT osztalyMegnevezes FROM kuldes.osztaly;";
+
+            return CRUD.Select(sqlQuery);
+        }
+        public DataTable GetAllOsztalyMegnevezesByOsztaly()
+        {
+            string sqlQuery = "SELECT osztalyMegnevezes FROM kuldes.osztaly WHERE ;";
 
             return CRUD.Select(sqlQuery);
         }

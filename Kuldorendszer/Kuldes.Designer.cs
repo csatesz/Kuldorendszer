@@ -107,7 +107,7 @@ namespace Kuldorendszer
             // txtBHazai
             // 
             this.txtBHazai.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtBHazai.Location = new System.Drawing.Point(329, 111);
+            this.txtBHazai.Location = new System.Drawing.Point(373, 111);
             this.txtBHazai.Name = "txtBHazai";
             this.txtBHazai.ReadOnly = true;
             this.txtBHazai.Size = new System.Drawing.Size(131, 20);
@@ -117,7 +117,7 @@ namespace Kuldorendszer
             // 
             this.lblHazai.AutoSize = true;
             this.lblHazai.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblHazai.Location = new System.Drawing.Point(326, 91);
+            this.lblHazai.Location = new System.Drawing.Point(381, 91);
             this.lblHazai.Name = "lblHazai";
             this.lblHazai.Size = new System.Drawing.Size(92, 17);
             this.lblHazai.TabIndex = 30;
@@ -126,7 +126,7 @@ namespace Kuldorendszer
             // txtBVendeg
             // 
             this.txtBVendeg.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtBVendeg.Location = new System.Drawing.Point(487, 111);
+            this.txtBVendeg.Location = new System.Drawing.Point(560, 110);
             this.txtBVendeg.Multiline = true;
             this.txtBVendeg.Name = "txtBVendeg";
             this.txtBVendeg.ReadOnly = true;
@@ -136,7 +136,7 @@ namespace Kuldorendszer
             // txtBDatum
             // 
             this.txtBDatum.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtBDatum.Location = new System.Drawing.Point(171, 111);
+            this.txtBDatum.Location = new System.Drawing.Point(189, 111);
             this.txtBDatum.Name = "txtBDatum";
             this.txtBDatum.ReadOnly = true;
             this.txtBDatum.Size = new System.Drawing.Size(131, 20);
@@ -155,7 +155,7 @@ namespace Kuldorendszer
             // 
             this.lblVendeg.AutoSize = true;
             this.lblVendeg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblVendeg.Location = new System.Drawing.Point(484, 91);
+            this.lblVendeg.Location = new System.Drawing.Point(557, 90);
             this.lblVendeg.Name = "lblVendeg";
             this.lblVendeg.Size = new System.Drawing.Size(105, 17);
             this.lblVendeg.TabIndex = 26;
@@ -165,7 +165,7 @@ namespace Kuldorendszer
             // 
             this.lblDatum.AutoSize = true;
             this.lblDatum.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblDatum.Location = new System.Drawing.Point(168, 91);
+            this.lblDatum.Location = new System.Drawing.Point(186, 91);
             this.lblDatum.Name = "lblDatum";
             this.lblDatum.Size = new System.Drawing.Size(49, 17);
             this.lblDatum.TabIndex = 25;
@@ -203,7 +203,7 @@ namespace Kuldorendszer
             // txtBAssz1
             // 
             this.txtBAssz1.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtBAssz1.Location = new System.Drawing.Point(329, 180);
+            this.txtBAssz1.Location = new System.Drawing.Point(373, 180);
             this.txtBAssz1.Name = "txtBAssz1";
             this.txtBAssz1.ReadOnly = true;
             this.txtBAssz1.Size = new System.Drawing.Size(131, 20);
@@ -213,7 +213,7 @@ namespace Kuldorendszer
             // 
             this.lblAssz1.AutoSize = true;
             this.lblAssz1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblAssz1.Location = new System.Drawing.Point(326, 160);
+            this.lblAssz1.Location = new System.Drawing.Point(370, 160);
             this.lblAssz1.Name = "lblAssz1";
             this.lblAssz1.Size = new System.Drawing.Size(94, 17);
             this.lblAssz1.TabIndex = 38;
@@ -222,7 +222,7 @@ namespace Kuldorendszer
             // txtBAssz2
             // 
             this.txtBAssz2.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtBAssz2.Location = new System.Drawing.Point(487, 180);
+            this.txtBAssz2.Location = new System.Drawing.Point(560, 179);
             this.txtBAssz2.Multiline = true;
             this.txtBAssz2.Name = "txtBAssz2";
             this.txtBAssz2.ReadOnly = true;
@@ -232,7 +232,7 @@ namespace Kuldorendszer
             // txtBJV
             // 
             this.txtBJV.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtBJV.Location = new System.Drawing.Point(171, 180);
+            this.txtBJV.Location = new System.Drawing.Point(189, 180);
             this.txtBJV.Name = "txtBJV";
             this.txtBJV.ReadOnly = true;
             this.txtBJV.Size = new System.Drawing.Size(131, 20);
@@ -242,7 +242,7 @@ namespace Kuldorendszer
             // 
             this.lblAssz2.AutoSize = true;
             this.lblAssz2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblAssz2.Location = new System.Drawing.Point(484, 160);
+            this.lblAssz2.Location = new System.Drawing.Point(557, 159);
             this.lblAssz2.Name = "lblAssz2";
             this.lblAssz2.Size = new System.Drawing.Size(94, 17);
             this.lblAssz2.TabIndex = 35;
@@ -252,7 +252,7 @@ namespace Kuldorendszer
             // 
             this.lblJv.AutoSize = true;
             this.lblJv.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblJv.Location = new System.Drawing.Point(168, 160);
+            this.lblJv.Location = new System.Drawing.Point(186, 160);
             this.lblJv.Name = "lblJv";
             this.lblJv.Size = new System.Drawing.Size(84, 17);
             this.lblJv.TabIndex = 34;
@@ -262,7 +262,7 @@ namespace Kuldorendszer
             // 
             this.lblJvKod.AutoSize = true;
             this.lblJvKod.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblJvKod.Location = new System.Drawing.Point(211, 203);
+            this.lblJvKod.Location = new System.Drawing.Point(229, 203);
             this.lblJvKod.Name = "lblJvKod";
             this.lblJvKod.Size = new System.Drawing.Size(41, 13);
             this.lblJvKod.TabIndex = 42;
@@ -272,7 +272,7 @@ namespace Kuldorendszer
             // 
             this.lblAssz2Kod.AutoSize = true;
             this.lblAssz2Kod.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblAssz2Kod.Location = new System.Drawing.Point(517, 203);
+            this.lblAssz2Kod.Location = new System.Drawing.Point(590, 202);
             this.lblAssz2Kod.Name = "lblAssz2Kod";
             this.lblAssz2Kod.Size = new System.Drawing.Size(59, 13);
             this.lblAssz2Kod.TabIndex = 43;
@@ -282,7 +282,7 @@ namespace Kuldorendszer
             // 
             this.lblAssz1Kod.AutoSize = true;
             this.lblAssz1Kod.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblAssz1Kod.Location = new System.Drawing.Point(359, 203);
+            this.lblAssz1Kod.Location = new System.Drawing.Point(403, 203);
             this.lblAssz1Kod.Name = "lblAssz1Kod";
             this.lblAssz1Kod.Size = new System.Drawing.Size(59, 13);
             this.lblAssz1Kod.TabIndex = 44;
@@ -292,7 +292,7 @@ namespace Kuldorendszer
             // 
             this.lblVerseny.AutoSize = true;
             this.lblVerseny.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblVerseny.Location = new System.Drawing.Point(300, 44);
+            this.lblVerseny.Location = new System.Drawing.Point(311, 44);
             this.lblVerseny.Name = "lblVerseny";
             this.lblVerseny.Size = new System.Drawing.Size(64, 17);
             this.lblVerseny.TabIndex = 45;
@@ -301,7 +301,7 @@ namespace Kuldorendszer
             // txtBFordulo
             // 
             this.txtBFordulo.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtBFordulo.Location = new System.Drawing.Point(241, 35);
+            this.txtBFordulo.Location = new System.Drawing.Point(253, 35);
             this.txtBFordulo.Name = "txtBFordulo";
             this.txtBFordulo.ReadOnly = true;
             this.txtBFordulo.Size = new System.Drawing.Size(46, 20);
@@ -321,7 +321,7 @@ namespace Kuldorendszer
             // btnModosit
             // 
             this.btnModosit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnModosit.Location = new System.Drawing.Point(202, 402);
+            this.btnModosit.Location = new System.Drawing.Point(212, 402);
             this.btnModosit.Name = "btnModosit";
             this.btnModosit.Size = new System.Drawing.Size(100, 47);
             this.btnModosit.TabIndex = 48;
@@ -332,7 +332,7 @@ namespace Kuldorendszer
             // cBoxVerseny
             // 
             this.cBoxVerseny.FormattingEnabled = true;
-            this.cBoxVerseny.Location = new System.Drawing.Point(362, 56);
+            this.cBoxVerseny.Location = new System.Drawing.Point(373, 56);
             this.cBoxVerseny.Name = "cBoxVerseny";
             this.cBoxVerseny.Size = new System.Drawing.Size(116, 21);
             this.cBoxVerseny.TabIndex = 49;
@@ -579,7 +579,7 @@ namespace Kuldorendszer
             // 
             this.btnElozo.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnElozo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnElozo.Location = new System.Drawing.Point(94, 44);
+            this.btnElozo.Location = new System.Drawing.Point(106, 44);
             this.btnElozo.Name = "btnElozo";
             this.btnElozo.Size = new System.Drawing.Size(75, 23);
             this.btnElozo.TabIndex = 51;
@@ -592,7 +592,7 @@ namespace Kuldorendszer
             this.btnKovetkezo.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnKovetkezo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnKovetkezo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
-            this.btnKovetkezo.Location = new System.Drawing.Point(502, 44);
+            this.btnKovetkezo.Location = new System.Drawing.Point(526, 44);
             this.btnKovetkezo.Name = "btnKovetkezo";
             this.btnKovetkezo.Size = new System.Drawing.Size(75, 23);
             this.btnKovetkezo.TabIndex = 52;
@@ -604,7 +604,7 @@ namespace Kuldorendszer
             // 
             this.btnLast.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnLast.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLast.Location = new System.Drawing.Point(583, 44);
+            this.btnLast.Location = new System.Drawing.Point(616, 44);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(75, 23);
             this.btnLast.TabIndex = 53;
@@ -614,21 +614,22 @@ namespace Kuldorendszer
             // 
             // lBMerkozesek
             // 
-            this.lBMerkozesek.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lBMerkozesek.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lBMerkozesek.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lBMerkozesek.FormattingEnabled = true;
             this.lBMerkozesek.ItemHeight = 16;
-            this.lBMerkozesek.Location = new System.Drawing.Point(686, 44);
+            this.lBMerkozesek.Location = new System.Drawing.Point(719, 44);
             this.lBMerkozesek.Name = "lBMerkozesek";
-            this.lBMerkozesek.Size = new System.Drawing.Size(422, 372);
+            this.lBMerkozesek.Size = new System.Drawing.Size(389, 372);
             this.lBMerkozesek.TabIndex = 1;
             this.lBMerkozesek.DoubleClick += new System.EventHandler(this.lBMerkozesek_DoubleClick);
             // 
             // cBoxJv
             // 
             this.cBoxJv.FormattingEnabled = true;
-            this.cBoxJv.Location = new System.Drawing.Point(171, 180);
+            this.cBoxJv.Location = new System.Drawing.Point(189, 180);
             this.cBoxJv.Name = "cBoxJv";
             this.cBoxJv.Size = new System.Drawing.Size(131, 21);
             this.cBoxJv.Sorted = true;
@@ -639,7 +640,7 @@ namespace Kuldorendszer
             // cBoxAssz1
             // 
             this.cBoxAssz1.FormattingEnabled = true;
-            this.cBoxAssz1.Location = new System.Drawing.Point(329, 180);
+            this.cBoxAssz1.Location = new System.Drawing.Point(373, 180);
             this.cBoxAssz1.Name = "cBoxAssz1";
             this.cBoxAssz1.Size = new System.Drawing.Size(131, 21);
             this.cBoxAssz1.Sorted = true;
@@ -650,7 +651,7 @@ namespace Kuldorendszer
             // cBoxAssz2
             // 
             this.cBoxAssz2.FormattingEnabled = true;
-            this.cBoxAssz2.Location = new System.Drawing.Point(487, 180);
+            this.cBoxAssz2.Location = new System.Drawing.Point(560, 179);
             this.cBoxAssz2.Name = "cBoxAssz2";
             this.cBoxAssz2.Size = new System.Drawing.Size(131, 21);
             this.cBoxAssz2.Sorted = true;
@@ -661,7 +662,7 @@ namespace Kuldorendszer
             // btnVegleg
             // 
             this.btnVegleg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnVegleg.Location = new System.Drawing.Point(362, 402);
+            this.btnVegleg.Location = new System.Drawing.Point(386, 402);
             this.btnVegleg.Name = "btnVegleg";
             this.btnVegleg.Size = new System.Drawing.Size(100, 47);
             this.btnVegleg.TabIndex = 57;
@@ -679,7 +680,7 @@ namespace Kuldorendszer
             this.dataGridView1.Location = new System.Drawing.Point(15, 252);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(643, 144);
+            this.dataGridView1.Size = new System.Drawing.Size(676, 144);
             this.dataGridView1.TabIndex = 58;
             this.dataGridView1.TabStop = false;
             // 
@@ -687,7 +688,7 @@ namespace Kuldorendszer
             // 
             this.lblFordulo.AutoSize = true;
             this.lblFordulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblFordulo.Location = new System.Drawing.Point(175, 44);
+            this.lblFordulo.Location = new System.Drawing.Point(187, 44);
             this.lblFordulo.Name = "lblFordulo";
             this.lblFordulo.Size = new System.Drawing.Size(60, 17);
             this.lblFordulo.TabIndex = 59;
@@ -696,7 +697,7 @@ namespace Kuldorendszer
             // cBoxFordulo
             // 
             this.cBoxFordulo.FormattingEnabled = true;
-            this.cBoxFordulo.Location = new System.Drawing.Point(241, 56);
+            this.cBoxFordulo.Location = new System.Drawing.Point(253, 56);
             this.cBoxFordulo.Name = "cBoxFordulo";
             this.cBoxFordulo.Size = new System.Drawing.Size(46, 21);
             this.cBoxFordulo.TabIndex = 60;
@@ -705,7 +706,7 @@ namespace Kuldorendszer
             // txtBVerseny
             // 
             this.txtBVerseny.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtBVerseny.Location = new System.Drawing.Point(362, 35);
+            this.txtBVerseny.Location = new System.Drawing.Point(373, 35);
             this.txtBVerseny.Name = "txtBVerseny";
             this.txtBVerseny.ReadOnly = true;
             this.txtBVerseny.Size = new System.Drawing.Size(116, 20);
@@ -736,7 +737,7 @@ namespace Kuldorendszer
             // btnStat
             // 
             this.btnStat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStat.Location = new System.Drawing.Point(536, 402);
+            this.btnStat.Location = new System.Drawing.Point(560, 402);
             this.btnStat.Name = "btnStat";
             this.btnStat.Size = new System.Drawing.Size(100, 47);
             this.btnStat.TabIndex = 65;
@@ -746,19 +747,19 @@ namespace Kuldorendszer
             // 
             // chkBoxJV
             // 
-            this.chkBoxJV.AutoSize = true;
-            this.chkBoxJV.Location = new System.Drawing.Point(390, 140);
+            this.chkBoxJV.Location = new System.Drawing.Point(463, 139);
             this.chkBoxJV.Name = "chkBoxJV";
             this.chkBoxJV.Size = new System.Drawing.Size(161, 17);
             this.chkBoxJV.TabIndex = 67;
             this.chkBoxJV.Text = "Játékvezetőket is megjelenít";
             this.chkBoxJV.UseVisualStyleBackColor = true;
+            this.chkBoxJV.Visible = false;
             this.chkBoxJV.CheckedChanged += new System.EventHandler(this.chkBoxJV_CheckedChanged);
             // 
             // Kuldes
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1134, 461);

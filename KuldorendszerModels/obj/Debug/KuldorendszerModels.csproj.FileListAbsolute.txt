@@ -1,6 +1,5 @@
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\KuldorendszerModels\bin\Debug\KuldorendszerModels.dll
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\KuldorendszerModels\bin\Debug\KuldorendszerModels.pdb
-C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\KuldorendszerModels\obj\Debug\KuldorendszerModels.csprojAssemblyReference.cache
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\KuldorendszerModels\obj\Debug\KuldorendszerModels.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\KuldorendszerModels\obj\Debug\KuldorendszerModels.dll
 C:\Users\Admin\Documents\PTI\Szakdolgozat\Kuldorendszer\KuldorendszerModels\obj\Debug\KuldorendszerModels.pdb

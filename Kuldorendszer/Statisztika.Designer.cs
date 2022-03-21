@@ -41,19 +41,24 @@ namespace Kuldorendszer
             this.lblTo = new System.Windows.Forms.Label();
             this.btnStat = new System.Windows.Forms.Button();
             this.btnBezar = new System.Windows.Forms.Button();
+            this.chkBFrom = new System.Windows.Forms.CheckBox();
+            this.chkBTo = new System.Windows.Forms.CheckBox();
+            this.chkBOsztaly = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lBStat
             // 
+            this.lBStat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lBStat.FormattingEnabled = true;
+            this.lBStat.ItemHeight = 16;
             this.lBStat.Location = new System.Drawing.Point(408, 12);
             this.lBStat.Name = "lBStat";
-            this.lBStat.Size = new System.Drawing.Size(243, 381);
+            this.lBStat.Size = new System.Drawing.Size(243, 372);
             this.lBStat.TabIndex = 0;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(190, 265);
+            this.textBox1.Location = new System.Drawing.Point(190, 216);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(168, 20);
             this.textBox1.TabIndex = 1;
@@ -64,21 +69,25 @@ namespace Kuldorendszer
             this.cBoxJv.Location = new System.Drawing.Point(190, 28);
             this.cBoxJv.Name = "cBoxJv";
             this.cBoxJv.Size = new System.Drawing.Size(168, 21);
+            this.cBoxJv.Sorted = true;
             this.cBoxJv.TabIndex = 2;
             this.cBoxJv.SelectedIndexChanged += new System.EventHandler(this.cBoxJv_SelectedIndexChanged);
             // 
             // cBoxOsztaly
             // 
+            this.cBoxOsztaly.Enabled = false;
             this.cBoxOsztaly.FormattingEnabled = true;
             this.cBoxOsztaly.Location = new System.Drawing.Point(190, 68);
             this.cBoxOsztaly.Name = "cBoxOsztaly";
             this.cBoxOsztaly.Size = new System.Drawing.Size(168, 21);
+            this.cBoxOsztaly.Sorted = true;
             this.cBoxOsztaly.TabIndex = 3;
             this.cBoxOsztaly.SelectedIndexChanged += new System.EventHandler(this.cBoxOsztaly_SelectedIndexChanged);
             // 
             // dTPTol
             // 
             this.dTPTol.CustomFormat = "yyyy-MM-dd HH-mm";
+            this.dTPTol.Enabled = false;
             this.dTPTol.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dTPTol.Location = new System.Drawing.Point(190, 109);
             this.dTPTol.Name = "dTPTol";
@@ -88,6 +97,7 @@ namespace Kuldorendszer
             // dTPIg
             // 
             this.dTPIg.CustomFormat = "yyyy-MM-dd HH-mm";
+            this.dTPIg.Enabled = false;
             this.dTPIg.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dTPIg.Location = new System.Drawing.Point(190, 148);
             this.dTPIg.Name = "dTPIg";
@@ -98,7 +108,7 @@ namespace Kuldorendszer
             // 
             this.lblJv.Location = new System.Drawing.Point(30, 28);
             this.lblJv.Name = "lblJv";
-            this.lblJv.Size = new System.Drawing.Size(117, 21);
+            this.lblJv.Size = new System.Drawing.Size(117, 20);
             this.lblJv.TabIndex = 0;
             this.lblJv.Text = "Játékvezető neve:";
             // 
@@ -106,7 +116,7 @@ namespace Kuldorendszer
             // 
             this.lblOsztaly.Location = new System.Drawing.Point(30, 68);
             this.lblOsztaly.Name = "lblOsztaly";
-            this.lblOsztaly.Size = new System.Drawing.Size(117, 21);
+            this.lblOsztaly.Size = new System.Drawing.Size(117, 20);
             this.lblOsztaly.TabIndex = 0;
             this.lblOsztaly.Text = "Osztály megnevezés:";
             // 
@@ -128,6 +138,7 @@ namespace Kuldorendszer
             // 
             // btnStat
             // 
+            this.btnStat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnStat.Location = new System.Drawing.Point(33, 310);
             this.btnStat.Name = "btnStat";
             this.btnStat.Size = new System.Drawing.Size(95, 40);
@@ -138,6 +149,7 @@ namespace Kuldorendszer
             // 
             // btnBezar
             // 
+            this.btnBezar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBezar.Location = new System.Drawing.Point(263, 310);
             this.btnBezar.Name = "btnBezar";
             this.btnBezar.Size = new System.Drawing.Size(95, 40);
@@ -146,11 +158,44 @@ namespace Kuldorendszer
             this.btnBezar.UseVisualStyleBackColor = true;
             this.btnBezar.Click += new System.EventHandler(this.btnBezar_Click);
             // 
+            // chkBFrom
+            // 
+            this.chkBFrom.AutoSize = true;
+            this.chkBFrom.Location = new System.Drawing.Point(157, 115);
+            this.chkBFrom.Name = "chkBFrom";
+            this.chkBFrom.Size = new System.Drawing.Size(15, 14);
+            this.chkBFrom.TabIndex = 9;
+            this.chkBFrom.UseVisualStyleBackColor = true;
+            this.chkBFrom.CheckedChanged += new System.EventHandler(this.chkBFrom_CheckedChanged);
+            // 
+            // chkBTo
+            // 
+            this.chkBTo.AutoSize = true;
+            this.chkBTo.Location = new System.Drawing.Point(157, 154);
+            this.chkBTo.Name = "chkBTo";
+            this.chkBTo.Size = new System.Drawing.Size(15, 14);
+            this.chkBTo.TabIndex = 10;
+            this.chkBTo.UseVisualStyleBackColor = true;
+            this.chkBTo.CheckedChanged += new System.EventHandler(this.chkBTo_CheckedChanged);
+            // 
+            // chkBOsztaly
+            // 
+            this.chkBOsztaly.AutoSize = true;
+            this.chkBOsztaly.Location = new System.Drawing.Point(157, 75);
+            this.chkBOsztaly.Name = "chkBOsztaly";
+            this.chkBOsztaly.Size = new System.Drawing.Size(15, 14);
+            this.chkBOsztaly.TabIndex = 11;
+            this.chkBOsztaly.UseVisualStyleBackColor = true;
+            this.chkBOsztaly.CheckedChanged += new System.EventHandler(this.chkBOsztaly_CheckedChanged);
+            // 
             // Statisztika
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(663, 401);
+            this.Controls.Add(this.chkBOsztaly);
+            this.Controls.Add(this.chkBTo);
+            this.Controls.Add(this.chkBFrom);
             this.Controls.Add(this.btnBezar);
             this.Controls.Add(this.btnStat);
             this.Controls.Add(this.lblTo);
@@ -164,6 +209,7 @@ namespace Kuldorendszer
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lBStat);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Statisztika";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -187,5 +233,8 @@ namespace Kuldorendszer
         private System.Windows.Forms.Label lblTo;
         private System.Windows.Forms.Button btnStat;
         private System.Windows.Forms.Button btnBezar;
+        private System.Windows.Forms.CheckBox chkBFrom;
+        private System.Windows.Forms.CheckBox chkBTo;
+        private System.Windows.Forms.CheckBox chkBOsztaly;
     }
 }

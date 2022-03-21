@@ -1,13 +1,6 @@
 ﻿using KuldorendszerBLL;
-using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kuldorendszer
@@ -45,7 +38,7 @@ namespace Kuldorendszer
             }
             else
                 MessageBox.Show("Az osztály kódja csak számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            OsztalyBLL oszt = new OsztalyBLL();
+            OsztalyService oszt = new OsztalyService();
             dt = oszt.GetOsztalyById(osztalyKod);
             if (dt.Rows.Count > 0)
             {

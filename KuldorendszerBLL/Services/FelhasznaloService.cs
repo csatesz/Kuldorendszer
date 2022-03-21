@@ -1,13 +1,11 @@
-﻿using System;
+﻿using KuldorendszerBLL.Interfaces;
+using KuldorendszerDAL;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using KuldorendszerDAL;
-using KuldorendszerModels;
 
 namespace KuldorendszerBLL
 {
-    public class FelhasznaloBLL
+    public class FelhasznaloService: IFelhasznaloService
     {
         //DataTable dt = new DataTable();
         public DataTable SelectUserByName(string nev)
@@ -22,11 +20,9 @@ namespace KuldorendszerBLL
             return CRUD.Select(sqlQuery, parameters);
         }
         public DataTable GetAllUser()
-        { //try catch?
-          //Felhasznalo felh = new Felhasznalo();
-          //Database db = InitializeDatabase();
+        { 
             string sqlQuery = $"SELECT felhKod, felhNev, email, admin, aszf, torolt FROM kuldes.felhasznalo ;";
-                //" FROM kuldes.felhasznalo WHERE torolt = 0 OR torolt is NULL); ";
+            //" FROM kuldes.felhasznalo WHERE torolt = 0 OR torolt is NULL); ";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
 
             return CRUD.Select(sqlQuery, parameters);
@@ -43,13 +39,13 @@ namespace KuldorendszerBLL
             parameters.Add("@admin", admin);
             parameters.Add("@aszf", aszf);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
 
         public DataTable GetfelhasznaloSearch(string keres)
         {
-            string sqlQuery = $"SELECT * FROM kuldes.felhasznalo WHERE felhNev LIKE \"%{keres}%\" " +
-                $"OR email LIKE \"%{keres}%\";";
+            string sqlQuery = $"SELECT felhKod, felhNev, email, admin, aszf, torolt FROM kuldes.felhasznalo WHERE " +
+                $" felhNev LIKE \"%{keres}%\" OR email LIKE \"%{keres}%\";";
 
             return CRUD.Select(sqlQuery);
         }
@@ -58,7 +54,7 @@ namespace KuldorendszerBLL
             string sqlQuery = $"UPDATE kuldes.felhasznalo SET torolt = true WHERE felhKod = @id;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool UpdateFelhasznalo(int id, string oszlop, string adat)
         {
@@ -67,7 +63,7 @@ namespace KuldorendszerBLL
             parameters.Add("@id", id);
             parameters.Add("@adat", adat);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         //private Database InitializeDatabase()
         //{

@@ -52,9 +52,16 @@ namespace Kuldorendszer
 
                 }
             }
-            FelhasznaloBLL felh = new FelhasznaloBLL();
+            if (txtBRegEmailUjra.Text.Trim() != txtBRegEmail.Text.Trim())
+            {
+                MessageBox.Show("Az email címek nem egyeznek!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ervenyes = false;
+            }
+
+            FelhasznaloService felh = new FelhasznaloService();
             dt = felh.SelectUserByName(txtBRegFelh.Text);// ha sikertelen úgy is jó lehet?!
             if (dt.Rows.Count > 0) foglalt = true;
+
             if (ervenyes && !foglalt)
             {
                 if (felh.AddUser(txtBRegFelh.Text.Trim(), txtBRegEmail.Text.Trim(),

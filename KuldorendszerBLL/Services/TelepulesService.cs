@@ -1,14 +1,11 @@
-﻿using KuldorendszerDAL;
-using System;
+﻿using KuldorendszerBLL.Interfaces;
+using KuldorendszerDAL;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KuldorendszerBLL
 {
-    public class TelepulesBLL
+    public class TelepulesService : ITelepulesService
     {
         public DataTable GetAllTelepules()
         {
@@ -18,7 +15,8 @@ namespace KuldorendszerBLL
         }
         public DataTable GetAllTelepulesSearch(string keres)
         {
-            string sqlQuery = $"SELECT * FROM kuldes.telepules WHERE Telepules LIKE \"%{keres}%\"";
+            string sqlQuery = $"SELECT * FROM kuldes.telepules WHERE Telepules LIKE \"%{keres}%\"" +
+                $" OR iranyitoszam LIKE \"%{keres}%\" ";
 
             return CRUD.Select(sqlQuery);
         }
@@ -47,7 +45,7 @@ namespace KuldorendszerBLL
             parameters.Add("@telepules", telepules);
             parameters.Add("@irsz", irsz);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool DeleteTelepules(string id)
         {
@@ -55,7 +53,7 @@ namespace KuldorendszerBLL
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public bool UpdateTelepules(int id, string oszlop, string adat)
         {
@@ -64,7 +62,7 @@ namespace KuldorendszerBLL
             parameters.Add("@id", id);
             parameters.Add("@adat", adat);
 
-            return CRUD.InsertUpdateDelete(sqlQuery, parameters, false);
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
         public DataTable GetAllTelepulesName()
         {

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using KuldorendszerBLL;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using KuldorendszerBLL;
 
 namespace Kuldorendszer
 {
@@ -16,8 +16,10 @@ namespace Kuldorendszer
         DataTable osztaly = new DataTable();
         DataTable elerhetoseg = new DataTable();
 
-        public string table = null;
-        private string kod = "";
+        private string table = null;
+#pragma warning disable CS0414 // The field 'Admin.kod' is assigned but its value is never used
+        private string kod = null;
+#pragma warning restore CS0414 // The field 'Admin.kod' is assigned but its value is never used
         private string id = "";
         public Admin()
         {
@@ -31,7 +33,7 @@ namespace Kuldorendszer
             textBKeres.Text = "";
             felhTable.Clear();
             this.Text = "Felhasználók";
-            FelhasznaloBLL felh = new FelhasznaloBLL();
+            FelhasznaloService felh = new FelhasznaloService();
             felhTable = felh.GetAllUser();
 
             dGridAdmin.DataSource = felhTable;
@@ -51,7 +53,7 @@ namespace Kuldorendszer
             textBKeres.Text = "";
             merkozesek.Clear();
             this.Text = "Mérkőzések";
-            MerkozesBLL m = new MerkozesBLL();
+            MerkozesService m = new MerkozesService();
             merkozesek = m.GetMerkozes();
 
             dGridAdmin.DataSource = merkozesek;
@@ -72,7 +74,7 @@ namespace Kuldorendszer
             textBKeres.Text = "";
             jvTable.Clear();
             this.Text = "Játékvezetők";
-            JatekvezetoBLL jv = new JatekvezetoBLL();
+            JatekvezetoService jv = new JatekvezetoService();
             jvTable = jv.GetAllJatekvezeto();
             dGridAdmin.DataSource = jvTable;
             dGridAdmin.Columns[0].HeaderText = "JV Kód";
@@ -93,7 +95,7 @@ namespace Kuldorendszer
             csapatokTable.Clear();
             this.Text = "Csapatok";
 
-            CsapatBLL csapat = new CsapatBLL();
+            CsapatService csapat = new CsapatService();
             csapatokTable = csapat.GetAllCsapat();
             dGridAdmin.DataSource = csapatokTable;
             dGridAdmin.Columns[0].HeaderText = "Azonosító";
@@ -116,37 +118,37 @@ namespace Kuldorendszer
             switch (table)
             {
                 case "csapatok":
-                    CsapatBLL csap = new CsapatBLL();
+                    CsapatService csap = new CsapatService();
                     csapatokTable = csap.GetAllCsapatSearch(textBKeres.Text.Trim());
                     dGridAdmin.DataSource = csapatokTable;
                     break;
                 case "elerhetoseg":
-                    ElerhetosegBLL el = new ElerhetosegBLL();
+                    ElerhetosegService el = new ElerhetosegService();
                     elerhetoseg = el.GetElerhetosegSearch(textBKeres.Text.Trim());
                     dGridAdmin.DataSource = elerhetoseg;
                     break;
                 case "felhasznalo":
-                    FelhasznaloBLL fel = new FelhasznaloBLL();
+                    FelhasznaloService fel = new FelhasznaloService();
                     felhTable = fel.GetfelhasznaloSearch(textBKeres.Text.Trim());
                     dGridAdmin.DataSource = felhTable;
                     break;
                 case "jatekvezetok":
-                    JatekvezetoBLL jv = new JatekvezetoBLL();
+                    JatekvezetoService jv = new JatekvezetoService();
                     jvTable = jv.GetJatekvezetoSearch(textBKeres.Text.Trim());
                     dGridAdmin.DataSource = jvTable;
                     break;
                 case "merkozes":
-                    MerkozesBLL m = new MerkozesBLL();
+                    MerkozesService m = new MerkozesService();
                     merkozesek = m.GetMerkozesSearch(textBKeres.Text.Trim());
                     dGridAdmin.DataSource = merkozesek;
                     break;
                 case "telepules":
-                    TelepulesBLL t = new TelepulesBLL();
+                    TelepulesService t = new TelepulesService();
                     telepules = t.GetAllTelepulesSearch(textBKeres.Text.Trim());
                     dGridAdmin.DataSource = telepules;
                     break;
                 case "osztaly":
-                    OsztalyBLL o = new OsztalyBLL();
+                    OsztalyService o = new OsztalyService();
                     osztaly = o.GetAllOsztalySearch(textBKeres.Text.Trim());
                     dGridAdmin.DataSource = osztaly;
                     break;
@@ -199,22 +201,22 @@ namespace Kuldorendszer
                 switch (table)
                 {
                     case "csapatok":
-                        CsapatBLL csap = new CsapatBLL();
+                        CsapatService csap = new CsapatService();
                         if (csap.DeleteCsapat(this.id))
                             MessageBox.Show($"Sikeres {id} azonosítójú csapat törlés!");
                         break;
                     case "elerhetoseg":
-                        ElerhetosegBLL el = new ElerhetosegBLL();
+                        ElerhetosegService el = new ElerhetosegService();
                         if (el.DeleteElerhetoseg(this.id))
                             MessageBox.Show($"Sikeres {id} azonosítójú elérhetőség törlés!");
                         break;
                     case "felhasznalo":
-                        FelhasznaloBLL f = new FelhasznaloBLL();
+                        FelhasznaloService f = new FelhasznaloService();
                         if (f.ArchiveFelhasznalo(this.id))
                             MessageBox.Show($"Sikeres {id} azonosítójú felhasználó archiválás!");
                         break;
                     case "jatekvezetok":
-                        JatekvezetoBLL j = new JatekvezetoBLL();
+                        JatekvezetoService j = new JatekvezetoService();
                         j.ArchiveJatekvezeto(this.id);
                         MessageBox.Show($"Sikeres {id} azonosítójú játékvezető archiválás!");
                         break;
@@ -223,12 +225,12 @@ namespace Kuldorendszer
                         m.Show();
                         break;
                     case "telepules":
-                        TelepulesBLL t = new TelepulesBLL();
+                        TelepulesService t = new TelepulesService();
                         if (t.DeleteTelepules(this.id))
                             MessageBox.Show($"Sikeres {id} azonosítójú telepulés törlés!");
                         break;
                     case "osztaly":
-                        OsztalyBLL o = new OsztalyBLL();
+                        OsztalyService o = new OsztalyService();
                         if (o.DeleteOsztaly(this.id))
                             MessageBox.Show($"Sikeres {id} azonosítójú osztály törlés!");
                         break;
@@ -291,7 +293,7 @@ namespace Kuldorendszer
             textBKeres.Text = "";
             telepules.Clear();
             this.Text = "Települések";
-            TelepulesBLL tel = new TelepulesBLL();
+            TelepulesService tel = new TelepulesService();
             telepules = tel.GetAllTelepules();
             dGridAdmin.DataSource = telepules;
             dGridAdmin.Columns[0].HeaderText = "Azonosító";
@@ -307,7 +309,7 @@ namespace Kuldorendszer
             textBKeres.Text = "";
             osztaly.Clear();
             this.Text = "Osztályok";
-            OsztalyBLL oszt = new OsztalyBLL();
+            OsztalyService oszt = new OsztalyService();
             osztaly = oszt.GetAllOsztaly();
             dGridAdmin.DataSource = osztaly;
             dGridAdmin.Columns[0].HeaderText = "Azonosító";
@@ -321,7 +323,7 @@ namespace Kuldorendszer
         {
             textBKeres.Text = "";
             this.Text = "Elérhetőségek";
-            ElerhetosegBLL el = new ElerhetosegBLL();
+            ElerhetosegService el = new ElerhetosegService();
             elerhetoseg = el.GetAllElerhetoseg();
             dGridAdmin.DataSource = elerhetoseg;
             dGridAdmin.Columns[0].HeaderText = "Azonosító";
@@ -359,37 +361,37 @@ namespace Kuldorendszer
                     switch (table)
                     {
                         case "csapatok":
-                            CsapatBLL csapat = new CsapatBLL();
+                            CsapatService csapat = new CsapatService();
                             if (csapat.UpdateCsapat(Int32.Parse(id), oszlop, szoveg))
                                 MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         case "elerhetoseg":
-                            ElerhetosegBLL el = new ElerhetosegBLL();
+                            ElerhetosegService el = new ElerhetosegService();
                             if (el.UpdateElerhetoseg(Int32.Parse(id), oszlop, szoveg))
                                 MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         case "felhasznalo":
-                            FelhasznaloBLL f = new FelhasznaloBLL();
+                            FelhasznaloService f = new FelhasznaloService();
                             if (f.UpdateFelhasznalo(Int32.Parse(id), oszlop, szoveg))
                                 MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         case "jatekvezetok":
-                            JatekvezetoBLL j = new JatekvezetoBLL();
+                            JatekvezetoService j = new JatekvezetoService();
                             if (j.UpdateJatekvezeto(Int32.Parse(id), oszlop, szoveg))
                                 MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         case "merkozes":
-                            MerkozesBLL m = new MerkozesBLL();
+                            MerkozesService m = new MerkozesService();
                             if (m.UpdateMerkozes(Int32.Parse(id), oszlop, szoveg))
                                 MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         case "telepules":
-                            TelepulesBLL t = new TelepulesBLL();
+                            TelepulesService t = new TelepulesService();
                             if (t.UpdateTelepules(Int32.Parse(id), oszlop, szoveg))
                                 MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         case "osztaly":
-                            OsztalyBLL o = new OsztalyBLL();
+                            OsztalyService o = new OsztalyService();
                             if (o.UpdateOsztaly(Int32.Parse(id), oszlop, szoveg))
                                 MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;

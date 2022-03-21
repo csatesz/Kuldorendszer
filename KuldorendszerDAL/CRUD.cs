@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using KuldorendszerModels;
+using System.Windows.Forms;
 
 namespace KuldorendszerDAL
 {
@@ -19,8 +19,8 @@ namespace KuldorendszerDAL
 
             return conString;
         }
-        public static bool InsertUpdateDelete(string sql, Dictionary<string, object> parameters, bool isProcedure)
-        {// használok én tárolt eljárás (StoredProcedure)?
+        public static bool InsertUpdateDelete(string sql, Dictionary<string, object> parameters)
+        {
             using (MySqlConnection con = new MySqlConnection(getConnectionString()))
             {
                 try
@@ -29,9 +29,6 @@ namespace KuldorendszerDAL
 
                     using (MySqlCommand sqlCommand = new MySqlCommand(sql, con))
                     {
-                        //if (isProcedure) sqlCommand.CommandType = CommandType.StoredProcedure;
-                        //else sqlCommand.CommandType = CommandType.Text;
-
                         // Dictionary-hoz hozzáadni paramétereket
                         foreach (KeyValuePair<string, object> parameter in parameters)
                             sqlCommand.Parameters.Add(new MySqlParameter(parameter.Key, parameter.Value));
@@ -42,7 +39,7 @@ namespace KuldorendszerDAL
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Hiba: "+ e);
+                    //MessageBox.Show("Hiba: " + e.Message, " CRUD művelet sikertelen!");
                     return false;
                 }
             }
@@ -50,7 +47,7 @@ namespace KuldorendszerDAL
         public static DataTable Select(string sql, Dictionary<string, object> parameters = null)
         {
             using (MySqlConnection sqlConnection = new MySqlConnection(getConnectionString()))
-                {
+            {
                 try
                 {
                     sqlConnection.Open();
@@ -61,7 +58,7 @@ namespace KuldorendszerDAL
                         if (parameters != null)
                             foreach (KeyValuePair<string, object> parameter in parameters)
                                 sqlCommand.Parameters.Add(new MySqlParameter(parameter.Key, parameter.Value));
-                       
+
                         using (MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(sqlCommand))
                         {
                             using (DataTable dt = new DataTable())
