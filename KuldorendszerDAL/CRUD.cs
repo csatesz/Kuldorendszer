@@ -37,9 +37,9 @@ namespace KuldorendszerDAL
                         else return false;
                     }
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    //MessageBox.Show("Hiba: " + e.Message, " CRUD művelet sikertelen!");
+                    MessageBox.Show("Hiba: " + ex.Message, " CRUD művelet sikertelen!");
                     return false;
                 }
             }
@@ -71,7 +71,7 @@ namespace KuldorendszerDAL
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("Hiba: " + ex.Message, " CRUD művelet sikertelen!");
+                    MessageBox.Show("Hiba: " + ex.Message, " CRUD művelet sikertelen!");
                     return null;
                 }
             }

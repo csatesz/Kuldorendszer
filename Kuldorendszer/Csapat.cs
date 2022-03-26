@@ -46,10 +46,10 @@ namespace Kuldorendszer
 
             CsapatService csap = new CsapatService();
             DataTable dt = csap.GetCsapatById(csKod);
-            if (dt.Rows.Count > 0) foglalt = true;
-            if (foglalt)
+            if (dt.Rows.Count > 0)
             {
                 MessageBox.Show("Már van ilyen kódú csapat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                foglalt = true;
             }
             if (ervenyes && !foglalt)
             {
@@ -91,6 +91,7 @@ namespace Kuldorendszer
             {
                 Elerhetoseg el = new Elerhetoseg(); //elérhetőség felvitel
                 el.Show();
+                //Delay(2000);
                 FillCombos();
             }
             else

@@ -30,7 +30,6 @@ namespace Kuldorendszer
         private void InitializeComponent()
         {
             this.lBStat = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.cBoxJv = new System.Windows.Forms.ComboBox();
             this.cBoxOsztaly = new System.Windows.Forms.ComboBox();
             this.dTPTol = new System.Windows.Forms.DateTimePicker();
@@ -41,8 +40,7 @@ namespace Kuldorendszer
             this.lblTo = new System.Windows.Forms.Label();
             this.btnStat = new System.Windows.Forms.Button();
             this.btnBezar = new System.Windows.Forms.Button();
-            this.chkBFrom = new System.Windows.Forms.CheckBox();
-            this.chkBTo = new System.Windows.Forms.CheckBox();
+            this.chkBDate = new System.Windows.Forms.CheckBox();
             this.chkBOsztaly = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -55,13 +53,6 @@ namespace Kuldorendszer
             this.lBStat.Name = "lBStat";
             this.lBStat.Size = new System.Drawing.Size(243, 372);
             this.lBStat.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(190, 216);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(168, 20);
-            this.textBox1.TabIndex = 1;
             // 
             // cBoxJv
             // 
@@ -158,30 +149,20 @@ namespace Kuldorendszer
             this.btnBezar.UseVisualStyleBackColor = true;
             this.btnBezar.Click += new System.EventHandler(this.btnBezar_Click);
             // 
-            // chkBFrom
+            // chkBDate
             // 
-            this.chkBFrom.AutoSize = true;
-            this.chkBFrom.Location = new System.Drawing.Point(157, 115);
-            this.chkBFrom.Name = "chkBFrom";
-            this.chkBFrom.Size = new System.Drawing.Size(15, 14);
-            this.chkBFrom.TabIndex = 9;
-            this.chkBFrom.UseVisualStyleBackColor = true;
-            this.chkBFrom.CheckedChanged += new System.EventHandler(this.chkBFrom_CheckedChanged);
-            // 
-            // chkBTo
-            // 
-            this.chkBTo.AutoSize = true;
-            this.chkBTo.Location = new System.Drawing.Point(157, 154);
-            this.chkBTo.Name = "chkBTo";
-            this.chkBTo.Size = new System.Drawing.Size(15, 14);
-            this.chkBTo.TabIndex = 10;
-            this.chkBTo.UseVisualStyleBackColor = true;
-            this.chkBTo.CheckedChanged += new System.EventHandler(this.chkBTo_CheckedChanged);
+            this.chkBDate.AutoSize = true;
+            this.chkBDate.Location = new System.Drawing.Point(157, 132);
+            this.chkBDate.Name = "chkBDate";
+            this.chkBDate.Size = new System.Drawing.Size(15, 14);
+            this.chkBDate.TabIndex = 9;
+            this.chkBDate.UseVisualStyleBackColor = true;
+            this.chkBDate.CheckedChanged += new System.EventHandler(this.chkBDate_CheckedChanged);
             // 
             // chkBOsztaly
             // 
             this.chkBOsztaly.AutoSize = true;
-            this.chkBOsztaly.Location = new System.Drawing.Point(157, 75);
+            this.chkBOsztaly.Location = new System.Drawing.Point(157, 72);
             this.chkBOsztaly.Name = "chkBOsztaly";
             this.chkBOsztaly.Size = new System.Drawing.Size(15, 14);
             this.chkBOsztaly.TabIndex = 11;
@@ -194,8 +175,7 @@ namespace Kuldorendszer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(663, 401);
             this.Controls.Add(this.chkBOsztaly);
-            this.Controls.Add(this.chkBTo);
-            this.Controls.Add(this.chkBFrom);
+            this.Controls.Add(this.chkBDate);
             this.Controls.Add(this.btnBezar);
             this.Controls.Add(this.btnStat);
             this.Controls.Add(this.lblTo);
@@ -206,7 +186,6 @@ namespace Kuldorendszer
             this.Controls.Add(this.dTPTol);
             this.Controls.Add(this.cBoxOsztaly);
             this.Controls.Add(this.cBoxJv);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lBStat);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -222,7 +201,6 @@ namespace Kuldorendszer
         #endregion
 
         private System.Windows.Forms.ListBox lBStat;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox cBoxJv;
         private System.Windows.Forms.ComboBox cBoxOsztaly;
         private System.Windows.Forms.DateTimePicker dTPTol;
@@ -233,8 +211,7 @@ namespace Kuldorendszer
         private System.Windows.Forms.Label lblTo;
         private System.Windows.Forms.Button btnStat;
         private System.Windows.Forms.Button btnBezar;
-        private System.Windows.Forms.CheckBox chkBFrom;
-        private System.Windows.Forms.CheckBox chkBTo;
+        private System.Windows.Forms.CheckBox chkBDate;
         private System.Windows.Forms.CheckBox chkBOsztaly;
     }
 }

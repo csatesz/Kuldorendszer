@@ -22,5 +22,6 @@ namespace KuldorendszerBLL.Interfaces
         DataTable GetMerkozesByFordulo(string fordulo);
         DataTable GetMerkozesByForduloAndOsztaly(string fordulo, string osztaly);
         DataTable GetMerkozesJvSzamById(int id);
+        DataTable GetMerkozesKodByDate(DateTime date, int interval);
     }
 }

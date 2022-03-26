@@ -11,7 +11,7 @@ namespace Kuldorendszer
     public partial class Kuldes : Form
     {
         DataTable merkozesTable = new DataTable(); //SELECT * FROM kuldes.merkozes
-        DataTable merkozesekJvel = new DataTable();
+        DataTable merkozesekJvel = new DataTable(); // mérkőzések játékvezetővel
         DataTable jv = new DataTable(); // játékvezetők
         DataTable assz = new DataTable(); //asszsiztensek
         int jvszam;
@@ -250,8 +250,8 @@ namespace Kuldorendszer
             cBoxAssz2.Items.Clear();
 
             JatekvezetoService j = new JatekvezetoService();
-            jv = j.GetJatekvezetoByFeladat("játékvezető");
-            assz = j.GetJatekvezetoByFeladat("asszisztens");
+            jv = j.GetJatekvezetoByFeladat("játékvezető");// szabad jvket kellene ide helyezni.
+            assz = j.GetJatekvezetoByFeladat("asszisztens");// szabad asszisztenseket kell ide helyezni.
             //jvszam = (int)merkozesTable.Rows[i][3];
             for (int i = 0; i < jv.Rows.Count; i++)
                 cBoxJv.Items.Add(jv.Rows[i]["nev"].ToString());
@@ -278,31 +278,28 @@ namespace Kuldorendszer
                     cBoxAssz2.Items.Add(assz.Rows[k]["nev"].ToString());
                 }
             }
+            cBoxJv.SelectedItem = txtBJV.Text;
+            cBoxAssz1.SelectedItem = txtBAssz1.Text;
+            cBoxAssz2.SelectedItem = txtBAssz2.Text;
         }
 
         private void btnVegleg_Click(object sender, EventArgs e)
         {
             dataGridView1.Enabled = lBMerkozesek.Enabled = cBoxFordulo.Enabled = cBoxVerseny.Enabled = btnStat.Enabled = btnKuldes.Enabled = btnElozo.Enabled = btnFirst.Enabled = btnKovetkezo.Enabled = btnLast.Enabled = true;
             chkBoxJV.Visible = cBoxJv.Visible = cBoxAssz1.Visible = cBoxAssz2.Visible = btnVegleg.Visible = false;
-
-            // meg kell nézni, hogy van-e már ilyen kódú mérkőzésen játékvezető - 
-            // ha nincs fel kell vinni 
+            // meg kell nézni, hogy van-e már ilyen kódú mérkőzésen játékvezető - ha nincs fel kell vinni 
             KuldesService m = new KuldesService();
             if (txtBJV.Text == "" || txtBJV.Text == null)
             {
                 if (m.AddKuldes(txtBKod.Text, lblJvKod.Text, lblJvKod.Text, lblAssz2Kod.Text, 0))
-                {
                     MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
                 else
                     MessageBox.Show("Sikertelen adatfelvitel", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 if (m.UpdateKuldes(txtBKod.Text, lblJvKod.Text, lblAssz1Kod.Text, lblAssz2Kod.Text, 0))
-                {
                     MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
                 else
                     MessageBox.Show("Sikertelen adatfelvitel", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -314,33 +311,35 @@ namespace Kuldorendszer
 
         private void btnKuldes_Click(object sender, EventArgs e)
         {
+            int db = 0;
             if (MessageBox.Show("Biztos elkészíti a küldést?", "Küldés készítés",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-            {// ha nincs jv abban a sorban, akkor kell arra a meccsre jvt, asszisztenst beírni jvszám függvényében
-             //merkozesTable-ba vannak a mérkőzések, merkozesekJvel-ben jv vel!
-
-                for (int i = 0; i < merkozesTable.Rows.Count; i++)// ha nincs ilyen kódú mérkőzésre jv küldeni kell
+            {//Amennyiben nincs játékvezető ebben a sorban, akkor arra a meccsre jvt, asszisztenst küldeni(beírni) jvszám függvényében
+                for (int i = 0; i < merkozesTable.Rows.Count; i++)
                 {
-                    //bool exists = merkozesekJvel.Select().ToList()
-                    //    .Exists(row => row["merkozesKod"].ToString() == 
-                    //    merkozesTable.Rows[i][0].ToString());
-
-                    // ha nincs még benne a mérkőzés a merkozesekjvvel-ben és a dátum későbbi
                     DateTime date = DateTime.Parse(merkozesTable.Rows[i][4].ToString());
+                    // ha nincs még benne a mérkőzés a merkozesekjvvel-ben és a dátum későbbi
                     if (merkozesekJvel.Rows.IndexOf(merkozesekJvel.AsEnumerable()
                         .Where(c => c.Field<int>(0) == Int32.Parse(merkozesTable.Rows[i][0].ToString()))
                         .FirstOrDefault()) < 0 && date > DateTime.Now)
                     {
+                        db++;
                         KuldesService k = new KuldesService();
-                        if (k.KuldesKeszit(Int32.Parse(merkozesTable.Rows[i][0].ToString()), date, (int)merkozesTable.Rows[i][3]))
+                        if (k.KuldesKeszit(Int32.Parse(merkozesTable.Rows[i][0].ToString()), date,
+                            (int)merkozesTable.Rows[i][3], (int)merkozesTable.Rows[i][6]))
                             MessageBox.Show($"Sikeres  küldés készítés a {merkozesTable.Rows[i][0]} kódú mérkőzésre!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        //else
-                        //    MessageBox.Show("Sikertelen küldés készítés!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error); ;//ide jön a fő rész küldés készítés
+                        else
+                            MessageBox.Show($"Sikertelen küldés készítés a {merkozesTable.Rows[i][0]} kódú mérkőzésre!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
-            MerkozesJvvel();
-            MerkozesKiir();
+            if (db == 0)
+                MessageBox.Show("Nincs olyan mérkőzés, amelyikre küldést kell készíteni!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+            {
+                MerkozesJvvel();
+                MerkozesKiir();
+            }
         }
         public void MerkozesJvvel()
         {
@@ -352,26 +351,17 @@ namespace Kuldorendszer
                 merkozesekJvel.Columns.Add("Asszisztens 1", typeof(String));
                 merkozesekJvel.Columns.Add("Asszisztens 2", typeof(String));
             }
-            int z = 0; int n = 0;
-            for (int i = 0; i < merkozesTable.Rows.Count; i++)
+            for (int i = 0; i < merkozesekJvel.Rows.Count; i++)
             {
-                if ((DateTime)merkozesTable.Rows[i][4] > DateTime.Now)
-                {
-                    DataTable assziszt1 = k.GetJatekvezetoOnKuldesByMerkozesKod(merkozesTable.Rows[i][0].ToString(), "assz1Kod");
-                    if (assziszt1.Rows.Count != 0)
-                    {
-                        merkozesekJvel.Rows[z][6] = assziszt1.Rows[0][0];
-                        z++;
-                    }
-                    assziszt1.Clear();
-                    DataTable assziszt2 = k.GetJatekvezetoOnKuldesByMerkozesKod(merkozesTable.Rows[i][0].ToString(), "assz2Kod");
-                    if (assziszt2.Rows.Count != 0)
-                    {
-                        merkozesekJvel.Rows[n][7] = assziszt2.Rows[0][0];
-                        n++;
-                    }
-                    assziszt2.Clear();
-                }
+                DataTable assziszt1 = k.GetJatekvezetoOnKuldesByMerkozesKod(merkozesekJvel.Rows[i][0].ToString(), "assz1Kod");
+                if (assziszt1.Rows.Count != 0)
+                    merkozesekJvel.Rows[i][6] = assziszt1.Rows[0][0];
+                assziszt1.Clear();
+
+                DataTable assziszt2 = k.GetJatekvezetoOnKuldesByMerkozesKod(merkozesekJvel.Rows[i][0].ToString(), "assz2Kod");
+                if (assziszt2.Rows.Count != 0)
+                    merkozesekJvel.Rows[i][7] = assziszt2.Rows[0][0];
+                assziszt2.Clear();
             }
             dataGridView1.DataSource = merkozesekJvel;
             dataGridView1.Columns[0].HeaderText = "Kód";

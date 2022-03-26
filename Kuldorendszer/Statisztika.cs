@@ -11,9 +11,9 @@ namespace Kuldorendszer
     {
         DataTable jv = new DataTable();
         DataTable osztaly = new DataTable();
-
         int jvKod = 0;
         int osztKod = 0;
+        DateTime dateFrom, dateTo; // statisztika készítés dátum intervalluma
         public Statisztika()
         {
             InitializeComponent();
@@ -33,26 +33,34 @@ namespace Kuldorendszer
             JatekvezetoService j = new JatekvezetoService();
             jv = j.GetAllJatekvezeto();// Jv kód és név 
             for (int i = 0; i < jv.Rows.Count; i++)
-            {
-                string jvNev = jv.Rows[i][1].ToString();
-                cBoxJv.Items.Add(jvNev);
-            }
+                cBoxJv.Items.Add(jv.Rows[i][1].ToString());
 
             OsztalyService o = new OsztalyService();
             osztaly = o.GetAllOsztalyMegnevezes();
             for (int k = 0; k < osztaly.Rows.Count; k++)
-            {
-                string oszt = osztaly.Rows[k][0].ToString();
-                cBoxOsztaly.Items.Add(oszt);
-            }
+                cBoxOsztaly.Items.Add(osztaly.Rows[k][0].ToString());
+
             cBoxJv.SelectedIndex = 0;
         }
 
         public void StatisztikaKiir()
         {
             List<ListBoxItems> statisztika = new List<ListBoxItems>();
+            DataTable dt;
             KuldesService k = new KuldesService();
-            DataTable dt = k.JatekvezetoOsszesMerkozesStat(jvKod);// Összes mérkőzés - osztKod?            
+            if (chkBDate.Checked)
+            {
+                dateFrom = dTPTol.Value; 
+                dateTo = dTPIg.Value;
+            }
+
+            if (chkBOsztaly.Checked) // && chkBDate.Checked dateFrom = dTPTol.Value; dateTo = dTPIg.Value;
+            {// Összes mérkőzés adott osztályból osztKod 
+                dt = k.JatekvezetoOsszesMerkozesStat(jvKod, osztKod);
+            }
+            else
+                dt = k.JatekvezetoOsszesMerkozesStat(jvKod);
+
             statisztika.Add(new ListBoxItems
             {
                 Kod = jvKod,
@@ -119,25 +127,21 @@ namespace Kuldorendszer
             else
             {
                 cBoxOsztaly.Enabled = false;
-                //cBoxOsztaly.SelectedIndex = -1;
             }
-
         }
 
-        private void chkBFrom_CheckedChanged(object sender, EventArgs e)
+        private void chkBDate_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBFrom.Checked)
+            if (chkBDate.Checked)
+            {
                 dTPTol.Enabled = true;
-            else
-                dTPTol.Enabled = false;
-        }
-
-        private void chkBTo_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkBTo.Checked)
                 dTPIg.Enabled = true;
+            }
             else
+            {
+                dTPTol.Enabled = false;
                 dTPIg.Enabled = false;
+            }
         }
     }
 }

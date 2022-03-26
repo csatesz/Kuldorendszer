@@ -106,7 +106,27 @@ namespace Kuldorendszer
         }
         private void btnElfJsz_Click(object sender, EventArgs e)
         {
-
+            FelhasznaloService felh = new FelhasznaloService();
+            dt = felh.SelectUserByName(txtBFelh.Text);
+            string email;
+            if (dt != null)
+            {
+                if (dt.Rows.Count != 0)
+                {
+                    user = dt.Rows[0][1].ToString();
+                    email = dt.Rows[0][2].ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Nincs ilyen felhasználó!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (txtBFelh.Text == user && txtBEmail.Text == email)
+                {
+                    // emailt kell küldeni egy generált jelszóval amennyiben a felhazsnálónak létezik ilyen email cím
+                    MessageBox.Show("Email küldés!");
+                }
+            }
         }
     }
 }

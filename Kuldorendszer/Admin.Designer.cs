@@ -44,7 +44,7 @@ namespace Kuldorendszer
             this.dGridAdmin = new System.Windows.Forms.DataGridView();
             this.textBKeres = new System.Windows.Forms.TextBox();
             this.btnKeres = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblKeresMezo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGridAdmin)).BeginInit();
             this.SuspendLayout();
@@ -262,21 +262,22 @@ namespace Kuldorendszer
             this.btnKeres.MouseLeave += new System.EventHandler(this.btnKeres_MouseLeave);
             this.btnKeres.MouseHover += new System.EventHandler(this.btnKeres_MouseHover);
             // 
-            // label1
+            // lblKeresMezo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(156, 260);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(16, 13);
-            this.label1.TabIndex = 53;
-            this.label1.Text = "...";
+            this.lblKeresMezo.AutoSize = true;
+            this.lblKeresMezo.Location = new System.Drawing.Point(241, 261);
+            this.lblKeresMezo.Name = "lblKeresMezo";
+            this.lblKeresMezo.Size = new System.Drawing.Size(99, 13);
+            this.lblKeresMezo.TabIndex = 53;
+            this.lblKeresMezo.Text = "Keresési feltétel(ek)";
+            this.lblKeresMezo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(819, 479);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblKeresMezo);
             this.Controls.Add(this.btnKeres);
             this.Controls.Add(this.textBKeres);
             this.Controls.Add(this.dGridAdmin);
@@ -311,7 +312,7 @@ namespace Kuldorendszer
         private System.Windows.Forms.DataGridView dGridAdmin;
         private System.Windows.Forms.TextBox textBKeres;
         private System.Windows.Forms.Button btnKeres;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblKeresMezo;
         private System.Windows.Forms.Button btnOsztKarb;
         private System.Windows.Forms.Button btnTelepKarb;
         private System.Windows.Forms.Button btnElerhetKarb;

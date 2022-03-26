@@ -122,6 +122,7 @@ namespace Kuldorendszer
             {
                 Elerhetoseg el = new Elerhetoseg(); //elérhetőség felvitel
                 el.Show();
+                FillCombos();
             }
             else
             {

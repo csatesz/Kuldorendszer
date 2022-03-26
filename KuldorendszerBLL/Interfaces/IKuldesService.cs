@@ -17,7 +17,7 @@ namespace KuldorendszerBLL.Interfaces
         DataTable JatekvezetoJvSzamStat(int id);
         DataTable JatekvezetoAsszisztSzamStat(int id);
         DataTable SzabadJatekvezetok(DateTime date, int interval);
-        bool KuldesKeszit(int kod, DateTime date, int jvszam);
+        bool KuldesKeszit(int kod, DateTime date, int jvszam, int osztalyid);
 
     }
 }

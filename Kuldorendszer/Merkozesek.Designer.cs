@@ -174,6 +174,7 @@ namespace Kuldorendszer
             this.cBoxHazai.Location = new System.Drawing.Point(152, 42);
             this.cBoxHazai.Name = "cBoxHazai";
             this.cBoxHazai.Size = new System.Drawing.Size(121, 21);
+            this.cBoxHazai.Sorted = true;
             this.cBoxHazai.TabIndex = 2;
             this.cBoxHazai.SelectedIndexChanged += new System.EventHandler(this.cBoxHazai_SelectedIndexChanged);
             // 
@@ -184,6 +185,7 @@ namespace Kuldorendszer
             this.cBoxVendeg.Location = new System.Drawing.Point(152, 75);
             this.cBoxVendeg.Name = "cBoxVendeg";
             this.cBoxVendeg.Size = new System.Drawing.Size(121, 21);
+            this.cBoxVendeg.Sorted = true;
             this.cBoxVendeg.TabIndex = 3;
             this.cBoxVendeg.SelectedIndexChanged += new System.EventHandler(this.cBoxVendeg_SelectedIndexChanged);
             // 
@@ -201,6 +203,7 @@ namespace Kuldorendszer
             this.cBoxTelepules.Location = new System.Drawing.Point(152, 178);
             this.cBoxTelepules.Name = "cBoxTelepules";
             this.cBoxTelepules.Size = new System.Drawing.Size(121, 21);
+            this.cBoxTelepules.Sorted = true;
             this.cBoxTelepules.TabIndex = 6;
             this.cBoxTelepules.SelectedIndexChanged += new System.EventHandler(this.cBoxTelepules_SelectedIndexChanged);
             // 
@@ -218,6 +221,7 @@ namespace Kuldorendszer
             this.cBoxOsztaly.Location = new System.Drawing.Point(152, 217);
             this.cBoxOsztaly.Name = "cBoxOsztaly";
             this.cBoxOsztaly.Size = new System.Drawing.Size(121, 21);
+            this.cBoxOsztaly.Sorted = true;
             this.cBoxOsztaly.TabIndex = 7;
             this.cBoxOsztaly.SelectedIndexChanged += new System.EventHandler(this.cBoxOsztaly_SelectedIndexChanged);
             // 

@@ -17,9 +17,7 @@ namespace Kuldorendszer
         DataTable elerhetoseg = new DataTable();
 
         private string table = null;
-#pragma warning disable CS0414 // The field 'Admin.kod' is assigned but its value is never used
         private string kod = null;
-#pragma warning restore CS0414 // The field 'Admin.kod' is assigned but its value is never used
         private string id = "";
         public Admin()
         {
@@ -30,7 +28,7 @@ namespace Kuldorendszer
         }
         private void btnFelhKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = "";
+            textBKeres.Text = ""; lblKeresMezo.Text = "Név";
             felhTable.Clear();
             this.Text = "Felhasználók";
             FelhasznaloService felh = new FelhasznaloService();
@@ -50,7 +48,7 @@ namespace Kuldorendszer
 
         private void btnMerkKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = "";
+            textBKeres.Text = ""; lblKeresMezo.Text = "Kód";
             merkozesek.Clear();
             this.Text = "Mérkőzések";
             MerkozesService m = new MerkozesService();
@@ -71,7 +69,7 @@ namespace Kuldorendszer
 
         private void btnJvKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = "";
+            textBKeres.Text = ""; lblKeresMezo.Text = "Név, feladatkör, keret";
             jvTable.Clear();
             this.Text = "Játékvezetők";
             JatekvezetoService jv = new JatekvezetoService();
@@ -91,7 +89,7 @@ namespace Kuldorendszer
 
         private void btnCsapKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = "";
+            textBKeres.Text = ""; lblKeresMezo.Text = "Csapat név, csapatvezető";
             csapatokTable.Clear();
             this.Text = "Csapatok";
 
@@ -290,7 +288,7 @@ namespace Kuldorendszer
 
         private void btnTelepKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = "";
+            textBKeres.Text = ""; lblKeresMezo.Text = "Település, irányítószám";
             telepules.Clear();
             this.Text = "Települések";
             TelepulesService tel = new TelepulesService();
@@ -306,7 +304,7 @@ namespace Kuldorendszer
 
         private void btnOsztKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = "";
+            textBKeres.Text = ""; lblKeresMezo.Text = "Osztály";
             osztaly.Clear();
             this.Text = "Osztályok";
             OsztalyService oszt = new OsztalyService();
@@ -321,7 +319,7 @@ namespace Kuldorendszer
 
         private void btnElerhetKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = "";
+            textBKeres.Text = ""; lblKeresMezo.Text = "Email, telefonszám";
             this.Text = "Elérhetőségek";
             ElerhetosegService el = new ElerhetosegService();
             elerhetoseg = el.GetAllElerhetoseg();

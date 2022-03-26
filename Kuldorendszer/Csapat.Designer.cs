@@ -57,6 +57,7 @@ namespace Kuldorendszer
             this.cBoxOsztaly.Location = new System.Drawing.Point(149, 224);
             this.cBoxOsztaly.Name = "cBoxOsztaly";
             this.cBoxOsztaly.Size = new System.Drawing.Size(121, 21);
+            this.cBoxOsztaly.Sorted = true;
             this.cBoxOsztaly.TabIndex = 41;
             this.cBoxOsztaly.SelectedIndexChanged += new System.EventHandler(this.cBoxOsztaly_SelectedIndexChanged);
             // 
@@ -73,6 +74,7 @@ namespace Kuldorendszer
             this.cBoxElerhetoseg.Location = new System.Drawing.Point(149, 123);
             this.cBoxElerhetoseg.Name = "cBoxElerhetoseg";
             this.cBoxElerhetoseg.Size = new System.Drawing.Size(121, 21);
+            this.cBoxElerhetoseg.Sorted = true;
             this.cBoxElerhetoseg.TabIndex = 36;
             this.cBoxElerhetoseg.SelectedIndexChanged += new System.EventHandler(this.cBoxElerhetoseg_SelectedIndexChanged);
             // 

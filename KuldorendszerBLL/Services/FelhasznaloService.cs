@@ -23,9 +23,9 @@ namespace KuldorendszerBLL
         { 
             string sqlQuery = $"SELECT felhKod, felhNev, email, admin, aszf, torolt FROM kuldes.felhasznalo ;";
             //" FROM kuldes.felhasznalo WHERE torolt = 0 OR torolt is NULL); ";
-            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            //Dictionary<string, object> parameters = new Dictionary<string, object>();
 
-            return CRUD.Select(sqlQuery, parameters);
+            return CRUD.Select(sqlQuery);
         }
         public bool AddUser(string nev, string email, string jelszo, bool admin, bool aszf)
         {
@@ -65,14 +65,5 @@ namespace KuldorendszerBLL
 
             return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
-        //private Database InitializeDatabase()
-        //{
-        //    Database db = new Database();
-        //    db.UserName = "sa";
-        //    db.Password = "server2008";
-        //    db.ServerName = "(local)";
-        //    db.DatabaseName = "DebopamDB";
-        //    return db;
-        //}
     }
 }

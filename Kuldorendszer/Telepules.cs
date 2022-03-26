@@ -52,15 +52,13 @@ namespace Kuldorendszer
                 MessageBox.Show("A irányítószám csak 4 jegyű számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             TelepulesService tel = new TelepulesService();
-            dt = tel.GetIdByTelepulesNev(txtBTelepules.Text.Trim());
+            dt = tel.GetTelepulesById(telepulesKod);
             if (dt.Rows.Count > 0)
-            {
+            {              
                 MessageBox.Show("Már van ilyen kódú település.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 foglalt = true;
             }
-            if (foglalt)
-            {
-            }
+
             if (ervenyes && !foglalt)
             {
                 if (tel.AddTelepules(telepulesKod, txtBTelepules.Text, irSzam))

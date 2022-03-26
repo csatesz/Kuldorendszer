@@ -321,7 +321,7 @@ namespace Kuldorendszer
             // btnModosit
             // 
             this.btnModosit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnModosit.Location = new System.Drawing.Point(212, 402);
+            this.btnModosit.Location = new System.Drawing.Point(232, 402);
             this.btnModosit.Name = "btnModosit";
             this.btnModosit.Size = new System.Drawing.Size(100, 47);
             this.btnModosit.TabIndex = 48;
@@ -331,6 +331,7 @@ namespace Kuldorendszer
             // 
             // cBoxVerseny
             // 
+            this.cBoxVerseny.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxVerseny.FormattingEnabled = true;
             this.cBoxVerseny.Location = new System.Drawing.Point(373, 56);
             this.cBoxVerseny.Name = "cBoxVerseny";
@@ -620,14 +621,15 @@ namespace Kuldorendszer
             this.lBMerkozesek.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lBMerkozesek.FormattingEnabled = true;
             this.lBMerkozesek.ItemHeight = 16;
-            this.lBMerkozesek.Location = new System.Drawing.Point(719, 44);
+            this.lBMerkozesek.Location = new System.Drawing.Point(755, 44);
             this.lBMerkozesek.Name = "lBMerkozesek";
-            this.lBMerkozesek.Size = new System.Drawing.Size(389, 372);
+            this.lBMerkozesek.Size = new System.Drawing.Size(353, 372);
             this.lBMerkozesek.TabIndex = 1;
             this.lBMerkozesek.DoubleClick += new System.EventHandler(this.lBMerkozesek_DoubleClick);
             // 
             // cBoxJv
             // 
+            this.cBoxJv.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxJv.FormattingEnabled = true;
             this.cBoxJv.Location = new System.Drawing.Point(189, 180);
             this.cBoxJv.Name = "cBoxJv";
@@ -639,6 +641,7 @@ namespace Kuldorendszer
             // 
             // cBoxAssz1
             // 
+            this.cBoxAssz1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxAssz1.FormattingEnabled = true;
             this.cBoxAssz1.Location = new System.Drawing.Point(373, 180);
             this.cBoxAssz1.Name = "cBoxAssz1";
@@ -650,6 +653,7 @@ namespace Kuldorendszer
             // 
             // cBoxAssz2
             // 
+            this.cBoxAssz2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxAssz2.FormattingEnabled = true;
             this.cBoxAssz2.Location = new System.Drawing.Point(560, 179);
             this.cBoxAssz2.Name = "cBoxAssz2";
@@ -662,7 +666,7 @@ namespace Kuldorendszer
             // btnVegleg
             // 
             this.btnVegleg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnVegleg.Location = new System.Drawing.Point(386, 402);
+            this.btnVegleg.Location = new System.Drawing.Point(428, 402);
             this.btnVegleg.Name = "btnVegleg";
             this.btnVegleg.Size = new System.Drawing.Size(100, 47);
             this.btnVegleg.TabIndex = 57;
@@ -680,7 +684,7 @@ namespace Kuldorendszer
             this.dataGridView1.Location = new System.Drawing.Point(15, 252);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(676, 144);
+            this.dataGridView1.Size = new System.Drawing.Size(716, 144);
             this.dataGridView1.TabIndex = 58;
             this.dataGridView1.TabStop = false;
             // 
@@ -696,6 +700,7 @@ namespace Kuldorendszer
             // 
             // cBoxFordulo
             // 
+            this.cBoxFordulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxFordulo.FormattingEnabled = true;
             this.cBoxFordulo.Location = new System.Drawing.Point(253, 56);
             this.cBoxFordulo.Name = "cBoxFordulo";
@@ -737,7 +742,7 @@ namespace Kuldorendszer
             // btnStat
             // 
             this.btnStat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStat.Location = new System.Drawing.Point(560, 402);
+            this.btnStat.Location = new System.Drawing.Point(616, 402);
             this.btnStat.Name = "btnStat";
             this.btnStat.Size = new System.Drawing.Size(100, 47);
             this.btnStat.TabIndex = 65;
@@ -747,7 +752,7 @@ namespace Kuldorendszer
             // 
             // chkBoxJV
             // 
-            this.chkBoxJV.Location = new System.Drawing.Point(463, 139);
+            this.chkBoxJV.Location = new System.Drawing.Point(463, 225);
             this.chkBoxJV.Name = "chkBoxJV";
             this.chkBoxJV.Size = new System.Drawing.Size(161, 17);
             this.chkBoxJV.TabIndex = 67;

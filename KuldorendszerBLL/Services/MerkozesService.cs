@@ -6,7 +6,7 @@ using System.Data;
 
 namespace KuldorendszerBLL
 {
-    public class MerkozesService: IMerkozesService
+    public class MerkozesService : IMerkozesService
     {
         public DataTable GetAllMerkozes()
         {
@@ -23,6 +23,16 @@ namespace KuldorendszerBLL
                 " ON o.idOsztaly = m.idOsztaly)";
 
             return CRUD.Select(sqlQuery);
+        }
+        public DataTable GetMerkozesKodByDate(DateTime date, int interval)
+        {
+            string sqlQuery = "SELECT merkozesKod FROM kuldes.merkozes WHERE merkozesDatum BETWEEN " +
+                "@fromdate AND @todate;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@fromdate", date.AddHours(-interval));
+            parameters.Add("@todate", date.AddHours(interval));
+
+            return CRUD.Select(sqlQuery, parameters);
         }
         public DataTable GetMerkozesSearch(string keres)
         {

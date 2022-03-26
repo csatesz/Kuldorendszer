@@ -89,6 +89,7 @@ namespace Kuldorendszer
             this.btnElfJsz.TabIndex = 2;
             this.btnElfJsz.Text = "Elfelejtett jelszó";
             this.btnElfJsz.UseVisualStyleBackColor = false;
+            this.btnElfJsz.Visible = false;
             this.btnElfJsz.Click += new System.EventHandler(this.btnElfJsz_Click);
             this.btnElfJsz.MouseLeave += new System.EventHandler(this.btnElfJsz_MouseLeave);
             this.btnElfJsz.MouseHover += new System.EventHandler(this.btnElfJsz_MouseHover);
