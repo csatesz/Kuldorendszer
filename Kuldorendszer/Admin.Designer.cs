@@ -234,7 +234,6 @@ namespace Kuldorendszer
             this.dGridAdmin.Size = new System.Drawing.Size(583, 190);
             this.dGridAdmin.TabIndex = 14;
             this.dGridAdmin.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGridAdmin_CellClick);
-            this.dGridAdmin.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGridAdmin_CellContentClick);
             this.dGridAdmin.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGridAdmin_CellEndEdit);
             this.dGridAdmin.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGridAdmin_CellLeave);
             // 

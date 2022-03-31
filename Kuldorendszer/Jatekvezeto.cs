@@ -1,34 +1,34 @@
-﻿using KuldorendszerBLL;
+﻿using Kuldorendszer.Interfaces;
+using KuldorendszerBLL;
 using System;
 using System.Data;
 using System.Windows.Forms;
 
 namespace Kuldorendszer
 {
-    public partial class Jatekvezeto : Form
+    public partial class Jatekvezeto : Form, IUpdatableCombosForm
     {
-        int telep, elKod, keret = 0;
+        int id, telep, elKod, keret = 0;
         DataTable dt = new DataTable();
-
+        JatekvezetoService jv = new JatekvezetoService();
         public Jatekvezeto()
         {
             InitializeComponent();
+        }
+        public Jatekvezeto(int id)
+        {
+            InitializeComponent();
+            this.id = id;
         }
         private void Jatekvezeto_Load(object sender, EventArgs e)
         {
             FillCombos();
         }
 
-        private void txtBFordulo_TextChanged(object sender, EventArgs e)
-        {
-        }
-
         private void btnOk_Click(object sender, EventArgs e)
         {
             bool ervenyes = false;
             bool foglalt = false;
-            JatekvezetoService jv = new JatekvezetoService();
-
             if (Int32.TryParse(txtBJvKod.Text, out int jvKod))
             {
                 if (jvKod > 99999999 || jvKod < 1)
@@ -114,15 +114,31 @@ namespace Kuldorendszer
                 string telepules = dt3.Rows[i][1].ToString();
                 cBoxTelepules.Items.Add(telepules);
             }
+            if (id != 0)
+            {
+                txtBJvKod.Enabled = btnOk.Enabled = false;
+                txtBJvKod.Text = id.ToString();
+                DataTable dtjv = jv.GetJatekvezetoAdatById(id);
+                txtBJvNev.Text = dtjv.Rows[0][1].ToString();
+                txtBMinosites.Text = dtjv.Rows[0][4].ToString();
+                cBoxFeladat.SelectedItem = dtjv.Rows[0][6].ToString();
+                cBoxOsztaly.SelectedItem = dtjv.Rows[0][5].ToString();
+
+                DataTable dte = el.GetEmailById(Int32.Parse(dtjv.Rows[0][2].ToString()));// email elerhetosegKod alapján
+                cBoxElerhetoseg.SelectedItem = dte.Rows[0][0].ToString();
+
+                DataTable dttel = t.GetTelepulesById(Int32.Parse(dtjv.Rows[0][3].ToString()));// település név idTelepules alapján
+                cBoxTelepules.SelectedItem = dttel.Rows[0][0];
+            }
         }
 
         private void cBoxElerhetoseg_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cBoxElerhetoseg.Text == "Új elérhetőség")
             {
-                Elerhetoseg el = new Elerhetoseg(); //elérhetőség felvitel
+                Elerhetoseg el = new Elerhetoseg(this); //elérhetőség felvitel
                 el.Show();
-                FillCombos();
+                //FillCombos();
             }
             else
             {
@@ -132,11 +148,22 @@ namespace Kuldorendszer
             }
         }
 
+        private void update_Click(object sender, EventArgs e)
+        {
+            if (jv.UpdateMindenJatekvezetoAdat(id, txtBJvNev.Text, elKod, telep, txtBMinosites.Text,
+                cBoxOsztaly.SelectedItem.ToString(), cBoxFeladat.Text, 0))
+            {
+                MessageBox.Show("Sikeres adatmódosítás", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            else
+                MessageBox.Show("Sikertelen adatmódosítás", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         private void cBoxTelepules_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cBoxTelepules.Text == "Új település") //település felvitel
             {
-                Telepules t = new Telepules();
+                Telepules t = new Telepules(this);
                 t.Show();
             }
             else

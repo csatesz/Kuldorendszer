@@ -5,8 +5,17 @@ using System.Data;
 
 namespace KuldorendszerBLL
 {
+
     public class CsapatService : ICsapatService
     {
+        public CsapatService() // ez jó így?
+        {
+
+        }
+        public CsapatService(int id)
+        {
+
+        }
         public DataTable GetAllCsapat()
         {
             string sqlQuery = "SELECT c.idCsapat, c.csapatnev, c.csapatVezeto, o.osztalyMegnevezes " +
@@ -29,17 +38,24 @@ namespace KuldorendszerBLL
             parameters.Add("@idCsapat", csapatId.ToString());
             return CRUD.Select(sqlQuery, parameters);
         }
+        public DataTable GetCsapatAdatById(int csapatId)
+        {
+            string sqlQuery = "SELECT * FROM kuldes.csapatok WHERE idCsapat = @idCsapat;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idCsapat", csapatId.ToString());
+            return CRUD.Select(sqlQuery, parameters);
+        }
         public bool AddCsapat(int id, string nev, int elerhetosegKod, string csapatVezeto, int osztalyId)
         {
             string sqlQuery = "INSERT INTO kuldes.csapatok (idCsapat, csapatNev, elerhetosegKod, " +
-                    $" csapatVezeto, idOsztaly) VALUES (@id, @nev, @jelszo, @admin, @aszf)";
+                    $" csapatVezeto, idOsztaly) VALUES (@id, @nev, @elerhetosegKod, @csapatVezeto, @idOsztaly)";
 
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
             parameters.Add("@nev", nev);
-            parameters.Add("@jelszo", elerhetosegKod);
-            parameters.Add("@admin", csapatVezeto);
-            parameters.Add("@aszf", osztalyId);
+            parameters.Add("@elerhetosegKod", elerhetosegKod);
+            parameters.Add("@csapatVezeto", csapatVezeto);
+            parameters.Add("@idOsztaly", osztalyId);
 
             return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
@@ -51,7 +67,21 @@ namespace KuldorendszerBLL
             return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
 
-        public bool UpdateCsapat(int id, string oszlop, string adat)
+        public bool UpdateMindenCsapatAdat(int id, string nev, int elerhetosegKod, string csapatVezeto, int osztalyId)
+        {
+            string sqlQuery = "UPDATE kuldes.csapatok SET csapatNev = @nev, elerhetosegKod = @elerhetosegKod, " +
+                " csapatVezeto = @csapatVezeto, csapatVezeto = @csapatVezeto, idOsztaly = @idOsztaly " +
+                " WHERE idCsapat = @id;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", id);
+            parameters.Add("@nev", nev);
+            parameters.Add("@elerhetosegKod", elerhetosegKod);
+            parameters.Add("@csapatVezeto", csapatVezeto);
+            parameters.Add("@idOsztaly", osztalyId);
+
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
+        }
+        public bool UpdateCsapat (int id, string oszlop, string adat)
         {
             string sqlQuery = $"UPDATE kuldes.csapatok SET {oszlop} = @adat WHERE idCsapat = @id;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
@@ -67,10 +97,10 @@ namespace KuldorendszerBLL
         }
         public DataTable GetAllCsapatNameByOsztaly(int idOsztaly)
         {
-            if (idOsztaly <= 0)
+            if (idOsztaly <= 0 || idOsztaly >= 100)
             {
                 return GetAllCsapatName();
-            }
+            }           
             else
             {
                 string sqlQuery = "SELECT csapatnev FROM kuldes.csapatok WHERE idOsztaly = @idOsztaly;";

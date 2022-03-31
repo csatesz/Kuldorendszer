@@ -61,11 +61,31 @@ namespace KuldorendszerBLL
 
             return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
+        public bool UpdateMindenMerkozesAdat(int kod, int hazai, int vendeg, int jvSzam, DateTime date,
+                    int telep, int osztaly, int fordulo, int torolt)
+        {
+            string sqlQuery = "UPDATE kuldes.merkozes SET HazaiCsapatId = @hazai, " +
+                    " vendegCsapatId = @vendeg, JvSzam = @jvSzam, merkozesDatum = @date, " +
+                    " idTelepules = @telep, idOsztaly = @osztaly,  fordulo = @fordulo, " +
+                    " torolt = @torolt WHERE merkozesKod = @kod ;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@kod", kod);
+            parameters.Add("@hazai", hazai);
+            parameters.Add("@vendeg", vendeg);
+            parameters.Add("@telep", telep);
+            parameters.Add("@jvSzam", jvSzam);
+            parameters.Add("@date", date);
+            parameters.Add("@osztaly", osztaly);
+            parameters.Add("@fordulo", fordulo);
+            parameters.Add("@torolt", torolt);
+
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
+        }
         public bool AddMerkozes(int kod, int hazai, int vendeg, int jvSzam, DateTime date,
                     int telep, int osztaly, int fordulo, int torolt)
         {
             string sqlQuery = "INSERT INTO kuldes.merkozes VALUES(@kod, @hazai, @vendeg, " +
-                    " @jvSzam, @date, @telep, @osztaly,  @fordulo, @torolt)";
+                    " @jvSzam, @date, @telep, @osztaly, @fordulo, @torolt)";
 
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@kod", kod);

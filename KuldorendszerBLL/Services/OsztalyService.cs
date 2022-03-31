@@ -5,7 +5,7 @@ using System.Data;
 
 namespace KuldorendszerBLL
 {
-    public class OsztalyService: IOsztalyService
+    public class OsztalyService : IOsztalyService
     {
         public DataTable GetAllOsztaly()
         {

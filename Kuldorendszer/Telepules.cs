@@ -1,4 +1,5 @@
-﻿using KuldorendszerBLL;
+﻿using Kuldorendszer.Interfaces;
+using KuldorendszerBLL;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -7,10 +8,13 @@ namespace Kuldorendszer
 {
     public partial class Telepules : Form
     {
+        IUpdatableCombosForm parentForm;
         DataTable dt = new DataTable();
-        public Telepules()
+        TelepulesService tel = new TelepulesService();
+        public Telepules(IUpdatableCombosForm form)
         {
             InitializeComponent();
+            parentForm = form;
         }
 
         private void btnMegse_Click(object sender, EventArgs e)
@@ -51,10 +55,9 @@ namespace Kuldorendszer
             else
                 MessageBox.Show("A irányítószám csak 4 jegyű számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            TelepulesService tel = new TelepulesService();
             dt = tel.GetTelepulesById(telepulesKod);
             if (dt.Rows.Count > 0)
-            {              
+            {
                 MessageBox.Show("Már van ilyen kódú település.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 foglalt = true;
             }
@@ -64,9 +67,8 @@ namespace Kuldorendszer
                 if (tel.AddTelepules(telepulesKod, txtBTelepules.Text, irSzam))
                 {
                     MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    parentForm.FillCombos(); 
                     this.Close();
-                    Jatekvezeto j = new Jatekvezeto();
-                    j.FillCombos();
                 }
                 else
                     MessageBox.Show("Sikertelen adatfelvitel", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);

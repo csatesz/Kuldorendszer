@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace KuldorendszerBLL.Interfaces
 {
@@ -15,6 +10,8 @@ namespace KuldorendszerBLL.Interfaces
         bool UpdateJatekvezeto(int id, string oszlop, string adat);
         bool AddJatekvezeto(int jvKod, string nev, int elKod, int telep, string min,
                     string oszt, string feladat, int torolt);
+        bool UpdateMindenJatekvezetoAdat(int jvKod, string nev, int elKod, int telep, string min,
+                   string oszt, string feladat, int torolt);
         DataTable GetJatekvezetoById(int id);
         DataTable GetJatekvezetoNevIdByMerkozesKod(int kod, string feladat);
         DataTable GetJatekvezetoByFeladat(string feladat);

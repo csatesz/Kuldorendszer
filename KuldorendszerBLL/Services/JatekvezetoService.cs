@@ -5,7 +5,7 @@ using System.Data;
 
 namespace KuldorendszerBLL
 {
-    public class JatekvezetoService: IJatekvezetoService
+    public class JatekvezetoService : IJatekvezetoService
     {
         public DataTable GetAllJatekvezeto()
         {
@@ -67,6 +67,14 @@ namespace KuldorendszerBLL
 
             return CRUD.Select(sqlQuery, parameters);
         }
+        public DataTable GetJatekvezetoAdatById(int id)
+        {
+            string sqlQuery = "SELECT * FROM kuldes.jatekvezetok WHERE jvKod = @id;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", id.ToString());
+
+            return CRUD.Select(sqlQuery, parameters);
+        }
         public DataTable GetJatekvezetoNevIdByMerkozesKod(int kod, string feladat)// ez jó így?
         {
             string sqlQuery = $"SELECT j.nev, j.jvKod FROM ((kuldes.jatekvezetok j INNER JOIN " +
@@ -92,6 +100,25 @@ namespace KuldorendszerBLL
             parameters.Add("@nev", nev);
 
             return CRUD.Select(sqlQuery, parameters);
+        }
+
+        public bool UpdateMindenJatekvezetoAdat(int jvKod, string nev, int elKod, int telep, string min, string oszt, string feladat, int torolt)
+        {
+            string sqlQuery = "UPDATE kuldes.jatekvezetok SET nev = @nev, elerhetosegKod  = @elKod, " +
+                     " idTelepules = @telep, minosites = @min, keret = @oszt, feladatkor = @feladat, " +
+                     " torolt = @torolt WHERE jvKod = @jvKod ;";
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@jvKod", jvKod);
+            parameters.Add("@nev", nev);
+            parameters.Add("@elKod", elKod);
+            parameters.Add("@telep", telep);
+            parameters.Add("@min", min);
+            parameters.Add("@oszt", oszt);
+            parameters.Add("@feladat", feladat);
+            parameters.Add("@torolt", torolt);
+
+            return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
     }
 }

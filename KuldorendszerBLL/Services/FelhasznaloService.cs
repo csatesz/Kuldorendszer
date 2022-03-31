@@ -5,7 +5,7 @@ using System.Data;
 
 namespace KuldorendszerBLL
 {
-    public class FelhasznaloService: IFelhasznaloService
+    public class FelhasznaloService : IFelhasznaloService
     {
         //DataTable dt = new DataTable();
         public DataTable SelectUserByName(string nev)
@@ -20,7 +20,7 @@ namespace KuldorendszerBLL
             return CRUD.Select(sqlQuery, parameters);
         }
         public DataTable GetAllUser()
-        { 
+        {
             string sqlQuery = $"SELECT felhKod, felhNev, email, admin, aszf, torolt FROM kuldes.felhasznalo ;";
             //" FROM kuldes.felhasznalo WHERE torolt = 0 OR torolt is NULL); ";
             //Dictionary<string, object> parameters = new Dictionary<string, object>();

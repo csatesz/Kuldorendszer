@@ -14,6 +14,7 @@ namespace Kuldorendszer
         DataTable merkozesekJvel = new DataTable(); // mérkőzések játékvezetővel
         DataTable jv = new DataTable(); // játékvezetők
         DataTable assz = new DataTable(); //asszsiztensek
+        MerkozesService m = new MerkozesService();
         int jvszam;
         int pos = 0;
         public Kuldes()
@@ -30,15 +31,14 @@ namespace Kuldorendszer
 
         private void Kuldes_Load(object sender, EventArgs e)
         {
-            MerkozesService m = new MerkozesService();
             merkozesTable = m.GetAllMerkozes();
             ShowData(pos);
-            FillCombo();
+            FillCombos();
             MerkozesJvvel();
             FillJvCombo();
         }
 
-        private void FillCombo()
+        private void FillCombos()
         {
             cBoxVerseny.Items.Clear();
             cBoxFordulo.Items.Clear();
@@ -69,7 +69,6 @@ namespace Kuldorendszer
         public void ShowData(int index) // itt kellene feltölteni a mérkőzést jvvel?!
         {
             int szam = (int)merkozesTable.Rows[index][0];
-            MerkozesService m = new MerkozesService();
             DataTable dt = m.GetForduloJvSzamById(szam);
             jvszam = Int32.Parse(merkozesTable.Rows[index][3].ToString()); // Jv-k száma
             txtBFordulo.Text = dt.Rows[0][0].ToString(); // Forduló
@@ -173,8 +172,6 @@ namespace Kuldorendszer
         private void VersenyForduloValt()
         {
             merkozesTable.Clear();
-            MerkozesService m = new MerkozesService();
-
             if (cBoxVerseny.SelectedIndex <= 0 && cBoxFordulo.SelectedIndex <= 0)
             {
                 merkozesTable = m.GetAllMerkozes();

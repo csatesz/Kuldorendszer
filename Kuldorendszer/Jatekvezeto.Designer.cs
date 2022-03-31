@@ -66,7 +66,6 @@ namespace Kuldorendszer
             this.txtBJvNev.Name = "txtBJvNev";
             this.txtBJvNev.Size = new System.Drawing.Size(122, 20);
             this.txtBJvNev.TabIndex = 24;
-            this.txtBJvNev.TextChanged += new System.EventHandler(this.txtBFordulo_TextChanged);
             // 
             // cBoxTelepules
             // 
@@ -138,8 +137,9 @@ namespace Kuldorendszer
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(84, 33);
             this.button1.TabIndex = 28;
-            this.button1.Text = "Import";
+            this.button1.Text = "Módosít";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.update_Click);
             // 
             // label4
             // 

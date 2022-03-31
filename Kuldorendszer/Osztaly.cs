@@ -8,6 +8,7 @@ namespace Kuldorendszer
     public partial class Osztaly : Form
     {
         DataTable dt = new DataTable();
+        OsztalyService oszt = new OsztalyService();
         public Osztaly()
         {
             InitializeComponent();
@@ -38,7 +39,6 @@ namespace Kuldorendszer
             }
             else
                 MessageBox.Show("Az osztály kódja csak számot tartalmazhat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            OsztalyService oszt = new OsztalyService();
             dt = oszt.GetOsztalyById(osztalyKod);
             if (dt.Rows.Count > 0)
             {

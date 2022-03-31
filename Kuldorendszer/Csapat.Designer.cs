@@ -109,8 +109,9 @@ namespace Kuldorendszer
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(84, 33);
             this.btnImport.TabIndex = 46;
-            this.btnImport.Text = "Import";
+            this.btnImport.Text = "Módosít";
             this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // label4
             // 

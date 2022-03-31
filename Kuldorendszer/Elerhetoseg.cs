@@ -1,4 +1,5 @@
 ﻿using KuldorendszerBLL;
+using Kuldorendszer.Interfaces;
 using System;
 using System.Data;
 using System.Net.Mail;
@@ -8,27 +9,26 @@ namespace Kuldorendszer
 {
     public partial class Elerhetoseg : Form
     {
+        IUpdatableCombosForm parentForm;
         DataTable dt = new DataTable();
-        public Elerhetoseg()
+        ElerhetosegService el = new ElerhetosegService();
+        public Elerhetoseg(IUpdatableCombosForm form)
         {
             InitializeComponent();
+            parentForm = form;
         }
 
         private void btnMegse_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Biztos hogy bezárod az ablakot!", "Bezár",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-            {
                 this.Close();
-            }
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
             bool ervenyes = false;
             bool foglalt = false;
-            //long tel = 0;
-
             if (txtBEmail.Text == "" || txtBEmail.Text == null)
             {
                 MessageBox.Show("Az email nem lehet üres!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -45,7 +45,6 @@ namespace Kuldorendszer
                     MessageBox.Show("Az email cím nem érvényes!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            ElerhetosegService el = new ElerhetosegService();
             dt = el.GetIdByEmail(txtBEmail.Text.Trim());
             if (dt.Rows.Count > 0)
             {
@@ -58,7 +57,6 @@ namespace Kuldorendszer
                 if (tel > 99999999999)
                 {
                     MessageBox.Show("A telefonszám nem lehet ennyi!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    ervenyes = false;
                 }
                 else ervenyes = true;
             }
@@ -72,8 +70,7 @@ namespace Kuldorendszer
                 if (el.AddElerhetoseg(txtBEmail.Text, tel.ToString()))
                 {
                     MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Jatekvezeto j = new Jatekvezeto();
-                    j.FillCombos();
+                    parentForm.FillCombos();
                     this.Close();
                 }
                 else

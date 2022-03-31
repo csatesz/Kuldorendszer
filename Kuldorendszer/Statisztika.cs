@@ -14,6 +14,7 @@ namespace Kuldorendszer
         int jvKod = 0;
         int osztKod = 0;
         DateTime dateFrom, dateTo; // statisztika készítés dátum intervalluma
+        JatekvezetoService jvs = new JatekvezetoService();
         public Statisztika()
         {
             InitializeComponent();
@@ -30,8 +31,7 @@ namespace Kuldorendszer
         {
             cBoxJv.Items.Clear();
             cBoxOsztaly.Items.Clear();
-            JatekvezetoService j = new JatekvezetoService();
-            jv = j.GetAllJatekvezeto();// Jv kód és név 
+            jv = jvs.GetAllJatekvezeto();// Jv kód és név 
             for (int i = 0; i < jv.Rows.Count; i++)
                 cBoxJv.Items.Add(jv.Rows[i][1].ToString());
 
@@ -50,7 +50,7 @@ namespace Kuldorendszer
             KuldesService k = new KuldesService();
             if (chkBDate.Checked)
             {
-                dateFrom = dTPTol.Value; 
+                dateFrom = dTPTol.Value;
                 dateTo = dTPIg.Value;
             }
 
@@ -94,8 +94,7 @@ namespace Kuldorendszer
 
         private void cBoxJv_SelectedIndexChanged(object sender, EventArgs e)
         {
-            JatekvezetoService jv = new JatekvezetoService();
-            DataTable dt = jv.GetJatekvezetoIdByNev(cBoxJv.SelectedItem.ToString());
+            DataTable dt = jvs.GetJatekvezetoIdByNev(cBoxJv.SelectedItem.ToString());
             if (dt.Rows.Count != 0)
                 Int32.TryParse(dt.Rows[0][0].ToString(), out jvKod);
         }

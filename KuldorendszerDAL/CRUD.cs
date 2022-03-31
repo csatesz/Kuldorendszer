@@ -29,7 +29,6 @@ namespace KuldorendszerDAL
 
                     using (MySqlCommand sqlCommand = new MySqlCommand(sql, con))
                     {
-                        // Dictionary-hoz hozzáadni paramétereket
                         foreach (KeyValuePair<string, object> parameter in parameters)
                             sqlCommand.Parameters.Add(new MySqlParameter(parameter.Key, parameter.Value));
 
@@ -38,8 +37,8 @@ namespace KuldorendszerDAL
                     }
                 }
                 catch (Exception ex)
-                {
-                    MessageBox.Show("Hiba: " + ex.Message, " CRUD művelet sikertelen!");
+                { 
+                    MessageBox.Show(/*ex.StackTrace + */" Hiba: " + ex.Message, " CRUD művelet sikertelen!");
                     return false;
                 }
             }

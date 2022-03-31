@@ -10,6 +10,7 @@ namespace Kuldorendszer
     public partial class Regisztracio : Form
     {
         DataTable dt = new DataTable();
+        FelhasznaloService felh = new FelhasznaloService();
         public Regisztracio()
         {
             try
@@ -49,7 +50,6 @@ namespace Kuldorendszer
                 catch (FormatException)
                 {
                     MessageBox.Show("Az email cím nem érvényes!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
                 }
             }
             if (txtBRegEmailUjra.Text.Trim() != txtBRegEmail.Text.Trim())
@@ -57,9 +57,7 @@ namespace Kuldorendszer
                 MessageBox.Show("Az email címek nem egyeznek!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 ervenyes = false;
             }
-
-            FelhasznaloService felh = new FelhasznaloService();
-            dt = felh.SelectUserByName(txtBRegFelh.Text);// ha sikertelen úgy is jó lehet?!
+            dt = felh.SelectUserByName(txtBRegFelh.Text); // ha sikertelen úgy is jó lehet?!
             if (dt.Rows.Count > 0) foglalt = true;
 
             if (ervenyes && !foglalt)
@@ -67,14 +65,14 @@ namespace Kuldorendszer
                 if (felh.AddUser(txtBRegFelh.Text.Trim(), txtBRegEmail.Text.Trim(),
                     HashExtension.sha256_hash(txtBRegJelszo.Text), false, chkAszf.Checked))
                 {
-                    MessageBox.Show("Sikeres Regisztráció", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Sikeres Regisztráció!", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
                 else
-                    MessageBox.Show("Sikertelen Regisztráció", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Sikertelen Regisztráció!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-                MessageBox.Show("A felhasználó név már foglalt", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("A felhasználó név már foglalt!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void BtnReg_MouseHover(object sender, EventArgs e)

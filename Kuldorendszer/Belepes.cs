@@ -12,6 +12,7 @@ namespace Kuldorendszer
         string user = null;
         string userpass = null;
         bool admin = false;
+        FelhasznaloService felh = new FelhasznaloService();
         public Belepes()
         {
             try
@@ -36,10 +37,8 @@ namespace Kuldorendszer
         }
 
         private void BtnBelep_Click(object sender, EventArgs e)
-        {
-            FelhasznaloService felh = new FelhasznaloService();
+        {            
             dt = felh.SelectUserByName(txtBFelh.Text);
-
             if (dt != null)
             {
                 if (dt.Rows.Count != 0)
@@ -106,7 +105,7 @@ namespace Kuldorendszer
         }
         private void btnElfJsz_Click(object sender, EventArgs e)
         {
-            FelhasznaloService felh = new FelhasznaloService();
+           
             dt = felh.SelectUserByName(txtBFelh.Text);
             string email;
             if (dt != null)

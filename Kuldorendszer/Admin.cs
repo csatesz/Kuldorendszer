@@ -1,4 +1,5 @@
-﻿using KuldorendszerBLL;
+﻿using Kuldorendszer.Interfaces;
+using KuldorendszerBLL;
 using System;
 using System.Data;
 using System.Drawing;
@@ -6,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Kuldorendszer
 {
-    public partial class Admin : Form
+    public partial class Admin : Form, IUpdatableCombosForm
     {
         DataTable felhTable = new DataTable();
         DataTable jvTable = new DataTable();
@@ -22,13 +23,15 @@ namespace Kuldorendszer
         public Admin()
         {
             InitializeComponent();
-            //dGridAdmin.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            //dGridAdmin.BorderStyle = BorderStyle.Fixed3D;
+            dGridAdmin.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dGridAdmin.BorderStyle = BorderStyle.Fixed3D;
             //dGridAdmin.EditMode = DataGridViewEditMode.EditOnEnter;
         }
+        public void FillCombos() { /*dGridAdmin.Refresh();*/ }
         private void btnFelhKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = ""; lblKeresMezo.Text = "Név";
+            textBKeres.Text = ""; 
+            lblKeresMezo.Text = "Név, email";
             felhTable.Clear();
             this.Text = "Felhasználók";
             FelhasznaloService felh = new FelhasznaloService();
@@ -48,7 +51,8 @@ namespace Kuldorendszer
 
         private void btnMerkKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = ""; lblKeresMezo.Text = "Kód";
+            textBKeres.Text = "";
+            lblKeresMezo.Text = "Kód";
             merkozesek.Clear();
             this.Text = "Mérkőzések";
             MerkozesService m = new MerkozesService();
@@ -69,7 +73,8 @@ namespace Kuldorendszer
 
         private void btnJvKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = ""; lblKeresMezo.Text = "Név, feladatkör, keret";
+            textBKeres.Text = ""; 
+            lblKeresMezo.Text = "Név, feladatkör, keret";
             jvTable.Clear();
             this.Text = "Játékvezetők";
             JatekvezetoService jv = new JatekvezetoService();
@@ -89,7 +94,8 @@ namespace Kuldorendszer
 
         private void btnCsapKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = ""; lblKeresMezo.Text = "Csapat név, csapatvezető";
+            textBKeres.Text = ""; 
+            lblKeresMezo.Text = "Csapat név, csapatvezető";
             csapatokTable.Clear();
             this.Text = "Csapatok";
 
@@ -176,23 +182,36 @@ namespace Kuldorendszer
 
         private void btnModosit_Click(object sender, EventArgs e)
         {
-            dGridAdmin.ReadOnly = false;
+            if (table == "csapatok")
+            {
+                Csapat csapat = new Csapat(Int32.Parse(id));
+                csapat.Show();
+            }
+            else if (table == "jatekvezetok")
+            {
+                Jatekvezeto j = new Jatekvezeto(Int32.Parse(id));
+                j.Show();
+            }
+            else if (table == "merkozes")
+            {
+                Merkozesek m = new Merkozesek(Int32.Parse(id));
+                m.Show();
+            }
+            else
+                dGridAdmin.ReadOnly = false;
         }
 
         private void btnTorol_Click(object sender, EventArgs e)
         {
             if (dGridAdmin.Rows.Count == 0)
-            {
                 return;
-            }
             if (string.IsNullOrEmpty(this.id))
             {
                 MessageBox.Show("Válassz egy elemet a listából.", "Adattörlés", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            // Meg kell vizsgálni használja e valamelyik tábla, akkor nem törölhető, archiválható!!!
-
+            // Meg kell vizsgálni használja e valamelyik tábla, akkor nem törölhető, archiválandó!!!
             if (MessageBox.Show("Biztos törlöd az adatot?", "Adattörlés",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
@@ -248,7 +267,7 @@ namespace Kuldorendszer
                     cs.Show();
                     break;
                 case "elerhetoseg":
-                    Elerhetoseg el = new Elerhetoseg();
+                    Elerhetoseg el = new Elerhetoseg(this);
                     el.Show();
                     break;
                 case "felhasznalo":
@@ -264,7 +283,7 @@ namespace Kuldorendszer
                     m.Show();
                     break;
                 case "telepules":
-                    Telepules t = new Telepules();
+                    Telepules t = new Telepules(this);
                     t.Show();
                     break;
                 case "osztaly":
@@ -276,19 +295,10 @@ namespace Kuldorendszer
             }
         }
 
-        private void dGridAdmin_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            ////label2.Text = dGridAdmin.CurrentCell.OwningColumn.Name;
-            //label2.Text = dGridAdmin.Columns[e.ColumnIndex].Name;
-            //if (dGridAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            //{
-            //    MessageBox.Show(dGridAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
-            //}
-        }
-
         private void btnTelepKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = ""; lblKeresMezo.Text = "Település, irányítószám";
+            textBKeres.Text = ""; 
+            lblKeresMezo.Text = "Település, irányítószám";
             telepules.Clear();
             this.Text = "Települések";
             TelepulesService tel = new TelepulesService();
@@ -304,7 +314,8 @@ namespace Kuldorendszer
 
         private void btnOsztKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = ""; lblKeresMezo.Text = "Osztály";
+            textBKeres.Text = ""; 
+            lblKeresMezo.Text = "Osztály";
             osztaly.Clear();
             this.Text = "Osztályok";
             OsztalyService oszt = new OsztalyService();
@@ -319,7 +330,8 @@ namespace Kuldorendszer
 
         private void btnElerhetKarb_Click(object sender, EventArgs e)
         {
-            textBKeres.Text = ""; lblKeresMezo.Text = "Email, telefonszám";
+            textBKeres.Text = ""; 
+            lblKeresMezo.Text = "Email, telefonszám";
             this.Text = "Elérhetőségek";
             ElerhetosegService el = new ElerhetosegService();
             elerhetoseg = el.GetAllElerhetoseg();
@@ -356,39 +368,39 @@ namespace Kuldorendszer
             {
                 if (dGridAdmin.CurrentCell.ColumnIndex != 0)
                 {
-                    switch (table)
+                    switch (table)// csak azokat módosíthatom a datagridbenm, ami nem kapcsolódik máshoz
                     {
-                        case "csapatok":
-                            CsapatService csapat = new CsapatService();
-                            if (csapat.UpdateCsapat(Int32.Parse(id), oszlop, szoveg))
-                                MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case "elerhetoseg":
+                        //case "csapatok": // elérhetőség kódot, osztályt módosítani nem tud
+                        //    CsapatService csapat = new CsapatService(Int32.Parse(id));// id-t is átr kell adni
+                        //    if (csapat.UpdateCsapat(Int32.Parse(id), oszlop, szoveg))
+                        //        MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //    break;
+                        case "elerhetoseg":// OK
                             ElerhetosegService el = new ElerhetosegService();
                             if (el.UpdateElerhetoseg(Int32.Parse(id), oszlop, szoveg))
                                 MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
-                        case "felhasznalo":
+                        case "felhasznalo": // OK
                             FelhasznaloService f = new FelhasznaloService();
                             if (f.UpdateFelhasznalo(Int32.Parse(id), oszlop, szoveg))
                                 MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
-                        case "jatekvezetok":
-                            JatekvezetoService j = new JatekvezetoService();
-                            if (j.UpdateJatekvezeto(Int32.Parse(id), oszlop, szoveg))
-                                MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case "merkozes":
-                            MerkozesService m = new MerkozesService();
-                            if (m.UpdateMerkozes(Int32.Parse(id), oszlop, szoveg))
-                                MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case "telepules":
+                        //case "jatekvezetok": // elérhetőség kódot, települést, osztályt módosítani nem tud
+                        //    JatekvezetoService j = new JatekvezetoService();
+                        //    if (j.UpdateJatekvezeto(Int32.Parse(id), oszlop, szoveg))
+                        //        MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //    break;
+                        //case "merkozes": // módosítani nem tud semmit
+                        //    MerkozesService m = new MerkozesService();
+                        //    if (m.UpdateMerkozes(Int32.Parse(id), oszlop, szoveg))
+                        //        MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //    break;
+                        case "telepules": // OK
                             TelepulesService t = new TelepulesService();
                             if (t.UpdateTelepules(Int32.Parse(id), oszlop, szoveg))
                                 MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
-                        case "osztaly":
+                        case "osztaly": // OK
                             OsztalyService o = new OsztalyService();
                             if (o.UpdateOsztaly(Int32.Parse(id), oszlop, szoveg))
                                 MessageBox.Show("Sikeres adatmódosítás", "Adatmódosítás", MessageBoxButtons.OK, MessageBoxIcon.Information);

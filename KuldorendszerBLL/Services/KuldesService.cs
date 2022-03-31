@@ -36,7 +36,7 @@ namespace KuldorendszerBLL
 
             return CRUD.InsertUpdateDelete(sqlQuery, parameters);
         }
-        public DataTable GetMerkozesJvvel() 
+        public DataTable GetMerkozesJvvel()
         {
             string sqlQuery = "SELECT m.merkozesKod, m.merkozesDatum, t.Telepules, c.csapatNev,  d.csapatNev, j.nev" +
                 " FROM (((((kuldes.merkozes m INNER JOIN kuldes.telepules t ON t.IdTelepules = m.IdTelepules)" +
@@ -71,7 +71,7 @@ namespace KuldorendszerBLL
         {// dátum(merkozesDatum) és osztály(idOsztaly) szerinti szűrést is betenni!
             string sqlQuery = "SELECT COUNT(k.jvKod OR k.assz1Kod OR k.assz2Kod) FROM kuldes.kuldes k " +
                 $" WHERE k.jvKod = @id OR k.assz1Kod = @id OR k.assz2Kod = @id " +
-                $"  ;"; 
+                $"  ;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
             //parameters.Add("@keret", keret);

@@ -7,24 +7,50 @@ namespace Kuldorendszer
 {
     public partial class Merkozesek : Form
     {
-        int hazaiId, vendegId, telepId, osztId;
+        int merkozesKod, hazaiId, vendegId, telepId, osztId;
+        MerkozesService m = new MerkozesService();
         public Merkozesek()
         {
             InitializeComponent();
-
+        }
+        public Merkozesek(int id)
+        {
+            InitializeComponent();
+            merkozesKod = id;
         }
         private void Merkozesek_Load(object sender, EventArgs e)
         {
             FillOsztalyCombo();
             FillCsapatCombos();
             FillTelepulesCombo();
-            this.dateTimePicker.Value = DateTime.Now;
+
+            if (merkozesKod != 0)
+            {
+                txtBMKod.Enabled = btnOk.Enabled = false;
+                txtBMKod.Text = merkozesKod.ToString();
+                DataTable dtm = m.GetMerkozesById(merkozesKod);
+                OsztalyService o = new OsztalyService();
+                cBoxOsztaly.SelectedItem = o.GetOsztalyById(Int32.Parse(dtm.Rows[0][6].ToString())).Rows[0][0];
+
+                CsapatService cs = new CsapatService();
+                cBoxVendeg.SelectedItem = cs.GetCsapatById(Int32.Parse(dtm.Rows[0][2].ToString())).Rows[0][0];
+                cBoxHazai.SelectedItem = cs.GetCsapatById(Int32.Parse(dtm.Rows[0][1].ToString())).Rows[0][0];
+                dateTimePicker.Value = DateTime.Parse(dtm.Rows[0][4].ToString());
+                txtBJvSzam.Text = dtm.Rows[0][3].ToString();
+
+                TelepulesService t = new TelepulesService();
+                cBoxTelepules.SelectedItem = t.GetTelepulesById(Int32.Parse(dtm.Rows[0][5].ToString())).Rows[0][0];
+
+                txtBFordulo.Text = dtm.Rows[0][7].ToString();
+            }
+            else
+                this.dateTimePicker.Value = DateTime.Now;
         }
         private void FillOsztalyCombo()
         {
             cBoxOsztaly.Items.Clear();
             OsztalyService o = new OsztalyService();
-            DataTable dt1 = o.GetAllOsztalyMegnevezes(); ;
+            DataTable dt1 = o.GetAllOsztalyMegnevezes();
             for (int i = 0; i < dt1.Rows.Count; i++)
             {
                 string osztaly = dt1.Rows[i][0].ToString();
@@ -48,6 +74,7 @@ namespace Kuldorendszer
             cBoxVendeg.Items.Clear();
 
             CsapatService cs = new CsapatService();
+
             DataTable dt2 = cs.GetAllCsapatNameByOsztaly(osztId);
             for (int i = 0; i < dt2.Rows.Count; i++)
             {
@@ -103,14 +130,21 @@ namespace Kuldorendszer
                 if (fordulo > 50)
                 {
                     MessageBox.Show("Nincs ennyi forduló!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    ervenyes = false;
+
                 }
                 else ervenyes = true;
             }
             else
+            {
                 MessageBox.Show("A forduló csak szám lehet!", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                ervenyes = false;
+            }
+            if (hazaiId == 0 || vendegId == 0 || telepId == 0 || osztId == 0)
+            {
+                MessageBox.Show("Minden adatot meg kell adni!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            MerkozesService m = new MerkozesService();
+                ervenyes = false;
+            }
             DataTable dt = m.GetMerkozesById(merkozesKod);
             if (dt.Rows.Count > 0)
             {
@@ -131,13 +165,25 @@ namespace Kuldorendszer
             }
         }
 
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (m.UpdateMindenMerkozesAdat(merkozesKod, hazaiId, vendegId, Int32.Parse(txtBJvSzam.Text),
+                dateTimePicker.Value, telepId, osztId, Int32.Parse(txtBFordulo.Text), 0))
+            {
+                MessageBox.Show("Sikeres adatmódosítás", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            else
+                MessageBox.Show("Sikertelen adatmódosítás", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         private void cBoxHazai_SelectedIndexChanged(object sender, EventArgs e)
         {
             CsapatService cs = new CsapatService();
             DataTable dt = cs.GetIdByCsapatNev(cBoxHazai.SelectedItem.ToString());
             Int32.TryParse(dt.Rows[0][0].ToString(), out hazaiId);
         }
-
         private void cBoxVendeg_SelectedIndexChanged(object sender, EventArgs e)
         {
             CsapatService cs = new CsapatService();
