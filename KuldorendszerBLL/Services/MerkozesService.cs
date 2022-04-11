@@ -127,7 +127,7 @@ namespace KuldorendszerBLL
         }
         public DataTable GetMerkozesByFordulo(string fordulo)
         {
-            string sqlQuery = "SELECT * FROM kuldes.merkozes WHERE  fordulo = @fordulo ;";
+            string sqlQuery = "SELECT * FROM kuldes.merkozes WHERE fordulo = @fordulo ;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@fordulo", fordulo);
 
@@ -135,7 +135,7 @@ namespace KuldorendszerBLL
         }
         public DataTable GetMerkozesByForduloAndOsztaly(string fordulo, string osztaly)
         {
-            string sqlQuery = "SELECT * FROM kuldes.merkozes WHERE  idOsztaly = " +
+            string sqlQuery = "SELECT * FROM kuldes.merkozes WHERE idOsztaly = " +
                 " (SELECT idOsztaly FROM kuldes.osztaly WHERE osztalyMegnevezes = @osztaly" +
                 " AND  fordulo = @fordulo) ;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();

@@ -46,7 +46,7 @@ namespace Kuldorendszer
         public void StatisztikaKiir()
         {
             List<ListBoxItems> statisztika = new List<ListBoxItems>();
-            DataTable dt;
+            DataTable dt, dt1, dt2;
             KuldesService k = new KuldesService();
             if (chkBDate.Checked)
             {
@@ -57,9 +57,15 @@ namespace Kuldorendszer
             if (chkBOsztaly.Checked) // && chkBDate.Checked dateFrom = dTPTol.Value; dateTo = dTPIg.Value;
             {// Összes mérkőzés adott osztályból osztKod 
                 dt = k.JatekvezetoOsszesMerkozesStat(jvKod, osztKod);
+                dt1 = k.JatekvezetoJvSzamStat(jvKod, osztKod);
+                dt2 = k.JatekvezetoAsszisztSzamStat(jvKod, osztKod);
             }
             else
+            {
                 dt = k.JatekvezetoOsszesMerkozesStat(jvKod);
+                dt1 = k.JatekvezetoJvSzamStat(jvKod);
+                dt2 = k.JatekvezetoAsszisztSzamStat(jvKod);
+            }
 
             statisztika.Add(new ListBoxItems
             {
@@ -70,15 +76,12 @@ namespace Kuldorendszer
             {
                 Kod = jvKod,
                 Text = $"- Összes működése: {dt.Rows[0][0]} mérkőzés"
-            });
-
-            DataTable dt1 = k.JatekvezetoJvSzamStat(jvKod);
+            });            
             statisztika.Add(new ListBoxItems
             {
                 Kod = jvKod,
                 Text = $"- Játékvezetés: {dt1.Rows[0][0]} mérkőzés"
-            });
-            DataTable dt2 = k.JatekvezetoAsszisztSzamStat(jvKod);
+            });           
             statisztika.Add(new ListBoxItems
             {
                 Kod = jvKod,

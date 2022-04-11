@@ -79,11 +79,10 @@ namespace KuldorendszerBLL
             return CRUD.Select(sqlQuery, parameters);
         }
         public DataTable JatekvezetoOsszesMerkozesStat(int id, int osztId)
-        {// dátum(merkozesDatum) szerinti szűrést is betenni!
+        {// dátum(merkozesDatum) szerinti szűrést is betenni!  WHERE merkozesDatum BETWEEN @fromdate AND @todate
             string sqlQuery = "SELECT COUNT(k.jvKod OR k.assz1Kod OR k.assz2Kod) FROM (kuldes.kuldes k " +
-                $" INNER JOIN kuldes.merkozes m ON m.merkozesKod = k.merkozesKod)  " +
-                $" WHERE k.jvKod = @id OR k.assz1Kod = @id OR k.assz2Kod = @id " +
-                $" AND m.idOsztaly = @osztId ;";
+                " INNER JOIN kuldes.merkozes m ON m.merkozesKod = k.merkozesKod)  " +
+                " WHERE m.idOsztaly = @osztId AND (k.jvKod = @id OR k.assz1Kod = @id OR k.assz2Kod = @id) ;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
             parameters.Add("@osztId", osztId);
@@ -91,21 +90,41 @@ namespace KuldorendszerBLL
             return CRUD.Select(sqlQuery, parameters);
         }
         public DataTable JatekvezetoJvSzamStat(int id)
-        {
-            string sqlQuery = "SELECT COUNT(jvKod) FROM kuldes.kuldes WHERE jvKod = @id " +
-                " ;";  // dátum és osztály szerinti szűrést is betenni
+        {// dátum és osztály szerinti szűrést is betenni
+            string sqlQuery = "SELECT COUNT(jvKod) FROM kuldes.kuldes WHERE jvKod = @id ;";  
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
 
             return CRUD.Select(sqlQuery, parameters);
         }
-        public DataTable JatekvezetoAsszisztSzamStat(int id)
+        public DataTable JatekvezetoJvSzamStat(int id, int osztId)
         {
-            string sqlQuery = "SELECT COUNT(assz1Kod OR assz2Kod) FROM kuldes.kuldes WHERE assz1Kod = @id OR assz2Kod = @id" +
-                " ;";  // dátum és osztály szerinti szűrést is betenni
+            string sqlQuery = "SELECT COUNT(jvKod) FROM (kuldes.kuldes k " +
+                " INNER JOIN kuldes.merkozes m ON m.merkozesKod = k.merkozesKod) " +
+                " WHERE m.idOsztaly = @osztId AND k.jvKod = @id  ;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", id);
+            parameters.Add("@osztId", osztId);
+
+            return CRUD.Select(sqlQuery, parameters);
+        }
+        public DataTable JatekvezetoAsszisztSzamStat(int id)
+        {// dátum és osztály szerinti szűrést is betenni
+            string sqlQuery = "SELECT COUNT(assz1Kod OR assz2Kod) FROM kuldes.kuldes k WHERE assz1Kod = @id OR assz2Kod = @id";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@id", id);
 
+            return CRUD.Select(sqlQuery, parameters);
+        }
+        public DataTable JatekvezetoAsszisztSzamStat(int id, int osztId)
+        {
+            string sqlQuery = "SELECT COUNT(assz1Kod OR assz2Kod) FROM (kuldes.kuldes k" +
+              " INNER JOIN kuldes.merkozes m ON m.merkozesKod = k.merkozesKod) " +
+              " WHERE  m.idOsztaly = @osztId AND (k.assz1Kod = @id OR k.assz2Kod = @id) ;";  // dátum és osztály szerinti szűrést is betenni
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", id);
+            parameters.Add("@osztId", osztId);
+             
             return CRUD.Select(sqlQuery, parameters);
         }
         public DataTable SzabadJatekvezetok(DateTime date, int interval)
@@ -113,9 +132,9 @@ namespace KuldorendszerBLL
             MerkozesService m = new MerkozesService();
             DataTable dtMerkKod = m.GetMerkozesKodByDate(date, interval);//adott időn kívüli mérkőzéskódok.
             JatekvezetoService jv = new JatekvezetoService();
-            DataTable dtJv = jv.GetAllJatekvezeto();// mérkőzés osztályára is szűrjek?
+            DataTable dtJv = jv.GetAllJatekvezeto();
             KuldesService k = new KuldesService();
-            foreach (DataRow rw in dtJv.Rows)// where keret = merkozes osztaly
+            foreach (DataRow rw in dtJv.Rows)// where keret = merkozes osztaly?
             {
                 string nev = rw[1].ToString(); // rw[0] jv kódja , rw[1] neve, rw[3] keret/osztály
                 foreach (DataRow row in dtMerkKod.Rows)
@@ -143,16 +162,16 @@ namespace KuldorendszerBLL
             //DataTable dto = o.GetOsztalyById(osztalyid);
             //string keret = dto.Rows[0][0].ToString();
             int i = 0;
-            DataTable dtszbad = SzabadJatekvezetok(date, 4);//id , név, feladatkör, Keret(osztály), minősítés, település, telefon, törölt
+            DataTable dtszabad = SzabadJatekvezetok(date, 4);//id , név, feladatkör, Keret(osztály), minősítés, település, telefon, törölt
             //akinek +- 4 órán belül nincs mérkőzése azon a mehetnek + az osztályt is nézni!
-            foreach (DataRow row in dtszbad.Rows)
+            foreach (DataRow row in dtszabad.Rows)
             {// Azok vezethetnek adott osztályban akik osztály id-je alacsonyabb!
-                DataTable dto = o.GetIdByOsztalyNev(dtszbad.Rows[i][3].ToString());
+                DataTable dto = o.GetIdByOsztalyNev(dtszabad.Rows[i][3].ToString());
                 int keretOsztalyId = Int32.Parse(dto.Rows[0][0].ToString());
-                if (dtszbad.Rows[i][2].ToString() == "játékvezető" && keretOsztalyId <= osztalyid)
-                    jvKod.Add(Int32.Parse(dtszbad.Rows[i][0].ToString()));
+                if (dtszabad.Rows[i][2].ToString() == "játékvezető" && keretOsztalyId <= osztalyid)
+                    jvKod.Add(Int32.Parse(dtszabad.Rows[i][0].ToString()));
                 else // ha nem vezethet az adott osztályban, még asszisztálhat
-                    asszisztKod.Add(Int32.Parse(dtszbad.Rows[i][0].ToString()));
+                    asszisztKod.Add(Int32.Parse(dtszabad.Rows[i][0].ToString()));
                 i++;
             }
             if (jvKod.Count < 1) // nincs küldhető játékvezető!

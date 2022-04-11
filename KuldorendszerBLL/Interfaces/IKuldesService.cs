@@ -11,7 +11,9 @@ namespace KuldorendszerBLL.Interfaces
         DataTable GetJatekvezetoOnKuldesByMerkozesKod(string mKod, string feladat);
         DataTable JatekvezetoOsszesMerkozesStat(int id);
         DataTable JatekvezetoJvSzamStat(int id);
+        DataTable JatekvezetoJvSzamStat(int id, int osztId);
         DataTable JatekvezetoAsszisztSzamStat(int id);
+        DataTable JatekvezetoAsszisztSzamStat(int id, int osztId);
         DataTable SzabadJatekvezetok(DateTime date, int interval);
         bool KuldesKeszit(int kod, DateTime date, int jvszam, int osztalyid);
 

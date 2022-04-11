@@ -66,7 +66,7 @@ namespace Kuldorendszer
             }
         }
 
-        public void ShowData(int index) // itt kellene feltölteni a mérkőzést jvvel?!
+        public void ShowData(int index)
         {
             int szam = (int)merkozesTable.Rows[index][0];
             DataTable dt = m.GetForduloJvSzamById(szam);
@@ -91,14 +91,14 @@ namespace Kuldorendszer
             TelepulesService t = new TelepulesService();
             DataTable dt4 = t.GetTelepulesById(Int32.Parse(merkozesTable.Rows[index][5].ToString()));
 
-            txtBHely.Text = dt4.Rows[0][0].ToString();// Hol? idTelepules -> 
+            txtBHely.Text = dt4.Rows[0][0].ToString();// Hol? idTelepules
 
             JatekvezetoService j = new JatekvezetoService();
             DataTable dt5 = j.GetJatekvezetoNevIdByMerkozesKod(Int32.Parse(merkozesTable.Rows[index][0].ToString()), "jvKod");
             if (dt5.Rows.Count != 0)
             {
-                txtBJV.Text = dt5.Rows[0][0].ToString(); // jv-k száma itt van merkozesTable.Rows[index][3].ToString();
-                lblJvKod.Text = dt5.Rows[0][1].ToString();// jv kódja
+                txtBJV.Text = dt5.Rows[0][0].ToString(); // jv név
+                lblJvKod.Text = dt5.Rows[0][1].ToString(); // jv kódja
             }
             else
             {
@@ -209,25 +209,25 @@ namespace Kuldorendszer
                 ShowData(pos);
             }
         }
-
+        // fejlesztendő feladat
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            MessageBox.Show(e.ClickedItem.Text);
+        {// továbbfejlesztendő feladat
+            //MessageBox.Show(e.ClickedItem.Text);
             string itemText = e.ClickedItem.Text;
 
             switch (itemText)
             {
                 case "&file":
-                    //do stuff
+                   
                     break;
                 case "&edit":
-                    // do stuff
+                    
                     break;
                 case "&tools":
-                    // do stuff
+                    
                     break;
                 case "&help":
-                    // do stuff
+                   
                     break;
             }
         }
@@ -247,8 +247,8 @@ namespace Kuldorendszer
             cBoxAssz2.Items.Clear();
 
             JatekvezetoService j = new JatekvezetoService();
-            jv = j.GetJatekvezetoByFeladat("játékvezető");// szabad jvket kellene ide helyezni.
-            assz = j.GetJatekvezetoByFeladat("asszisztens");// szabad asszisztenseket kell ide helyezni.
+            jv = j.GetJatekvezetoByFeladat("játékvezető"); // szabad jvket kellene ide helyezni.
+            assz = j.GetJatekvezetoByFeladat("asszisztens"); // szabad asszisztenseket kell ide helyezni.
             //jvszam = (int)merkozesTable.Rows[i][3];
             for (int i = 0; i < jv.Rows.Count; i++)
                 cBoxJv.Items.Add(jv.Rows[i]["nev"].ToString());
@@ -441,6 +441,25 @@ namespace Kuldorendszer
         private void chkBoxJV_CheckedChanged(object sender, EventArgs e)
         {
             FillJvCombo();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Csathó Zsolt küldő rendszere", "Rólunk", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Biztos hogy bezárod az ablakot!", "Bezár",
+             MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Nyomtatás
         }
     }
 }

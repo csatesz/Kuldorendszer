@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Kuldorendszer
 {
-    public partial class Csapat : Form,IUpdatableCombosForm
+    public partial class Csapat : Form, IUpdatableCombosForm
     {
         int id, elKod, osztaly, csKod;
         CsapatService csap = new CsapatService();

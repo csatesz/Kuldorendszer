@@ -7,7 +7,6 @@ namespace KuldorendszerBLL
 {
     public class FelhasznaloService : IFelhasznaloService
     {
-        //DataTable dt = new DataTable();
         public DataTable SelectUserByName(string nev)
         { //try catch?
           //Felhasznalo felh = new Felhasznalo();
