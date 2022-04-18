@@ -39,7 +39,7 @@ namespace Kuldorendszer
             
             if (ValidateCsapat())
             {
-                if (csap.AddCsapat(csKod, txtBCsapatNev.Text, elKod, txtBCsapatvezeto.Text, osztaly))
+                if (csap.AddCsapat(Int32.Parse(txtBCsapatKod.Text), txtBCsapatNev.Text, elKod, txtBCsapatvezeto.Text, osztaly))
                 {
                     MessageBox.Show("Sikeres adatfelvitel", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
@@ -109,7 +109,6 @@ namespace Kuldorendszer
                 MessageBox.Show("Már van ilyen kódú csapat.", "Adatfelvitel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 foglalt = true;
             }
-
             return ervenyes && !foglalt;
         }
 
